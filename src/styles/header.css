@@ -1,0 +1,19 @@
+header {
+  background-color: rgb(0, 40, 65);
+}
+
+.container > button {
+  background-color: white;
+}
+
+.navbar-brand {
+  color: white;
+  font-weight: 600;
+}
+
+.navbar-collapse > a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 0.3rem;
+}
