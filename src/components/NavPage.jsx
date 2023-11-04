@@ -35,15 +35,15 @@ const NavPage = () => {
             <Nav.Link as={Link} to="/empleados" eventKey="3">
               Empleados
             </Nav.Link>
-            {/* <Nav.Link as={Link} to="/usuarios" eventKey="4">
-              Usuarios
-            </Nav.Link> */}
-            {/* <Nav.Link as={Link} to="/departamentos" eventKey="5">
-              Departamentos
-            </Nav.Link> */}
-            {/* <Nav.Link as={Link} to="/puestos" eventKey="6">
+            <Nav.Link as={Link} to="/puestos" eventKey="4">
               Puestos
-            </Nav.Link> */}
+            </Nav.Link>
+            <Nav.Link as={Link} to="/departamentos" eventKey="5">
+              Departamentos
+            </Nav.Link>
+            <Nav.Link as={Link} to="/usuarios" eventKey="6">
+              Usuarios del Sistema
+            </Nav.Link>
           </Navbar.Collapse>
         </Container>
       </Navbar>
