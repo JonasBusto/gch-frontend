@@ -1,3 +1,107 @@
-thead tr {
+.container-datatable {
+  margin: 2rem 0;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.container-datatable table {
   background-color: black !important;
+}
+
+.container-datatable > div:last-child {
+  display: flex;
+  flex-direction: column;
+  width: 95vw;
+}
+
+.container-datatable > div > div {
+  width: 100%;
+}
+.container-datatable table {
+}
+
+.contain-input-search {
+  background-color: #39a7ff;
+}
+.contain-input-search input {
+  border: 0;
+  font-size: 1.2rem;
+  width: 100%;
+  color: black;
+  font-weight: 600;
+  margin-top: 1rem;
+  background-color: rgb(236, 236, 236);
+  border-radius: 5px;
+}
+
+.contain-input-search p {
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+.p-dropdown-items {
+  padding: 0;
+}
+
+.btn-agregar {
+  background-color: #362fd9;
+  color: #eeeeee;
+  border: 0;
+  padding: 0.5rem 1.9rem;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: 0.7s all ease-in-out;
+}
+
+.btn-acciones {
+  display: flex;
+}
+
+.btn-acciones > a {
+  margin: 0.3rem;
+  border: 0;
+  padding: 1rem;
+  border-radius: 5px;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+.btn-acciones > a:first-child {
+  background-color: #d2de32;
+}
+.btn-acciones > a:last-child {
+  background-color: #ff6c22;
+}
+
+.estado-item {
+  display: flex;
+  align-items: center;
+}
+
+.estado-item > div {
+  width: 0.7rem !important;
+  height: 0.7rem !important;
+  border-radius: 100%;
+  margin: 0 0.5rem;
+}
+
+.estado-item > .habilitado {
+  background-color: greenyellow;
+}
+.estado-item > .no-habilitado {
+  background-color: red;
+}
+
+.estado-item > p {
+  color: #495057;
+  font-weight: 600;
+  margin: 0;
 }

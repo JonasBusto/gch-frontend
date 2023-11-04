@@ -8,6 +8,7 @@ let usuarios = [
     sexo: "h",
     email: "jonas@gmail.com",
     telefono: "123456789",
+    habilitado: true,
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ let usuarios = [
     sexo: "h",
     email: "nacho@gmail.com",
     telefono: "123456789",
+    habilitado: false,
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ let usuarios = [
     sexo: "h",
     email: "paez@gmail.com",
     telefono: "123456789",
+    habilitado: true,
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ let usuarios = [
     sexo: "h",
     email: "felix@gmail.com",
     telefono: "123456789",
+    habilitado: true,
   },
   {
     id: 5,
@@ -48,6 +52,7 @@ let usuarios = [
     sexo: "h",
     email: "leandro@gmail.com",
     telefono: "123456789",
+    habilitado: false,
   },
   {
     id: 6,
@@ -58,6 +63,7 @@ let usuarios = [
     sexo: "h",
     email: "profesor@gmail.com",
     telefono: "123456789",
+    habilitado: false,
   },
 ];
 
