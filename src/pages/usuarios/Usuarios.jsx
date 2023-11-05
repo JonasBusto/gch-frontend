@@ -46,15 +46,27 @@ const Usuarios = () => {
     );
   };
 
-  const estado = (empleado) => {
+  const estado = (usuario) => {
     return (
       <div className="d-flex estado-item">
         <div
-          className={empleado.habilitado ? "habilitado" : "no-habilitado"}
+          className={usuario.habilitado ? "habilitado" : "no-habilitado"}
         ></div>
-        <p>{empleado.habilitado ? "Habilitado" : "Deshabilitado"}</p>
+        <span>{usuario.habilitado ? "Habilitado" : "Deshabilitado"}</span>
       </div>
     );
+  };
+
+  const fieldEstado = (usuario) => {
+    let field = "";
+
+    if (usuario.habilitado) {
+      field = "Habilitado";
+    } else {
+      field = "Deshabilitado";
+    }
+
+    return field;
   };
 
   const nombreUsuario = (usuario) => {
@@ -72,7 +84,7 @@ const Usuarios = () => {
     return (
       <div className="item-asociado">
         <span>
-          <Link to={"/empleados/cargar/" + empleado.id}>
+          <Link to={"/empleados/cargar/" + usuario.id_empleado}>
             {"#" +
               empleado.id +
               " - " +
@@ -83,6 +95,14 @@ const Usuarios = () => {
         </span>
       </div>
     );
+  };
+
+  const fieldEmpleadoAsociado = (usuario) => {
+    let empleado = empleados.filter((e) => e.id == usuario.id_empleado)[0];
+    let field =
+      "#" + empleado.id + " - " + empleado.apellido + ", " + empleado.nombre;
+
+    return field;
   };
 
   return (
@@ -143,14 +163,13 @@ const Usuarios = () => {
           style={{ minWidth: "250px" }}
         ></Column>
         <Column
-          sortable
-          field="id_empleado"
+          field={fieldEmpleadoAsociado}
           header="Empleado asociado"
           body={empleadoAsociado}
           style={{ minWidth: "250px" }}
         ></Column>
         <Column
-          field="habilitado"
+          field={fieldEstado}
           header="Estado"
           style={{ minWidth: "250px" }}
           body={estado}

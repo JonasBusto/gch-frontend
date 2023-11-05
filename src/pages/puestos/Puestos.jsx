@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import puestos from "../../helpers/puestos";
+import departamentos from "../../helpers/departamentos";
 import Modal from "react-bootstrap/Modal";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -44,6 +45,31 @@ const Puestos = () => {
         </Modal>
       </div>
     );
+  };
+
+  const departamentoAsociado = (puesto) => {
+    let departamento = departamentos.filter(
+      (d) => d.id == puesto.id_departamento
+    )[0];
+
+    return (
+      <div className="item-asociado">
+        <span>
+          <Link to={"/departamentos/cargar/" + departamento.id_departamento}>
+            {"#" + departamento.id + " - " + departamento.nombre}
+          </Link>
+        </span>
+      </div>
+    );
+  };
+
+  const fieldDepartamentoAsociado = (puesto) => {
+    let departamento = departamentos.filter(
+      (d) => d.id == puesto.id_departamento
+    )[0];
+    let field = "#" + departamento.id + " - " + departamento.nombre;
+
+    return field;
   };
 
   return (
@@ -105,9 +131,9 @@ const Puestos = () => {
         ></Column>
 
         <Column
-          sortable
-          field="id_departamento"
+          field={fieldDepartamentoAsociado}
           header="ID Departamento asociado"
+          body={departamentoAsociado}
           style={{ minWidth: "250px" }}
         ></Column>
         <Column header="Acciones" body={accion}></Column>
