@@ -30,22 +30,25 @@ const NavPage = () => {
               Inicio
             </Nav.Link> */}
             <Nav.Link as={Link} to="/iniciar-sesion" eventKey="2">
-              Iniciar Sesión
+              <i className="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
             </Nav.Link>
             <Nav.Link as={Link} to="/empleados" eventKey="3">
-              Empleados
+              <i className="fa-solid fa-user-tie"></i> Empleados
             </Nav.Link>
             <Nav.Link as={Link} to="/puestos" eventKey="4">
-              Puestos
+              <i className="fa-solid fa-briefcase"></i> Puestos
             </Nav.Link>
             <Nav.Link as={Link} to="/departamentos" eventKey="5">
-              Departamentos
+              <i className="fa-solid fa-building"></i>Departamentos
             </Nav.Link>
             <Nav.Link as={Link} to="/usuarios" eventKey="6">
-              Usuarios del Sistema
+              <i className="fa-solid fa-users"></i> Usuarios del Sistema
             </Nav.Link>
             <Nav.Link as={Link} to="/roles" eventKey="7">
-              Roles del empleado
+              <i className="fa-regular fa-address-book"></i> Roles del empleado
+            </Nav.Link>
+            <Nav.Link as={Link} to="/organigrama" eventKey="5">
+              <i className="fa-solid fa-sitemap"></i> Organigrama
             </Nav.Link>
           </Navbar.Collapse>
         </Container>
