@@ -44,6 +44,9 @@ const NavPage = () => {
             <Nav.Link as={Link} to="/usuarios" eventKey="6">
               Usuarios del Sistema
             </Nav.Link>
+            <Nav.Link as={Link} to="/roles" eventKey="7">
+              Roles del empleado
+            </Nav.Link>
           </Navbar.Collapse>
         </Container>
       </Navbar>

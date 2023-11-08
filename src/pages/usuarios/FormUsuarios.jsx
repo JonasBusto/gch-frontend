@@ -57,6 +57,12 @@ const FormUsuarios = () => {
 
           if (values.imagen_perfil.trim() === "") {
             errors.imagen_perfil = "Requerido";
+          } else if (
+            !/^(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))$/.test(
+              values.imagen_perfil
+            )
+          ) {
+            errors.imagen_perfil = "URL no valida";
           }
 
           if (values.id_empleado?.toString().trim() === "") {

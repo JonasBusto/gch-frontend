@@ -79,7 +79,7 @@ const FormPuestos = () => {
                 value={values.nombre}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                maxLength={20}
+                maxLength={100}
                 placeholder="Ingrese nombre del puesto"
               />
 
@@ -90,12 +90,14 @@ const FormPuestos = () => {
             <Form.Group className="mb-3">
               <Form.Label className="m-0">Descripción del Puesto</Form.Label>
               <Form.Control
+                as="textarea"
+                rows={3}
                 type="text"
                 id="desc"
                 value={values.desc}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                maxLength={20}
+                maxLength={1000}
                 placeholder="Ingrese una descripción"
               />
 
@@ -111,6 +113,7 @@ const FormPuestos = () => {
                 value={values.salario}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                maxLength={20}
                 placeholder="Ingrese salario"
               />
 

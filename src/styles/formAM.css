@@ -11,6 +11,10 @@
   margin-top: 3rem;
 }
 
+.p-datatable {
+  max-width: 100%;
+}
+
 .form-am-custom label {
   font-weight: 700;
   font-size: 0.7rem;
@@ -35,7 +39,8 @@
 }
 
 .form-group-custom,
-.form-am-custom input {
+.form-am-custom input,
+.form-am-custom textarea {
   background-color: rgb(236, 236, 236);
   border-radius: 5px;
 }
