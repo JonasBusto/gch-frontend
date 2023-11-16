@@ -10,9 +10,11 @@ import FormEmpleados from "../pages/empleados/FormEmpleados";
 import FormUsuarios from "../pages/usuarios/FormUsuarios";
 import FormPuestos from "../pages/puestos/FormPuestos";
 import FormDepartamentos from "../pages/departamentos/FormDepartamentos";
-import Error404 from "../pages/Erro404";
+import Error404 from "../pages/Error404";
 import FormRoles from "../pages/roles/FormRoles";
 import Roles from "../pages/roles/Roles";
+import Organigrama from "../pages/organigrama/Organigrama";
+import Nosotros from "../pages/Nosotros";
 import { Route, Routes } from "react-router-dom";
 
 const Main = () => {
@@ -26,6 +28,8 @@ const Main = () => {
         <Route path="/usuarios" element={<Usuarios />} />
         <Route path="/roles" element={<Roles />} />
         <Route path="/puestos" element={<Puestos />} />
+        <Route path="/organigrama" element={<Organigrama />} />
+        <Route path="/info" element={<Nosotros />} />
         <Route path="/departamentos" element={<Departamentos />} />
         <Route path="/empleados/cargar/:id" element={<FormEmpleados />} />
         <Route path="/empleados/cargar/" element={<FormEmpleados />} />

@@ -29,5 +29,18 @@ header {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  margin: 0 0.3rem;
+  margin: 0 1rem;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse > a {
+    margin: 1rem 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  
+  .navbar-collapse > a {
+    font-size: 0.9rem;
+  }
 }

@@ -11,7 +11,7 @@ const NavPage = () => {
       <Navbar
         style={{ maxWidth: "1300px" }}
         collapseOnSelect
-        expand="lg"
+        expand="xl"
         className="mt-2 mx-auto bg-nav-custom"
       >
         <Container>
@@ -39,7 +39,7 @@ const NavPage = () => {
               <i className="fa-solid fa-briefcase"></i> Puestos
             </Nav.Link>
             <Nav.Link as={Link} to="/departamentos" eventKey="5">
-              <i className="fa-solid fa-building"></i>Departamentos
+              <i className="fa-solid fa-building"></i> Departamentos
             </Nav.Link>
             <Nav.Link as={Link} to="/usuarios" eventKey="6">
               <i className="fa-solid fa-users"></i> Usuarios del Sistema

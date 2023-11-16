@@ -2,6 +2,7 @@ let cardsHome = [
   {
     id: 1,
     rol: "admin",
+    url:"empleados",
     titulo_seccion: "Sección Empleados",
     desc_seccion:
       "Visualizar empleados con sus respectivos roles y asignar roles a un empleado ABM de empleado y sus habilidades.",
@@ -11,6 +12,7 @@ let cardsHome = [
   {
     id: 2,
     rol: "admin",
+    url:"usuarios",
     titulo_seccion: "Sección Usuarios",
     desc_seccion: "ABM de usuarios y visualización de los mismos.",
     imagen_seccion:
@@ -19,6 +21,7 @@ let cardsHome = [
   {
     id: 3,
     rol: "admin",
+    url:"departamentos",
     titulo_seccion: "Sección Departamentos",
     desc_seccion: "Visualización de Departamentos.",
     imagen_seccion:

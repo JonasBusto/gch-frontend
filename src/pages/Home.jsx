@@ -1,5 +1,6 @@
 import React from "react";
 import cardsHome from "../helpers/cardHome";
+import { Link } from "react-router-dom";
 import "../styles/home.css";
 
 const Home = () => {
@@ -31,7 +32,7 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="btn-card-home">
-                  <button>Ingresar</button>
+                  <Link to={"/" + c.url}>Ingresar</Link>
                 </div>
               </div>
             </div>

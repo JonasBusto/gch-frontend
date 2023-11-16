@@ -285,7 +285,13 @@ const FormEmpleados = () => {
                   (s) =>
                     s.id != id && (
                       <option key={s.id} value={s.id}>
-                        {"" + s.rol + " - " + s.apellido + ", " + s.nombre + ""}
+                        {"" +
+                          roles.filter((r) => r.id == s.id_rol)[0].nombre_rol +
+                          " - " +
+                          s.apellido +
+                          ", " +
+                          s.nombre +
+                          ""}
                       </option>
                     )
                 )}
