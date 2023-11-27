@@ -9,8 +9,11 @@ const DepDetalles = () => {
   let depObjeto = departamentos.filter((d) => d.id == id)[0];
 
   return (
-    <div>
-      <div className="row m-0">
+    <div className="contain-det-emp">
+      <div className="row m-0 p-0">
+        <div className="titulo-det-emp">
+          <p>Detalles del departamento</p>
+        </div>
         <div className="col-5">
           <div className="img-dep-info">
             <img className="img-fluid" src={depObjeto.img} alt="" />

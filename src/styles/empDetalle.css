@@ -1,0 +1,48 @@
+.contain-det-emp {
+  background-color: white;
+  margin: 0.8rem;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.contain-det-emp > .row {
+  padding: 0 0.5rem;
+}
+
+.detalle-emp {
+  margin: 0.5rem 0;
+}
+
+.detalle-emp > p {
+  margin: 0;
+}
+
+.detalle-emp > p:first-child {
+  text-transform: uppercase;
+}
+
+.titulo-det-emp {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.titulo-det-emp {
+  background-color: #39a7ff;
+}
+
+.titulo-det-emp > p {
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 1rem;
+}
+
+.img-det-emp > img {
+  height: 25rem;
+  width: 100%;
+  object-fit: cover;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

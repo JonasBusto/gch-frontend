@@ -1,75 +1,78 @@
 .card-dep {
-    background-color: white;
-    padding: 0.5rem;
-    margin: 1rem;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transition: 0.5s all ease-in-out;
+  background-color: white;
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: 0.5s all ease-in-out;
 }
 
-.card-dep:hover{
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+.card-dep:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.card-dep-img>img {
-    object-fit: cover;
-    width: 100%;
-    border-radius: 5px;
+.card-dep-img > img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5px;
 }
 
 .col-card-dep {
-    min-height: 20rem;
+  min-height: 20rem;
 }
-.card-dep-info{
-    margin-top: 1rem;
-    margin-left: 0.5rem;
+.card-dep-info {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
 }
 .card-dep-info p:first-child {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
 }
 .card-dep-info p:last-child {
-    color: grey;
-    font-size: 0.8rem;
+  color: grey;
+  font-size: 0.8rem;
 }
 
-.card-dep-info>a {
-    background-color: #362fd9;
-    color: #eeeeee;
-    border: 0;
-    padding: 0.5rem 1.9rem;
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    transition: 0.7s all ease-in-out;
-    border: 4px solid transparent;
-    text-decoration: none;
+.card-dep-info > a {
+  background-color: #362fd9;
+  color: #eeeeee;
+  border: 0;
+  padding: 0.5rem 1.9rem;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: 0.7s all ease-in-out;
+  border: 4px solid transparent;
+  text-decoration: none;
 }
 
-.card-dep-info>a:hover {
-    color: #362fd9;
-    border: 4px solid #362fd9;
-    background-color: #eeeeee;
-  }
-
-.titulo-dep-info >p {
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
+.card-dep-info > a:hover {
+  color: #362fd9;
+  border: 4px solid #362fd9;
+  background-color: #eeeeee;
 }
 
-.titulo2-dep-info>p {
-    font-size: 0.8rem;
-    margin: 0;
-    line-height: 0.4rem;
-    color: grey;
+.titulo-dep-info > p {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
 }
 
-.img-dep-info>img {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px
-    /* height: 15rem; */
+.titulo2-dep-info > p {
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 0.4rem;
+  color: grey;
+}
+
+.img-dep-info > img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  height: 20rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

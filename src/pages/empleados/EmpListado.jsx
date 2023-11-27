@@ -1,38 +1,63 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import empleados from "../../helpers/empleados";
+import roles from "../../helpers/roles";
+import { DataView } from "primereact/dataview";
 import "../../styles/empListado.css";
+import "primeflex/primeflex.css";
 
 const EmpListado = () => {
-  return (
-    <div style={{ width: "100vw", maxWidth: "1300px" }}>
-      <div className="row m-0">
-        <div className="col-12 col-md-6 col-lg-4 col-emp">
-          <div className="d-flex flex-column col-card-emp">
-            <div className="card-emp-img d-flex justify-content-center">
-              <div></div>
-              {/* https://i.ytimg.com/vi/jb0KaJkxq_A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBgjiHOm3yjw4_G56T_PAKtP8qPSA */}
-              <img
-                className="img-fluid"
-                src="https://www.lanacion.com.ar/resizer/v2/elon-U52OA55WTJCJREBI62NJEAHXHA.JPG?auth=d79d6bd9f30deb19eac871d91d1f70b834638ad3653a0ff31b7e7ea6fbe8dbc4&width=420&height=280&quality=70&smart=true"
-                alt=""
-              />
+  const itemTemplate = (e) => {
+    return (
+      <div key={e.id} className="col-12 col-md-6 col-lg-4 col-emp">
+        <div className="d-flex flex-column col-card-emp">
+          <div className="card-emp-img d-flex justify-content-center">
+            <div></div>
+            <img className="img-fluid" src={e.foto_perfil} alt="" />
+          </div>
+          <div className="col-info-emp-card">
+            <div className="d-flex justify-content-center">
+              <p>{e.apellido + ", " + e.nombre}</p>
             </div>
-            <div>
-              <p>Nombre del empleado</p>
-              <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Necessitatibus expedita illum accusantium earum, rerum sapiente
-                quasi rem cupiditate facilis, fuga quo fugit! Laboriosam,
-                excepturi laudantium culpa blanditiis asperiores ullam
-                doloremque?
-              </div>
-            </div>
-            <div>
-              <Link to="">Detalle</Link>
+            <div className="d-flex justify-content-center">
+              <p className="text-center d-flex flex-column">
+                <span>
+                  <b>{roles.filter((r) => r.id == e.id_rol)[0].nombre_rol}</b>
+                </span>
+                <span>
+                  Supervisado por:{" "}
+                  {empleados.filter((r) => r.id == e.id_supervisor)[0]
+                    ? empleados.filter((emp) => emp.id == e.id_supervisor)[0]
+                        .nombre +
+                      ", " +
+                      empleados.filter((emp) => emp.id == e.id_supervisor)[0]
+                        .apellido
+                    : "No tiene"}
+                </span>
+              </p>
             </div>
           </div>
+          <div className="d-flex justify-content-center col-detalle-emp-card">
+            <Link to={"" + e.id}>Detalle</Link>
+          </div>
         </div>
+      </div>
+    );
+  };
+
+  return (
+    <div style={{ width: "95vw", maxWidth: "1300px" }}>
+      <div className="row m-0"></div>
+      <div className="d-flex flex-column contain-list-emp">
+        <div>
+          <p>Lista de empleados</p>
+        </div>
+        <DataView
+          value={empleados}
+          itemTemplate={itemTemplate}
+          paginator
+          rows={6}
+        />
       </div>
     </div>
   );

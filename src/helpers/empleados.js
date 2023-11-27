@@ -4,7 +4,7 @@ let empleados = [
     nombre: "Jonás",
     apellido: "Busto",
     foto_perfil:
-      "https://media.tenor.com/HDlcmUVa3w8AAAAd/messi-lionel-messi.gif",
+      "https://i.pinimg.com/474x/49/7f/3a/497f3a90e3ae26355403409c59109187.jpg",
     direccion: "Rivadavia 100A",
     fecha_nac: "2000-01-01",
     sexo: "h",
@@ -18,7 +18,7 @@ let empleados = [
     nombre: "Nacho",
     apellido: "Rebolleda",
     foto_perfil:
-      "https://media.tenor.com/HDlcmUVa3w8AAAAd/messi-lionel-messi.gif",
+      "https://img3.hulu.com/user/v3/artwork/92d8e1b6-2366-4e4b-b4a2-5810e5c6fbb8?base_image_bucket_name=image_manager&base_image=3ee333c0-7a99-46d8-b51b-4e81ab494507&size=600x338&format=jpeg",
     direccion: "Rivadavia 100A",
     fecha_nac: "2000-01-01",
     sexo: "h",
@@ -32,7 +32,7 @@ let empleados = [
     nombre: "Javier",
     apellido: "Paez",
     foto_perfil:
-      "https://media.tenor.com/HDlcmUVa3w8AAAAd/messi-lionel-messi.gif",
+      "https://i.pinimg.com/474x/0f/47/ab/0f47ab395b842050004155282245c5e9.jpg",
     direccion: "Rivadavia 100A",
     fecha_nac: "2000-01-01",
     sexo: "h",
@@ -46,7 +46,7 @@ let empleados = [
     nombre: "Felix",
     apellido: "Figueroa",
     foto_perfil:
-      "https://media.tenor.com/HDlcmUVa3w8AAAAd/messi-lionel-messi.gif",
+      "https://toys.tfw2005.com/wp-content/uploads/sites/12/2010/04/g1megatron_1271540432.jpg",
     direccion: "Rivadavia 100A",
     fecha_nac: "2000-01-01",
     sexo: "h",
@@ -60,7 +60,7 @@ let empleados = [
     nombre: "Leandro",
     apellido: "Bechara",
     foto_perfil:
-      "https://media.tenor.com/HDlcmUVa3w8AAAAd/messi-lionel-messi.gif",
+      "https://tfwiki.net/mediawiki/images2/thumb/3/3a/G1OptimusPrimeStockFootage.jpg/350px-G1OptimusPrimeStockFootage.jpg",
     direccion: "Rivadavia 100A",
     fecha_nac: "2000-01-01",
     sexo: "h",
@@ -74,14 +74,14 @@ let empleados = [
     nombre: "Lucas",
     apellido: "Cordero",
     foto_perfil:
-      "https://media.tenor.com/HDlcmUVa3w8AAAAd/messi-lionel-messi.gif",
+      "https://www.elfinanciero.com.mx/resizer/N5L3Rc9cLdbmOEmtcua5q3Nbcqk=/1440x810/filters:format(jpg):quality(70):focal(517x413:527x423)/cloudfront-us-east-1.images.arcpublishing.com/elfinanciero/PVEPXIPOSZE5JMQJWCGF5ZJJJI.jpg",
     direccion: "Rivadavia 100A",
     fecha_nac: "2000-01-01",
     sexo: "h",
     email: "profesor@gmail.com",
     telefono: "123456789",
     id_rol: 2,
-    id_supervisor: 6,
+    id_supervisor: "",
   },
 ];
 

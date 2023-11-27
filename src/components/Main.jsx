@@ -18,6 +18,7 @@ import Nosotros from "../pages/Nosotros";
 import DepListado from "../pages/departamentos/DepListado";
 import DepDetalles from "../pages/departamentos/DepDetalles";
 import EmpListado from "../pages/empleados/EmpListado";
+import EmpDetalle from "../pages/empleados/EmpDetalle";
 import { Route, Routes } from "react-router-dom";
 
 const Main = () => {
@@ -35,6 +36,7 @@ const Main = () => {
         <Route path="/info" element={<Nosotros />} />
         <Route path="/departamentos" element={<Departamentos />} />
         <Route path="/empleados-listado" element={<EmpListado />} />
+        <Route path="/empleados-listado/:id" element={<EmpDetalle />} />
         <Route path="/departamentos-listado" element={<DepListado />} />
         <Route path="/departamentos-listado/:id" element={<DepDetalles />} />
         <Route path="/empleados/cargar/:id" element={<FormEmpleados />} />
