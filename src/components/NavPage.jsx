@@ -29,28 +29,54 @@ const NavPage = () => {
             {/* <Nav.Link as={Link} to="/" eventKey="1">
               Inicio
             </Nav.Link> */}
-            <Nav.Link as={Link} to="/iniciar-sesion" eventKey="2">
+            {/* <Nav.Link as={Link} to="/iniciar-sesion" eventKey="2">
               <i className="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
-            </Nav.Link>
-            <Nav.Link as={Link} to="/empleados" eventKey="3">
-              <i className="fa-solid fa-user-tie"></i> Empleados
-            </Nav.Link>
-            <Nav.Link as={Link} to="/puestos" eventKey="4">
-              <i className="fa-solid fa-briefcase"></i> Puestos
-            </Nav.Link>
-            <Nav.Link as={Link} to="/departamentos" eventKey="5">
-              <i className="fa-solid fa-building"></i> Departamentos
-            </Nav.Link>
-            <Nav.Link as={Link} to="/usuarios" eventKey="6">
-              <i className="fa-solid fa-users"></i> Usuarios del Sistema
-            </Nav.Link>
-            <Nav.Link as={Link} to="/roles" eventKey="7">
-              <i className="fa-regular fa-address-book"></i> Roles del empleado
-            </Nav.Link>
-            <Nav.Link as={Link} to="/organigrama" eventKey="5">
-              <i className="fa-solid fa-sitemap"></i> Organigrama
-            </Nav.Link>
+            </Nav.Link> */}
+            <NavDropdown title="Administrador" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/empleados">
+                <i className="fa-solid fa-user-tie"></i> Empleados ABM
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/puestos">
+                <i className="fa-solid fa-briefcase"></i> Puestos ABM
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/departamentos">
+                <i className="fa-solid fa-building"></i> Departamentos ABM
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/usuarios">
+                <i className="fa-solid fa-users"></i> Usuarios del Sistema ABM
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/roles">
+                <i className="fa-regular fa-address-book"></i> Roles del
+                empleado ABM
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Opciones" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/departamentos-listado">
+                <i className="fa-solid fa-building"></i> Departamentos
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/empleados-listado">
+                <i className="fa-solid fa-user-tie"></i> Empleados
+              </NavDropdown.Item>
+
+              <NavDropdown.Divider />
+              <NavDropdown.Item as={Link} to="/organigrama">
+                <i className="fa-solid fa-sitemap"></i> Organigrama
+              </NavDropdown.Item>
+            </NavDropdown>
           </Navbar.Collapse>
+          <Navbar.Brand className="login-brand">
+            <Link
+              to="/iniciar-sesion"
+              className="d-flex flex-column align-items-center w-100 justify-content-center"
+            >
+              <img
+                className="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/5509/5509636.png"
+                alt=""
+              />
+              {/* <p>Iniciar Sesión</p> */}
+            </Link>
+          </Navbar.Brand>
         </Container>
       </Navbar>
     </>

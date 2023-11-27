@@ -1,0 +1,12 @@
+.col-card-emp {
+    background-color: white;
+    padding: 0.5rem;
+}
+
+
+.card-emp-img>img {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 100%;
+}
