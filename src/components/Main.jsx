@@ -19,6 +19,7 @@ import DepListado from "../pages/departamentos/DepListado";
 import DepDetalles from "../pages/departamentos/DepDetalles";
 import EmpListado from "../pages/empleados/EmpListado";
 import EmpDetalle from "../pages/empleados/EmpDetalle";
+import Perfil from "../pages/Perfil";
 import { Route, Routes } from "react-router-dom";
 
 const Main = () => {
@@ -26,6 +27,7 @@ const Main = () => {
     <main className="mt-2 mx-auto" style={{ maxWidth: "1300px" }}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/perfil" element={<Perfil />} />
         <Route path="/iniciar-sesion" element={<Login />} />
         <Route path="/registrarse" element={<Register />} />
         <Route path="/empleados" element={<Empleados />} />
