@@ -1,12 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import empleados from "../../helpers/empleados";
 import roles from "../../helpers/roles";
 import { DataView } from "primereact/dataview";
+import { InputText } from "primereact/inputtext";
 import "../../styles/empListado.css";
 import "primeflex/primeflex.css";
 
 const EmpListado = () => {
+  const [filter, setFilter] = useState([]);
+  const [inputBuscar, setInputBuscar] = useState("");
+
+  const onChangeInput = (inputBuscar) => {
+    let arrayAux = [];
+    let arrayAuxEmpleados = [...empleados];
+
+    arrayAux = arrayAuxEmpleados.filter(
+      (p) =>
+        (p.nombre + " " + p.apellido)
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .includes(inputBuscar.toLowerCase().trim()) ||
+        (p.apellido + " " + p.nombre)
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .includes(inputBuscar.toLowerCase().trim())
+    );
+
+    setFilter([...arrayAux]);
+  };
+
+  useEffect(() => {
+    onChangeInput(inputBuscar);
+  }, [inputBuscar]);
+
+  useEffect(() => {
+    setFilter([...empleados]);
+  }, []);
+
   const itemTemplate = (e) => {
     return (
       <div key={e.id} className="col-12 col-md-6 col-lg-4 col-emp">
@@ -49,13 +82,21 @@ const EmpListado = () => {
     <div style={{ width: "95vw", maxWidth: "1300px" }}>
       <div className="row m-0"></div>
       <div className="d-flex flex-column contain-list-emp">
-        <div>
+        <div className="w-100 contain-header-listado">
           <p>Lista de empleados</p>
+          <div className="mx-3 mb-3">
+            <InputText
+              onChange={(e) => setInputBuscar(e.target.value)}
+              placeholder="Buscar Empleado"
+              onInput={(e) => {}}
+            />
+          </div>
         </div>
         <DataView
-          value={empleados}
+          value={filter}
           itemTemplate={itemTemplate}
           paginator
+          emptyMessage="Sin resultados"
           rows={6}
         />
       </div>

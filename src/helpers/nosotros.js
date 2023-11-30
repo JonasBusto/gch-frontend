@@ -30,8 +30,8 @@ let nosotros = [
         id: 4,
         nombre: "Felix",
         apellido: "Figueroa",
-        legajo: "12345",
-        email: "felix@alu.frt.utn.edu.ar",
+        legajo: "46276",
+        email: "felixfigueroa@alu.frt.utn.edu.ar",
         rol_equipo: "Diseñador",
         foto_perfil: "https://i.blogs.es/66b2a4/photo-1511367461989-f85a21fda167/1366_2000.jpeg"
     },

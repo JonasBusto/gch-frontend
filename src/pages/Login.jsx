@@ -9,7 +9,7 @@ const Login = () => {
   const changePass = () => setShowPass(!showPass);
 
   return (
-    <div>
+    <div style={{ width: "95vw", maxWidth: "1300px" }}>
       <Formik
         initialValues={{
           email: "",
