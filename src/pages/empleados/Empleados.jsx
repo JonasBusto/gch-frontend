@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import empleados from "../../helpers/empleados";
 import roles from "../../helpers/roles";
+import puestos from "../../helpers/puestos";
 import Modal from "react-bootstrap/Modal";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -63,6 +64,18 @@ const Empleados = () => {
     return rolEmpleado.nombre_rol;
   };
 
+  const puestosBody = (empleado) => {
+    let puestoEmpleado = puestos.filter((p) => p.id == empleado.id_puesto)[0];
+
+    return <span>{puestoEmpleado.nombre}</span>;
+  };
+
+  const puestosField = (empleado) => {
+    let puestoEmpleado = roles.filter((p) => p.id == empleado.id_puesto)[0];
+
+    return puestoEmpleado.nombre;
+  };
+
   return (
     <div className="container-datatable">
       <div className="d-flex flex-column align-items-center justify-content-between p-3 w-100 contain-input-search">
@@ -98,8 +111,8 @@ const Empleados = () => {
       >
         <Column
           sortable
-          field="id"
-          header="ID"
+          field="dni"
+          header="DNI"
           style={{ minWidth: "100px" }}
         ></Column>
         <Column
@@ -121,6 +134,12 @@ const Empleados = () => {
           style={{ minWidth: "250px" }}
         ></Column>
         <Column
+          field={puestosField}
+          header="Puesto"
+          body={puestosBody}
+          style={{ minWidth: "250px" }}
+        ></Column>
+        <Column
           sortable
           field="email"
           header="Email"
@@ -130,12 +149,6 @@ const Empleados = () => {
           sortable
           field="telefono"
           header="Telefono"
-          style={{ minWidth: "250px" }}
-        ></Column>
-        <Column
-          sortable
-          field="direccion"
-          header="Dirección"
           style={{ minWidth: "250px" }}
         ></Column>
         <Column header="Acciones" body={accion}></Column>

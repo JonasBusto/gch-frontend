@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navigate, useParams } from "react-router-dom/dist";
 import empleados from "../../helpers/empleados";
 import roles from "../../helpers/roles";
+import puestos from "../../helpers/puestos";
 import Form from "react-bootstrap/Form";
 import { Formik } from "formik";
 import "../../styles/formAM.css";
@@ -12,13 +13,15 @@ const FormEmpleados = () => {
   let valuesForm = {
     nombre: "",
     apellido: "",
+    dni: "",
     foto_perfil: "",
     direccion: "",
     fecha_nac: "",
-    sexo: "",
+    habilitado: false,
     email: "",
     telefono: "",
     id_rol: "",
+    id_puesto: "",
     id_supervisor: "",
   };
 
@@ -28,13 +31,15 @@ const FormEmpleados = () => {
     valuesForm = {
       nombre: empleado.nombre,
       apellido: empleado.apellido,
+      dni: empleado.dni,
       foto_perfil: empleado.foto_perfil,
       direccion: empleado.direccion,
       fecha_nac: empleado.fecha_nac,
-      sexo: empleado.sexo,
+      habilitado: empleado.habilitado,
       email: empleado.email,
       telefono: empleado.telefono,
       id_rol: empleado.id_rol,
+      id_puesto: empleado.id_puesto,
       id_supervisor: empleado.id_supervisor,
     };
   }
@@ -59,6 +64,12 @@ const FormEmpleados = () => {
             errors.apellido = "Ingrese apellido valido";
           }
 
+          if (values.dni.trim() === "") {
+            errors.dni = "Requerido";
+          } else if (!/^\d{7,8}(?:[-\s]\d{4})?$/.test(values.dni)) {
+            errors.dni = "Ingrese DNI valido";
+          }
+
           if (values.foto_perfil.trim() === "") {
             errors.foto_perfil = "Requerido";
           } else if (
@@ -77,10 +88,6 @@ const FormEmpleados = () => {
             errors.fecha_nac = "Requerido";
           }
 
-          if (values.sexo.trim() === "") {
-            errors.sexo = "Requerido";
-          }
-
           if (values.email.trim() === "") {
             errors.email = "Requerido";
           } else if (
@@ -93,6 +100,10 @@ const FormEmpleados = () => {
 
           if (values.telefono.trim() === "") {
             errors.telefono = "Requerido";
+          }
+
+          if (values.id_puesto.toString().trim() === "") {
+            errors.id_puesto = "Requerido";
           }
 
           if (values.id_rol.toString().trim() === "") {
@@ -172,6 +183,22 @@ const FormEmpleados = () => {
               )}
             </Form.Group>
             <Form.Group className="mb-3">
+              <Form.Label className="m-0">DNI del empleado</Form.Label>
+              <Form.Control
+                type="text"
+                id="dni"
+                value={values.dni}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                maxLength={15}
+                placeholder="Ingrese DNI"
+              />
+
+              {touched.dni && errors.dni && (
+                <Form.Text className="text-muted">{errors.dni}</Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label className="m-0">Dirección del empleado</Form.Label>
               <Form.Control
                 type="text"
@@ -206,19 +233,20 @@ const FormEmpleados = () => {
               )}
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Sexo del Empleado</Form.Label>
+              <Form.Label>Estado</Form.Label>
               <Form.Select
-                name="sexo"
-                value={values.sexo}
+                name="habilitado"
+                value={values.habilitado}
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                <option value="">Seleccione</option>
-                <option value="h">Hombre</option>
-                <option value="m">Mujer</option>
+                <option value={false}>Deshabilitado</option>
+                <option value={true}>Habilitado</option>
               </Form.Select>
-              {touched.sexo && errors.sexo && (
-                <Form.Text className="text-muted">{errors.sexo}</Form.Text>
+              {touched.habilitado && errors.habilitado && (
+                <Form.Text className="text-muted">
+                  {errors.habilitado}
+                </Form.Text>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
@@ -270,6 +298,25 @@ const FormEmpleados = () => {
               </Form.Select>
               {touched.id_rol && errors.id_rol && (
                 <Form.Text className="text-muted">{errors.id_rol}</Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Puesto del Empleado</Form.Label>
+              <Form.Select
+                name="id_puesto"
+                value={values.id_puesto}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="">Seleccione un puesto</option>
+                {puestos.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.nombre + " (" + p.nombre_abrev + ")"}
+                  </option>
+                ))}
+              </Form.Select>
+              {touched.id_puesto && errors.id_puesto && (
+                <Form.Text className="text-muted">{errors.id_puesto}</Form.Text>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
