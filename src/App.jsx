@@ -4,6 +4,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import { BrowserRouter } from "react-router-dom";
 import { PrimeReactProvider } from "primereact/api";
+import { GchProvider } from "./context/GchContext";
 import "./styles/app.css";
 
 const App = () => {
@@ -15,23 +16,25 @@ const App = () => {
     nullSortOrder: 1,
     ripple: false,
     zIndex: {
-      modal: 1100, // dialog, sidebar
-      overlay: 1000, // dropdown, overlaypanel
-      menu: 1000, // overlay menus
-      tooltip: 1100, // tooltip
-      toast: 1200, // toast
+      modal: 1100,
+      overlay: 1000,
+      menu: 1000,
+      tooltip: 1100,
+      toast: 1200,
     },
     autoZIndex: true,
   };
   return (
     <BrowserRouter>
-      <PrimeReactProvider value={value}>
-        <div className="d-flex flex-column min-vh-100">
-          <Header />
-          <Main />
-          <Footer />
-        </div>
-      </PrimeReactProvider>
+      <GchProvider>
+        <PrimeReactProvider value={value}>
+          <div className="d-flex flex-column min-vh-100">
+            <Header />
+            <Main />
+            <Footer />
+          </div>
+        </PrimeReactProvider>
+      </GchProvider>
     </BrowserRouter>
   );
 };

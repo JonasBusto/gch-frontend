@@ -20,6 +20,10 @@ import DepDetalles from "../pages/departamentos/DepDetalles";
 import EmpListado from "../pages/empleados/EmpListado";
 import EmpDetalle from "../pages/empleados/EmpDetalle";
 import Perfil from "../pages/Perfil";
+import FormNiveles from "../pages/niveles/FormNiveles";
+import Niveles from "../pages/niveles/Niveles";
+import FormHabilidades from "../pages/habilidades/FormHabilidades";
+import Habilidades from "../pages/habilidades/Habilidades";
 import { Route, Routes } from "react-router-dom";
 
 const Main = () => {
@@ -33,7 +37,9 @@ const Main = () => {
         <Route path="/empleados" element={<Empleados />} />
         <Route path="/usuarios" element={<Usuarios />} />
         <Route path="/roles" element={<Roles />} />
+        <Route path="/niveles" element={<Niveles />} />
         <Route path="/puestos" element={<Puestos />} />
+        <Route path="/habilidades" element={<Habilidades />} />
         <Route path="/organigrama" element={<Organigrama />} />
         <Route path="/info" element={<Nosotros />} />
         <Route path="/departamentos" element={<Departamentos />} />
@@ -49,6 +55,10 @@ const Main = () => {
         <Route path="/puestos/cargar/" element={<FormPuestos />} />
         <Route path="/roles/cargar/:id" element={<FormRoles />} />
         <Route path="/roles/cargar/" element={<FormRoles />} />
+        <Route path="/habilidades/cargar/:id" element={<FormHabilidades />} />
+        <Route path="/habilidades/cargar/" element={<FormHabilidades />} />
+        <Route path="/niveles/cargar/:id" element={<FormNiveles />} />
+        <Route path="/niveles/cargar/" element={<FormNiveles />} />
         <Route
           path="/departamentos/cargar/:id"
           element={<FormDepartamentos />}

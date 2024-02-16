@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import empleados from "../../helpers/empleados";
-import departamentos from "../../helpers/departamentos";
 import Modal from "react-bootstrap/Modal";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -8,8 +7,11 @@ import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";
 import "../../styles/empleados.css";
 import { Link } from "react-router-dom";
+import GchContext from "../../context/GchContext";
 
 const Departamentos = () => {
+  const { departamentos, eliminarDepartamento } = useContext(GchContext);
+
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
@@ -30,18 +32,18 @@ const Departamentos = () => {
         </button>
         <Modal className="modal-custom-accion" show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              {"Eliminar Departamento " + departamento.id}
-            </Modal.Title>
+            <Modal.Title>{"Eliminar Departamento "}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {"¿Esta seguro de eliminar al departamento '" +
-              departamento.nombre +
+              departamento.name +
               "'?"}
           </Modal.Body>
           <Modal.Footer>
             <button onClick={handleClose}>Cancelar</button>
-            <button onClick={handleClose}>Confirmar</button>
+            <button onClick={() => eliminarDepartamento(departamento)}>
+              Confirmar
+            </button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -83,19 +85,13 @@ const Departamentos = () => {
       >
         <Column
           sortable
-          field="id"
-          header="ID"
-          style={{ minWidth: "100px" }}
-        ></Column>
-        <Column
-          sortable
-          field="nombre"
+          field="name"
           header="Nombre"
           style={{ minWidth: "250px" }}
         ></Column>
         <Column
           sortable
-          field="desc"
+          field="description"
           header="Descripción"
           style={{ minWidth: "400px" }}
         ></Column>

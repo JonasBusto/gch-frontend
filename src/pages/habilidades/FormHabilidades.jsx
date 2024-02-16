@@ -9,8 +9,8 @@ import { Formik } from "formik";
 import GchContext from "../../context/GchContext";
 import "../../styles/formAM.css";
 
-const FormDepartamentos = () => {
-  const { altaDepartamento, modificarDepartamento, departamentos } =
+const FormHabilidades = () => {
+  const { habilidades, altaHabilidad, modificarHabilidad } =
     useContext(GchContext);
 
   const { id } = useParams();
@@ -20,17 +20,17 @@ const FormDepartamentos = () => {
     desc: "",
   };
 
-  if (departamentos.length === 0) {
+  if (habilidades.length === 0) {
     return <h1>Cargando</h1>;
   }
 
   if (id) {
-    let departamento = departamentos.filter((d) => d.id == id)[0];
+    let habilidad = habilidades.filter((d) => d.id == id)[0];
 
     valuesForm = {
       id: id,
-      nombre: departamento.name,
-      desc: departamento.description,
+      nombre: habilidad.name,
+      desc: habilidad.description,
     };
   }
 
@@ -54,9 +54,9 @@ const FormDepartamentos = () => {
         onSubmit={(values, { resetForm }) => {
           // console.log("Departamento: ", values);
           if (id) {
-            modificarDepartamento(values);
+            modificarHabilidad(values);
           } else {
-            altaDepartamento(values);
+            altaHabilidad(values);
           }
         }}
       >
@@ -69,10 +69,10 @@ const FormDepartamentos = () => {
           handleBlur,
         }) => (
           <Form onSubmit={handleSubmit} className="form-am-custom">
-            <p>{id ? "Modificar Departamento" : "Alta Departamento"}</p>
+            <p>{id ? "Modificar Habilidad" : "Alta Habilidad"}</p>
 
             <Form.Group className="mb-3">
-              <Form.Label className="m-0">Nombre del Departamento</Form.Label>
+              <Form.Label className="m-0">Nombre de la habilidad</Form.Label>
               <Form.Control
                 type="text"
                 id="nombre"
@@ -80,7 +80,7 @@ const FormDepartamentos = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 maxLength={100}
-                placeholder="Ingrese nombre del puesto"
+                placeholder="Ingrese nombre de la habilidad"
               />
 
               {touched.nombre && errors.nombre && (
@@ -89,7 +89,7 @@ const FormDepartamentos = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label className="m-0">
-                Descripción del Departamento
+                Descripción de la Habilidad
               </Form.Label>
               <Form.Control
                 as="textarea"
@@ -119,4 +119,4 @@ const FormDepartamentos = () => {
   );
 };
 
-export default FormDepartamentos;
+export default FormHabilidades;

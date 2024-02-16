@@ -36,8 +36,14 @@ const NavPage = () => {
               <NavDropdown.Item as={Link} to="/empleados">
                 <i className="fa-solid fa-user-tie"></i> Empleados ABM
               </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/habilidades">
+                <i className="fa-regular fa-address-book"></i> Habilidades ABM
+              </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/puestos">
                 <i className="fa-solid fa-briefcase"></i> Puestos ABM
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/niveles">
+                <i className="fa-solid fa-layer-group"></i> Niveles ABM
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/departamentos">
                 <i className="fa-solid fa-building"></i> Departamentos ABM

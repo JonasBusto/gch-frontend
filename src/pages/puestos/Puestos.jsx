@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import puestos from "../../helpers/puestos";
 import departamentos from "../../helpers/departamentos";
 import Modal from "react-bootstrap/Modal";
@@ -6,10 +6,13 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";
-import "../../styles/empleados.css";
 import { Link } from "react-router-dom";
+import GchContext from "../../context/GchContext";
+import "../../styles/empleados.css";
 
 const Puestos = () => {
+  const { puestos, departamentos } = useContext(GchContext);
+
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
@@ -105,37 +108,37 @@ const Puestos = () => {
         rowsPerPageOptions={[5, 10, 25, 50]}
         value={puestos}
       >
-        <Column
+        {/* <Column
           sortable
           field="id"
           header="ID"
           style={{ minWidth: "100px" }}
-        ></Column>
+        ></Column> */}
         <Column
           sortable
-          field="nombre"
+          field="name"
           header="Nombre"
           style={{ minWidth: "250px" }}
         ></Column>
         <Column
           sortable
-          field="desc"
+          field="description"
           header="Descripción"
           style={{ minWidth: "400px" }}
         ></Column>
         <Column
           sortable
-          field="salario"
+          field="salary"
           header="Salario [$]"
           style={{ minWidth: "250px" }}
         ></Column>
 
-        <Column
+        {/* <Column
           field={fieldDepartamentoAsociado}
           header="ID Departamento asociado"
           body={departamentoAsociado}
           style={{ minWidth: "250px" }}
-        ></Column>
+        ></Column> */}
         <Column header="Acciones" body={accion}></Column>
       </DataTable>
     </div>

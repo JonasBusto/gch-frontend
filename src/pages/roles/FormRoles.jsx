@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom/dist";
 import empleados from "../../helpers/empleados";
-import roles from "../../helpers/roles";
+// import roles from "../../helpers/roles";
 import usuarios from "../../helpers/usuarios";
 import Form from "react-bootstrap/Form";
 import { Formik } from "formik";
 import "../../styles/formAM.css";
+import GchContext from "../../context/GchContext";
 
 const FormRoles = () => {
+  const { altaRol, roles, modificarRol } = useContext(GchContext);
   const { id } = useParams();
 
   let valuesForm = {
@@ -15,12 +17,16 @@ const FormRoles = () => {
     desc_rol: "",
   };
 
+  if (roles.length === 0) {
+    return <h1>Cargando</h1>;
+  }
   if (id) {
-    let rol = roles.filter((r) => r.id == id)[0];
+    let rol = roles?.filter((r) => r.id == id)[0];
 
     valuesForm = {
-      nombre_rol: rol.nombre_rol,
-      desc_rol: rol.desc_rol,
+      id: id,
+      nombre_rol: rol?.name,
+      desc_rol: rol?.description,
     };
   }
 
@@ -43,7 +49,12 @@ const FormRoles = () => {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          console.log("Rol: ", values);
+          // console.log("Rol: ", values);
+          if (id) {
+            modificarRol(values);
+          } else {
+            altaRol(values);
+          }
         }}
       >
         {({
@@ -65,7 +76,7 @@ const FormRoles = () => {
                 value={values.nombre_rol}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                maxLength={20}
+                maxLength={200}
                 placeholder="Ingrese nombre del rol"
               />
 

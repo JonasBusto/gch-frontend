@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom/dist";
 import empleados from "../../helpers/empleados";
 import usuarios from "../../helpers/usuarios";
@@ -6,9 +6,13 @@ import puestos from "../../helpers/puestos";
 import departamentos from "../../helpers/departamentos";
 import Form from "react-bootstrap/Form";
 import { Formik } from "formik";
+import GchContext from "../../context/GchContext";
 import "../../styles/formAM.css";
 
 const FormPuestos = () => {
+  const { puestos, departamentos, modificarPuesto, altaPuesto } =
+    useContext(GchContext);
+
   const { id } = useParams();
 
   let valuesForm = {
@@ -18,14 +22,22 @@ const FormPuestos = () => {
     id_departamento: "",
   };
 
+  if (departamentos.length == 0) {
+    return <h1>Cargando...</h1>;
+  }
+  if (puestos.length == 0) {
+    return <h1>Cargando...</h1>;
+  }
+
   if (id) {
     let puesto = puestos.filter((p) => p.id == id)[0];
 
     valuesForm = {
-      nombre: puesto.nombre,
-      desc: puesto.desc,
-      salario: puesto.salario,
-      id_departamento: puesto.id_departamento,
+      id: id,
+      nombre: puesto.name,
+      desc: puesto.description,
+      salario: puesto.salary,
+      id_departamento: puesto.departmentId ? puesto.departmentId : "",
     };
   }
 
@@ -44,20 +56,27 @@ const FormPuestos = () => {
             errors.desc = "Requerido";
           }
 
-          if (values.salario.trim() === "") {
+          if (values.salario.toString().trim() === "") {
             errors.salario = "Requerido";
-          } else if (!/^[+]?([.]\d+|\d+([.]\d+)?)$/.test(values.salario)) {
+          } else if (
+            !/^[+]?([.]\d+|\d+([.]\d+)?)$/.test(values.salario.toString())
+          ) {
             errors.salario = "Salario no valido";
           }
 
-          if (values.id_departamento?.toString().trim() === "") {
-            errors.id_departamento = "Requerido";
-          }
+          // if (values.id_departamento?.toString().trim() === "") {
+          //   errors.id_departamento = "Requerido";
+          // }
 
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          console.log("Puesto: ", values);
+          // console.log("Puesto: ", values);
+          if (id) {
+            modificarPuesto(values);
+          } else {
+            altaPuesto(values);
+          }
         }}
       >
         {({
@@ -126,14 +145,14 @@ const FormPuestos = () => {
               <Form.Label>Asociar a Departamento: </Form.Label>
               <Form.Select
                 name="id_departamento"
-                value={values.id_departamento}
+                value={values?.id_departamento}
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                <option value="">Seleccione una opción</option>
+                <option value="">Sin departamento</option>
                 {departamentos.map((d) => (
                   <option key={d.id} value={d.id}>
-                    {d.nombre}
+                    {d.name}
                   </option>
                 ))}
               </Form.Select>
