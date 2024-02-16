@@ -1,13 +1,12 @@
-import React from 'react';
-import Header from './components/structure/Header';
-import Main from './components/structure/Main';
-import Footer from './components/structure/Footer';
+import { Header } from './components/structure/Header';
+import { Main } from './components/structure/Main';
+import { Footer } from './components/structure/Footer';
 import { BrowserRouter } from 'react-router-dom';
 import { PrimeReactProvider } from 'primereact/api';
 import { GchProvider } from './context/GchContext';
 import './styles/app.css';
 
-const App = () => {
+export function App() {
   const value = {
     appendTo: 'self',
     cssTransition: false,
@@ -37,6 +36,4 @@ const App = () => {
       </GchProvider>
     </BrowserRouter>
   );
-};
-
-export default App;
+}

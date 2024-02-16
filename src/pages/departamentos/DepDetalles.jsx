@@ -1,9 +1,8 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import departamentos from '../../helpers/departamentos';
 import '../../styles/depListado.css';
 
-const DepDetalles = () => {
+export function DepDetalles() {
   const { id } = useParams();
 
   let depObjeto = departamentos.filter((d) => d.id == id)[0];
@@ -35,6 +34,4 @@ const DepDetalles = () => {
       </div>
     </div>
   );
-};
-
-export default DepDetalles;
+}

@@ -1,9 +1,8 @@
-import React from 'react';
 import cardsHome from '../helpers/cardHome';
 import { Link } from 'react-router-dom';
 import '../styles/home.css';
 
-const Home = () => {
+export function Home() {
   return (
     <div>
       <div className='row m-0'>
@@ -41,6 +40,4 @@ const Home = () => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}

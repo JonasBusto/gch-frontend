@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import puestos from '../../helpers/puestos';
 import departamentos from '../../helpers/departamentos';
 import Modal from 'react-bootstrap/Modal';
@@ -10,7 +10,7 @@ import GchContext from '../../context/GchContext';
 import { Link } from 'react-router-dom';
 import '../../styles/empleados.css';
 
-const Niveles = () => {
+export function Niveles() {
   const { niveles } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
@@ -124,6 +124,4 @@ const Niveles = () => {
       </DataTable>
     </div>
   );
-};
-
-export default Niveles;
+}

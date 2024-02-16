@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import empleados from '../../helpers/empleados';
 import Modal from 'react-bootstrap/Modal';
 import { DataTable } from 'primereact/datatable';
@@ -9,7 +9,7 @@ import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
 import GchContext from '../../context/GchContext';
 
-const Departamentos = () => {
+export function Departamentos() {
   const { departamentos, eliminarDepartamento } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
@@ -99,6 +99,4 @@ const Departamentos = () => {
       </DataTable>
     </div>
   );
-};
-
-export default Departamentos;
+}

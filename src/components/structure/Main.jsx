@@ -1,31 +1,31 @@
-import Home from '../../pages/Home';
-import Empleados from '../../pages/empleados/Empleados';
-import Login from '../../pages/Login';
-import Register from '../../pages/Register';
-import Puestos from '../../pages/puestos/Puestos';
-import Usuarios from '../../pages/usuarios/Usuarios';
-import Departamentos from '../../pages/departamentos/Departamentos';
-import FormEmpleados from '../../pages/empleados/FormEmpleados';
-import FormUsuarios from '../../pages/usuarios/FormUsuarios';
-import FormPuestos from '../../pages/puestos/FormPuestos';
-import FormDepartamentos from '../../pages/departamentos/FormDepartamentos';
-import Error404 from '../../pages/Error404';
-import FormRoles from '../../pages/roles/FormRoles';
-import Roles from '../../pages/roles/Roles';
-import Organigrama from '../../pages/organigrama/Organigrama';
-import Nosotros from '../../pages/Nosotros';
-import DepListado from '../../pages/departamentos/DepListado';
-import DepDetalles from '../../pages/departamentos/DepDetalles';
-import EmpListado from '../../pages/empleados/EmpListado';
-import EmpDetalle from '../../pages/empleados/EmpDetalle';
-import Perfil from '../../pages/Perfil';
-import FormNiveles from '../../pages/niveles/FormNiveles';
-import Niveles from '../../pages/niveles/Niveles';
-import FormHabilidades from '../../pages/habilidades/FormHabilidades';
-import Habilidades from '../../pages/habilidades/Habilidades';
+import { Home } from '../../pages/Home';
+import { Login } from '../../pages/Login';
+import { Register } from '../../pages/Register';
+import { Nosotros } from '../../pages/Nosotros';
+import { Perfil } from '../../pages/Perfil';
+import { Error404 } from '../../pages/Error404';
+import { Departamentos } from '../../pages/departamentos/Departamentos';
+import { DepListado } from '../../pages/departamentos/DepListado';
+import { DepDetalles } from '../../pages/departamentos/DepDetalles';
+import { FormDepartamentos } from '../../pages/departamentos/FormDepartamentos';
+import { Empleados } from '../../pages/empleados/Empleados';
+import { EmpListado } from '../../pages/empleados/EmpListado';
+import { EmpDetalle } from '../../pages/empleados/EmpDetalle';
+import { FormEmpleados } from '../../pages/empleados/FormEmpleados';
+import { Habilidades } from '../../pages/habilidades/Habilidades';
+import { FormHabilidades } from '../../pages/habilidades/FormHabilidades';
+import { Niveles } from '../../pages/niveles/Niveles';
+import { FormNiveles } from '../../pages/niveles/FormNiveles';
+import { Organigrama } from '../../pages/organigrama/Organigrama';
+import { Puestos } from '../../pages/puestos/Puestos';
+import { FormPuestos } from '../../pages/puestos/FormPuestos';
+import { Roles } from '../../pages/roles/Roles';
+import { FormRoles } from '../../pages/roles/FormRoles';
+import { Usuarios } from '../../pages/usuarios/Usuarios';
+import { FormUsuarios } from '../../pages/usuarios/FormUsuarios';
 import { Route, Routes } from 'react-router-dom';
 
-const Main = () => {
+export function Main() {
   return (
     <main className='mt-2 mx-auto' style={{ maxWidth: '1300px' }}>
       <Routes>
@@ -67,6 +67,4 @@ const Main = () => {
       </Routes>
     </main>
   );
-};
-
-export default Main;
+}

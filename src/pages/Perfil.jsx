@@ -1,9 +1,8 @@
-import React from 'react';
 import usuarios from '../helpers/usuarios';
 import empleados from '../helpers/empleados';
 import '../styles/perfil.css';
 
-const Perfil = () => {
+export function Perfil() {
   let idArray = 6;
 
   const logout = () => {};
@@ -53,6 +52,4 @@ const Perfil = () => {
       </div>
     </div>
   );
-};
-
-export default Perfil;
+}

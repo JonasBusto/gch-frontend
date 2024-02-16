@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom/dist';
 import empleados from '../../helpers/empleados';
 import usuarios from '../../helpers/usuarios';
@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
 import '../../styles/formAM.css';
 
-const FormUsuarios = () => {
+export function FormUsuarios() {
   const { id } = useParams();
 
   let valuesForm = {
@@ -195,6 +195,4 @@ const FormUsuarios = () => {
       </Formik>
     </div>
   );
-};
-
-export default FormUsuarios;
+}

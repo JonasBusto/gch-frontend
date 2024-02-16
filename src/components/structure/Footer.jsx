@@ -1,8 +1,7 @@
-import React from 'react';
 import '../../styles/footer.css';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+export function Footer() {
   return (
     <footer className='mt-auto d-flex flex-column align-items-center'>
       <div className='contain-footer'>
@@ -45,6 +44,4 @@ const Footer = () => {
       <p>Gestión del Capital Humano - {new Date().getFullYear()}</p>
     </footer>
   );
-};
-
-export default Footer;
+}

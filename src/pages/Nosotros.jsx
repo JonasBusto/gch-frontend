@@ -1,8 +1,7 @@
-import React from 'react';
 import nosotros from '../helpers/nosotros';
 import '../styles/nosotros.css';
 
-const Nosotros = () => {
+export function Nosotros() {
   function compare(obj1, obj2) {
     if (obj1.apellido > obj2.apellido) {
       return 1;
@@ -37,6 +36,4 @@ const Nosotros = () => {
       </div>
     </div>
   );
-};
-
-export default Nosotros;
+}

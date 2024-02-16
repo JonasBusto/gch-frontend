@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import empleados from '../../helpers/empleados';
 import usuarios from '../../helpers/usuarios';
 import Modal from 'react-bootstrap/Modal';
@@ -9,7 +9,7 @@ import { InputText } from 'primereact/inputtext';
 import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
 
-const Usuarios = () => {
+export function Usuarios() {
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
@@ -178,6 +178,4 @@ const Usuarios = () => {
       </DataTable>
     </div>
   );
-};
-
-export default Usuarios;
+}

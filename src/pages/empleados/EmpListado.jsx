@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import empleados from '../../helpers/empleados';
 import roles from '../../helpers/roles';
@@ -7,7 +7,7 @@ import { InputText } from 'primereact/inputtext';
 import '../../styles/empListado.css';
 import 'primeflex/primeflex.css';
 
-const EmpListado = () => {
+export function EmpListado() {
   const [filter, setFilter] = useState([]);
   const [inputBuscar, setInputBuscar] = useState('');
 
@@ -102,6 +102,4 @@ const EmpListado = () => {
       </div>
     </div>
   );
-};
-
-export default EmpListado;
+}

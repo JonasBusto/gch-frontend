@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import puestos from '../../helpers/puestos';
 import departamentos from '../../helpers/departamentos';
 import Modal from 'react-bootstrap/Modal';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 
-const Puestos = () => {
+export function Puestos() {
   const { puestos, departamentos } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
@@ -143,6 +143,4 @@ const Puestos = () => {
       </DataTable>
     </div>
   );
-};
-
-export default Puestos;
+}

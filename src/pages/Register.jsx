@@ -1,7 +1,3 @@
-import React from 'react';
-
-const Register = () => {
+export function Register() {
   return <div>Register</div>;
-};
-
-export default Register;
+}

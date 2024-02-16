@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../../styles/organigrama.css';
 import { OrganizationChart } from 'primereact/organizationchart';
 import organigrama from '../../helpers/organigrama';
 
-const Organigrama = () => {
+export function Organigrama() {
   const [selection, setSelection] = useState([]);
 
   const nodeTemplate = (node) => {
@@ -40,6 +40,4 @@ const Organigrama = () => {
       />
     </div>
   );
-};
-
-export default Organigrama;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom/dist';
 import empleados from '../../helpers/empleados';
 import usuarios from '../../helpers/usuarios';
@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 import GchContext from '../../context/GchContext';
 import '../../styles/formAM.css';
 
-const FormNiveles = () => {
+export function FormNiveles() {
   const { niveles, departamentos } = useContext(GchContext);
 
   const { id } = useParams();
@@ -109,6 +109,4 @@ const FormNiveles = () => {
       </Formik>
     </div>
   );
-};
-
-export default FormNiveles;
+}

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
 import '../styles/loginRegister.css';
 
-const Login = () => {
+export function Login() {
   const [showPass, setShowPass] = useState(false);
 
   const changePass = () => setShowPass(!showPass);
@@ -106,6 +106,4 @@ const Login = () => {
       </Formik>
     </div>
   );
-};
-
-export default Login;
+}

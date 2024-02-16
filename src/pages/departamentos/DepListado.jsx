@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import departamentos from '../../helpers/departamentos';
 import { DataView } from 'primereact/dataview';
 import { InputText } from 'primereact/inputtext';
 import '../../styles/depListado.css';
 
-const DepListado = () => {
+export function DepListado() {
   const [filter, setFilter] = useState([]);
   const [inputBuscar, setInputBuscar] = useState('');
 
@@ -75,6 +75,4 @@ const DepListado = () => {
       </div>
     </div>
   );
-};
-
-export default DepListado;
+}

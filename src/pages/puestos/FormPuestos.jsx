@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom/dist';
 import empleados from '../../helpers/empleados';
 import usuarios from '../../helpers/usuarios';
@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 import GchContext from '../../context/GchContext';
 import '../../styles/formAM.css';
 
-const FormPuestos = () => {
+export function FormPuestos() {
   const { puestos, departamentos, modificarPuesto, altaPuesto } =
     useContext(GchContext);
 
@@ -173,6 +173,4 @@ const FormPuestos = () => {
       </Formik>
     </div>
   );
-};
-
-export default FormPuestos;
+}

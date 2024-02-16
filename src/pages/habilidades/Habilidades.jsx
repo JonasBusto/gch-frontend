@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import empleados from '../../helpers/empleados';
 import Modal from 'react-bootstrap/Modal';
 import { DataTable } from 'primereact/datatable';
@@ -9,7 +9,7 @@ import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
 import GchContext from '../../context/GchContext';
 
-const Habilidades = () => {
+export function Habilidades() {
   const { eliminarHabilidad, habilidades, eliminarDepartamento } =
     useContext(GchContext);
 
@@ -98,6 +98,4 @@ const Habilidades = () => {
       </DataTable>
     </div>
   );
-};
-
-export default Habilidades;
+}

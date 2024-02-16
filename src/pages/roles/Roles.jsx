@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import puestos from '../../helpers/puestos';
 import departamentos from '../../helpers/departamentos';
 // import roles from "../../helpers/roles";
@@ -11,7 +11,7 @@ import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
 import GchContext from '../../context/GchContext';
 
-const Roles = () => {
+export function Roles() {
   const { roles, eliminarRol } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
@@ -107,6 +107,4 @@ const Roles = () => {
       </DataTable>
     </div>
   );
-};
-
-export default Roles;
+}

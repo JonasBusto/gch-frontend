@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom/dist';
 import empleados from '../../helpers/empleados';
 // import roles from "../../helpers/roles";
@@ -8,7 +8,7 @@ import { Formik } from 'formik';
 import '../../styles/formAM.css';
 import GchContext from '../../context/GchContext';
 
-const FormRoles = () => {
+export function FormRoles() {
   const { altaRol, roles, modificarRol } = useContext(GchContext);
   const { id } = useParams();
 
@@ -115,6 +115,4 @@ const FormRoles = () => {
       </Formik>
     </div>
   );
-};
-
-export default FormRoles;
+}

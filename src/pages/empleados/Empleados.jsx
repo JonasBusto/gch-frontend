@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import empleados from '../../helpers/empleados';
 import roles from '../../helpers/roles';
 import puestos from '../../helpers/puestos';
@@ -10,7 +10,7 @@ import { InputText } from 'primereact/inputtext';
 import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
 
-const Empleados = () => {
+export function Empleados() {
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
@@ -155,6 +155,4 @@ const Empleados = () => {
       </DataTable>
     </div>
   );
-};
-
-export default Empleados;
+}

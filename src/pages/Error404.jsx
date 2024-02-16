@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/error404.css';
 
-const Error404 = () => {
+export function Error404() {
   return (
     <div
       className='contain-error-404 d-flex flex-column align-items-center'
@@ -16,6 +15,4 @@ const Error404 = () => {
       <Link to='/'>Volver al inicio</Link>
     </div>
   );
-};
-
-export default Error404;
+}

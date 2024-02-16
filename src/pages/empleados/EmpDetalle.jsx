@@ -1,10 +1,9 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import empleados from '../../helpers/empleados';
 import roles from '../../helpers/roles';
 import '../../styles/empDetalle.css';
 
-const EmpDetalle = () => {
+export function EmpDetalle() {
   const { id } = useParams();
   const empleadoObjeto = empleados.filter((e) => e.id == id)[0];
 
@@ -112,6 +111,4 @@ const EmpDetalle = () => {
       </div>
     </div>
   );
-};
-
-export default EmpDetalle;
+}
