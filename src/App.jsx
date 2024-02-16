@@ -1,18 +1,18 @@
-import React from "react";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Footer from "./components/Footer";
-import { BrowserRouter } from "react-router-dom";
-import { PrimeReactProvider } from "primereact/api";
-import { GchProvider } from "./context/GchContext";
-import "./styles/app.css";
+import React from 'react';
+import Header from './components/structure/Header';
+import Main from './components/structure/Main';
+import Footer from './components/structure/Footer';
+import { BrowserRouter } from 'react-router-dom';
+import { PrimeReactProvider } from 'primereact/api';
+import { GchProvider } from './context/GchContext';
+import './styles/app.css';
 
 const App = () => {
   const value = {
-    appendTo: "self",
+    appendTo: 'self',
     cssTransition: false,
     hideOverlayOnScroll: true,
-    inputStyle: "filled",
+    inputStyle: 'filled',
     nullSortOrder: 1,
     ripple: false,
     zIndex: {
@@ -28,7 +28,7 @@ const App = () => {
     <BrowserRouter>
       <GchProvider>
         <PrimeReactProvider value={value}>
-          <div className="d-flex flex-column min-vh-100">
+          <div className='d-flex flex-column min-vh-100'>
             <Header />
             <Main />
             <Footer />

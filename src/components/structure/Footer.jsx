@@ -1,13 +1,13 @@
-import React from "react";
-import "../styles/footer.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import '../../styles/footer.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="mt-auto d-flex flex-column align-items-center">
-      <div className="contain-footer">
-        <div className="row m-0">
-          <div className="col-12 col-lg-4 col-footer d-flex flex-column">
+    <footer className='mt-auto d-flex flex-column align-items-center'>
+      <div className='contain-footer'>
+        <div className='row m-0'>
+          <div className='col-12 col-lg-4 col-footer d-flex flex-column'>
             <h5>Resumen</h5>
             <div>
               <p>
@@ -18,10 +18,10 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="col-12 col-lg-4 col-footer">
+          <div className='col-12 col-lg-4 col-footer'>
             <h5>Información</h5>
             <div>
-              <Link to="/info">Sobre nosotros</Link>
+              <Link to='/info'>Sobre nosotros</Link>
               <p>
                 <b>Profesor:</b> Cordero, Lucas
               </p>
@@ -33,11 +33,11 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="col-12 col-lg-4 col-footer d-flex justify-content-center">
+          <div className='col-12 col-lg-4 col-footer d-flex justify-content-center'>
             <img
-              className="img-fluid"
-              src="https://res.cloudinary.com/dtccrvpzp/image/upload/v1699624532/Proyecto%20Final/ypdazcpvne7ifuodif7m.png"
-              alt=""
+              className='img-fluid'
+              src='https://res.cloudinary.com/dtccrvpzp/image/upload/v1699624532/Proyecto%20Final/ypdazcpvne7ifuodif7m.png'
+              alt=''
             />
           </div>
         </div>

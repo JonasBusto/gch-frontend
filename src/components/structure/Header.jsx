@@ -1,6 +1,6 @@
-import React from "react";
-import NavPage from "./NavPage";
-import "../styles/header.css";
+import React from 'react';
+import NavPage from '../items/NavPage';
+import '../../styles/header.css';
 
 const Header = () => {
   return (
