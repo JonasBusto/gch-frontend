@@ -1,23 +1,23 @@
 .contain-error-404 p {
-    margin: 0;
-    text-transform: uppercase;
+  margin: 0;
+  text-transform: uppercase;
 }
 
 .contain-error-404 p:first-child {
-    font-size: 2.5rem;
-    font-weight: 700;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .contain-error-404 .desc-error-404 {
-font-size: 0.7rem;
-width: 20rem;
-line-height: 0.9rem;
-font-weight: 600;
-text-align: center;
+  font-size: 0.7rem;
+  width: 20rem;
+  line-height: 0.9rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .contain-error-404 a {
-    margin: 0.3rem;
+  margin: 0.3rem;
   border: 0;
   padding: 1rem;
   border-radius: 5px;
@@ -33,5 +33,5 @@ text-align: center;
 }
 
 .contain-error-404 a:hover {
-    background-color: #f36d29;
+  background-color: #f36d29;
 }

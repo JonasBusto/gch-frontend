@@ -5,6 +5,7 @@ body {
   background-color: rgb(239, 239, 239) !important;
 }
 
-p, h1 {
+p,
+h1 {
   font-family: 'Roboto', sans-serif;
 }

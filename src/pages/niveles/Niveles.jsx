@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
-import puestos from "../../helpers/puestos";
-import departamentos from "../../helpers/departamentos";
-import Modal from "react-bootstrap/Modal";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { FilterMatchMode } from "primereact/api";
-import { InputText } from "primereact/inputtext";
-import GchContext from "../../context/GchContext";
-import { Link } from "react-router-dom";
-import "../../styles/empleados.css";
+import React, { useState, useContext } from 'react';
+import puestos from '../../helpers/puestos';
+import departamentos from '../../helpers/departamentos';
+import Modal from 'react-bootstrap/Modal';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { FilterMatchMode } from 'primereact/api';
+import { InputText } from 'primereact/inputtext';
+import GchContext from '../../context/GchContext';
+import { Link } from 'react-router-dom';
+import '../../styles/empleados.css';
 
 const Niveles = () => {
   const { niveles } = useContext(GchContext);
@@ -24,16 +24,16 @@ const Niveles = () => {
     const handleShow = () => setShow(true);
 
     return (
-      <div className="btn-acciones">
-        <Link to={"/niveles/cargar/" + puesto.id}>
-          <i className="fa-solid fa-pencil"></i>
+      <div className='btn-acciones'>
+        <Link to={'/niveles/cargar/' + puesto.id}>
+          <i className='fa-solid fa-pencil'></i>
         </Link>
         <button onClick={handleShow}>
-          <i className="fa-solid fa-trash-can"></i>
+          <i className='fa-solid fa-trash-can'></i>
         </button>
-        <Modal className="modal-custom-accion" show={show} onHide={handleClose}>
+        <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{"Eliminar Nivel " + puesto.id}</Modal.Title>
+            <Modal.Title>{'Eliminar Nivel ' + puesto.id}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {/* Cuando este el backend, alertar que no puede eliminar
@@ -56,10 +56,10 @@ const Niveles = () => {
     )[0];
 
     return (
-      <div className="item-asociado">
+      <div className='item-asociado'>
         <span>
-          <Link to={"/departamentos/cargar/" + departamento.id_departamento}>
-            {"#" + departamento.id + " - " + departamento.nombre}
+          <Link to={'/departamentos/cargar/' + departamento.id_departamento}>
+            {'#' + departamento.id + ' - ' + departamento.nombre}
           </Link>
         </span>
       </div>
@@ -70,22 +70,22 @@ const Niveles = () => {
     let departamento = departamentos.filter(
       (d) => d.id == puesto.id_departamento
     )[0];
-    let field = "#" + departamento.id + " - " + departamento.nombre;
+    let field = '#' + departamento.id + ' - ' + departamento.nombre;
 
     return field;
   };
 
   return (
-    <div className="container-datatable">
-      <div className="d-flex flex-column align-items-center justify-content-between p-3 w-100 contain-input-search">
-        <div className="d-flex align-items-center justify-content-between">
+    <div className='container-datatable'>
+      <div className='d-flex flex-column align-items-center justify-content-between p-3 w-100 contain-input-search'>
+        <div className='d-flex align-items-center justify-content-between'>
           <p>Lista de Niveles</p>
-          <Link to="/niveles/cargar" className="btn-agregar">
-            <i className="me-2 fa-solid fa-plus"></i>Agregar
+          <Link to='/niveles/cargar' className='btn-agregar'>
+            <i className='me-2 fa-solid fa-plus'></i>Agregar
           </Link>
         </div>
         <InputText
-          placeholder="Buscar Nivel"
+          placeholder='Buscar Nivel'
           onInput={(e) => {
             setFilters({
               global: {
@@ -100,11 +100,11 @@ const Niveles = () => {
       <DataTable
         paginator
         removableSort
-        selectionMode="single"
+        selectionMode='single'
         scrollable
         filters={filters}
         rows={5}
-        emptyMessage="Sin resultados"
+        emptyMessage='Sin resultados'
         rowsPerPageOptions={[5, 10, 25, 50]}
         value={niveles}
       >
@@ -116,11 +116,11 @@ const Niveles = () => {
         ></Column> */}
         <Column
           sortable
-          field="name"
-          header="Nombre"
-          style={{ minWidth: "250px" }}
+          field='name'
+          header='Nombre'
+          style={{ minWidth: '250px' }}
         ></Column>
-        <Column header="Acciones" body={accion}></Column>
+        <Column header='Acciones' body={accion}></Column>
       </DataTable>
     </div>
   );

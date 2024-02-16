@@ -1,6 +1,6 @@
-import React from "react";
-import nosotros from "../helpers/nosotros";
-import "../styles/nosotros.css";
+import React from 'react';
+import nosotros from '../helpers/nosotros';
+import '../styles/nosotros.css';
 
 const Nosotros = () => {
   function compare(obj1, obj2) {
@@ -15,21 +15,21 @@ const Nosotros = () => {
 
   return (
     <div>
-      <div className="row m-0 justify-content-md-center">
+      <div className='row m-0 justify-content-md-center'>
         {nosotros.sort(compare).map((n) => (
-          <div key={n.id} className="col-6 col-md-4 card-info-nosotros">
-            <div className="d-flex flex-column">
-              <div className="d-flex justify-content-center">
-                <img className="img-fluid" src={n.foto_perfil} alt="" />
+          <div key={n.id} className='col-6 col-md-4 card-info-nosotros'>
+            <div className='d-flex flex-column'>
+              <div className='d-flex justify-content-center'>
+                <img className='img-fluid' src={n.foto_perfil} alt='' />
               </div>
-              <div className="mt-2 d-flex flex-column align-items-center">
-                <p>{n.apellido + ", " + n.nombre}</p>
+              <div className='mt-2 d-flex flex-column align-items-center'>
+                <p>{n.apellido + ', ' + n.nombre}</p>
 
-                <a className="email-info" href={"mailto:" + n.email}>
+                <a className='email-info' href={'mailto:' + n.email}>
                   {n.email}
                 </a>
-                <p className="info-legajo">{n.legajo}</p>
-                <p className="rol-info">{n.rol_equipo}</p>
+                <p className='info-legajo'>{n.legajo}</p>
+                <p className='rol-info'>{n.rol_equipo}</p>
               </div>
             </div>
           </div>

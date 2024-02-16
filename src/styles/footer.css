@@ -16,18 +16,19 @@ footer > p {
   text-transform: uppercase;
 }
 
-.col-footer h5, .col-footer p {
+.col-footer h5,
+.col-footer p {
   color: white;
 }
 
-.col-footer a{
+.col-footer a {
   text-transform: uppercase;
   font-weight: 700;
   text-decoration: none;
 }
 
 .col-footer p {
-  margin: 0; 
+  margin: 0;
 }
 
 .col-footer img {
@@ -41,7 +42,7 @@ footer > p {
   padding: 2rem 0;
 }
 
-.contain-footer>div {
+.contain-footer > div {
   max-width: 1300px;
   margin: 0 auto !important;
 }

@@ -25,7 +25,8 @@ header {
   filter: invert(0.2);
 }
 
-.navbar-collapse > a, .dropdown>a {
+.navbar-collapse > a,
+.dropdown > a {
   color: white;
   text-decoration: none;
   font-weight: 600;
@@ -42,7 +43,6 @@ header {
 
 .login-brand:hover {
   background-color: rgb(233, 228, 228);
-
 }
 
 .login-brand img {
@@ -58,7 +58,6 @@ header {
 }
 
 @media (min-width: 1200px) {
-  
   .navbar-collapse > a {
     font-size: 0.9rem;
   }
