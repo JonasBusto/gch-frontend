@@ -7,26 +7,10 @@ import { GchProvider } from './context/GchContext';
 import './styles/app.css';
 
 export function App() {
-  const value = {
-    appendTo: 'self',
-    cssTransition: false,
-    hideOverlayOnScroll: true,
-    inputStyle: 'filled',
-    nullSortOrder: 1,
-    ripple: false,
-    zIndex: {
-      modal: 1100,
-      overlay: 1000,
-      menu: 1000,
-      tooltip: 1100,
-      toast: 1200,
-    },
-    autoZIndex: true,
-  };
   return (
     <BrowserRouter>
       <GchProvider>
-        <PrimeReactProvider value={value}>
+        <PrimeReactProvider>
           <div className='d-flex flex-column min-vh-100'>
             <Header />
             <Main />
