@@ -7,20 +7,40 @@ import puestos from '../../helpers/puestos';
 import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
 import GchContext from '../../context/GchContext';
+import { MultiSelect } from 'primereact/multiselect';
 import '../../styles/formAM.css';
 
 export function FormDepartamentos() {
-  const { altaDepartamento, modificarDepartamento, departamentos } =
-    useContext(GchContext);
+  const {
+    altaDepartamento,
+    modificarDepartamento,
+    departamentos,
+    roles,
+    puestos,
+    niveles,
+  } = useContext(GchContext);
 
   const { id } = useParams();
+
+  const [deptHijos, setDeptHijos] = useState([]);
+  const [rolPuestos, setRolPuestos] = useState([]);
 
   let valuesForm = {
     nombre: '',
     desc: '',
+    nivel_id: '',
+    depart_h: [],
+    depart_p: '',
+    puestos_id: [],
   };
 
-  if (!departamentos) {
+  if (!roles) {
+    return <h1>Cargando</h1>;
+  } else if (!niveles) {
+    return <h1>Cargando</h1>;
+  } else if (!departamentos) {
+    return <h1>Cargando</h1>;
+  } else if (!puestos) {
     return <h1>Cargando</h1>;
   }
 
@@ -31,6 +51,12 @@ export function FormDepartamentos() {
       id: id,
       nombre: departamento.name,
       desc: departamento.description,
+      nivel_id: departamento?.levelId ? departamento.levelId : '',
+      depart_h: departamento?.childDepartmentsId,
+      depart_p: departamento?.parentDepartmentsId
+        ? departamento.parentDepartmentsId
+        : '',
+      puestos_id: departamento?.positionsId,
     };
   }
 
@@ -52,7 +78,16 @@ export function FormDepartamentos() {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          // console.log("Departamento: ", values);
+          let arrayAuxDept_h = deptHijos.map((dept) => {
+            return dept.id;
+          });
+          let arrayAuxPuestos = rolPuestos.map((puesto) => {
+            return puesto.id;
+          });
+
+          values.depart_h = arrayAuxDept_h;
+          values.puestos_id = arrayAuxPuestos;
+          console.log('Departamento: ', values);
           if (id) {
             modificarDepartamento(values);
           } else {
@@ -105,6 +140,79 @@ export function FormDepartamentos() {
 
               {touched.desc && errors.desc && (
                 <Form.Text className='text-muted'>{errors.desc}</Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className='mb-3'>
+              <Form.Label>Asociar a Nivel: </Form.Label>
+              <Form.Select
+                name='nivel_id'
+                value={values.nivel_id}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value=''>No</option>
+                {niveles.map((n) => (
+                  <option key={n.id} value={n.id}>
+                    {n.name}
+                  </option>
+                ))}
+              </Form.Select>
+              {touched.nivel_id && errors.nivel_id && (
+                <Form.Text className='text-muted'>{errors.nivel_id}</Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className='mb-3 form-multiple-select-custom'>
+              <Form.Label>Asociar a Departamento Hijos: </Form.Label>
+              <MultiSelect
+                name='depart_h'
+                value={deptHijos}
+                onChange={(e) => setDeptHijos(e.target.value)}
+                onBlur={handleBlur}
+                options={departamentos}
+                optionLabel='name'
+                placeholder='Seleccione Departamentos'
+                maxSelectedLabels={5}
+              />
+              {touched.depart_h && errors.depart_h && (
+                <Form.Text className='text-muted'>{errors.depart_h}</Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className='mb-3'>
+              <Form.Label>Asociar a Departamento Padre: </Form.Label>
+              <Form.Select
+                name='depart_p'
+                value={values?.depart_p}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value=''>Sin departamento</option>
+                {departamentos.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name}
+                  </option>
+                ))}
+              </Form.Select>
+              {touched.depart_p && errors.depart_p && (
+                <Form.Text className='text-muted'>{errors.depart_p}</Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className='mb-3 form-multiple-select-custom'>
+              <Form.Label>Asociar a Puestos: </Form.Label>
+
+              <MultiSelect
+                name='puestos_id'
+                value={rolPuestos}
+                onChange={(e) => setRolPuestos(e.target.value)}
+                onBlur={handleBlur}
+                options={puestos}
+                optionLabel='name'
+                placeholder='Seleccione Puestos'
+                maxSelectedLabels={5}
+              />
+              {touched.puestos_id && errors.puestos_id && (
+                <Form.Text className='text-muted'>
+                  {errors.puestos_id}
+                </Form.Text>
               )}
             </Form.Group>
             <div className='d-flex justify-content-center'>

@@ -12,6 +12,12 @@ export const altaDepartamento = (departamento) => {
     body: JSON.stringify({
       name: departamento.nombre,
       description: departamento.desc,
+      levelId:
+        departamento.nivel_id.length === 0 ? null : departamento.nivel_id,
+      childDepartmentsId: departamento.depart_h,
+      parentDepartmentId:
+        departamento.depart_p.length === 0 ? null : departamento.depart_p,
+      positionsId: departamento.puestos_id,
     }),
   }).then((res) => {
     res.json();
@@ -46,10 +52,10 @@ export const modificarDepartamento = (departamento) => {
     body: JSON.stringify({
       name: departamento.nombre,
       description: departamento.desc,
-      levelId: null,
-      childDepartmentsI: [],
-      parentDepartmentId: null,
-      positionsId: [],
+      levelId: departamento.nivel_id,
+      childDepartmentsId: departamento.depart_h,
+      parentDepartmentId: departamento.depart_p,
+      positionsId: departamento.puestos_id,
     }),
   })
     .then((res) => res.json())
