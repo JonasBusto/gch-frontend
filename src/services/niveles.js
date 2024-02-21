@@ -45,7 +45,7 @@ export const modificarNivel = (rol) => {
     },
     body: JSON.stringify({
       name: rol.nombre,
-      departmentsId: rol.id_departamento,
+      departmentsId: [...rol.id_departamento],
     }),
   }).then((res) => {
     res.json();

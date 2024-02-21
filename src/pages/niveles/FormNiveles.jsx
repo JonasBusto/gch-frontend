@@ -16,7 +16,9 @@ export function FormNiveles() {
 
   const { id } = useParams();
 
+  const [selectedDepts, setSelectedDepts] = useState([]);
   const [selectDept, setSelectDept] = useState([]);
+  const [deptsLibres, setDeptsLibres] = useState([]);
 
   let valuesForm = {
     nombre: '',
@@ -25,20 +27,34 @@ export function FormNiveles() {
 
   useEffect(() => {
     if (niveles && departamentos) {
+      let nivel = niveles.filter((p) => p.id == id)[0];
+      let auxDepts = [];
+      let deptsNiveles = niveles
+        .map((n) =>
+          n.departmentsId.map((d) => {
+            return d;
+          })
+        )
+        .join()
+        .split(',');
+
+      let auxDeptsLibres = departamentos.filter(
+        (d) => !deptsNiveles.includes(d.id)
+      );
+      setDeptsLibres(auxDeptsLibres);
       if (id) {
-        let nivel = niveles.filter((p) => p.id == id)[0];
-        let auxDepts = [];
+        // console.log('auxDeptsLibres: ', auxDeptsLibres);
 
         for (let i = 0; i < nivel.departmentsId.length; i++) {
           for (let j = 0; j < departamentos.length; j++) {
             if (departamentos[j].id === nivel.departmentsId[i]) {
               auxDepts.push(departamentos[j]);
-              // break;
             }
           }
         }
-        // console.log(auxDepts);
+        console.log(auxDepts);
         setSelectDept(auxDepts);
+        setSelectedDepts(auxDepts);
       }
     }
   }, [niveles]);
@@ -70,9 +86,9 @@ export function FormNiveles() {
             errors.nombre = 'Requerido';
           }
 
-          if (selectDept.length === 0) {
-            errors.id_departamento = 'Requerido';
-          }
+          // if (selectDept.length === 0) {
+          //   errors.id_departamento = 'Requerido';
+          // }
 
           return errors;
         }}
@@ -81,6 +97,8 @@ export function FormNiveles() {
             return dept.id;
           });
           values.id_departamento = arrayAuxDept;
+
+          // console.log(values);
 
           if (id) {
             modificarNivel(values);
@@ -124,7 +142,7 @@ export function FormNiveles() {
                 value={selectDept}
                 onChange={(e) => setSelectDept(e.target.value)}
                 onBlur={handleBlur}
-                options={departamentos}
+                options={[...deptsLibres, ...selectedDepts]}
                 optionLabel='name'
                 placeholder='Seleccione Departamentos'
                 maxSelectedLabels={5}

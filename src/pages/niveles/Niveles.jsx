@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/empleados.css';
 
 export function Niveles() {
-  const { niveles } = useContext(GchContext);
+  const { niveles, eliminarNivel } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -43,7 +43,7 @@ export function Niveles() {
           </Modal.Body>
           <Modal.Footer>
             <button onClick={handleClose}>Cancelar</button>
-            <button onClick={handleClose}>Confirmar</button>
+            <button onClick={() => eliminarNivel(puesto)}>Confirmar</button>
           </Modal.Footer>
         </Modal>
       </div>
