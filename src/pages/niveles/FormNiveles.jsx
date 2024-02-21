@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom/dist';
 import empleados from '../../helpers/empleados';
 import usuarios from '../../helpers/usuarios';
@@ -7,19 +7,45 @@ import departamentos from '../../helpers/departamentos';
 import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
 import GchContext from '../../context/GchContext';
+import { MultiSelect } from 'primereact/multiselect';
 import '../../styles/formAM.css';
 
 export function FormNiveles() {
-  const { niveles, departamentos } = useContext(GchContext);
+  const { niveles, departamentos, altaNivel, eliminarNivel, modificarNivel } =
+    useContext(GchContext);
 
   const { id } = useParams();
 
+  const [selectDept, setSelectDept] = useState([]);
+
   let valuesForm = {
     nombre: '',
-    id_departamento: '',
+    id_departamento: [],
   };
 
-  if (niveles.length == 0) {
+  useEffect(() => {
+    if (niveles && departamentos) {
+      if (id) {
+        let nivel = niveles.filter((p) => p.id == id)[0];
+        let auxDepts = [];
+
+        for (let i = 0; i < nivel.departmentsId.length; i++) {
+          for (let j = 0; j < departamentos.length; j++) {
+            if (departamentos[j].id === nivel.departmentsId[i]) {
+              auxDepts.push(departamentos[j]);
+              // break;
+            }
+          }
+        }
+        // console.log(auxDepts);
+        setSelectDept(auxDepts);
+      }
+    }
+  }, [niveles]);
+
+  if (!niveles) {
+    return <h1>Cargando...</h1>;
+  } else if (!departamentos) {
     return <h1>Cargando...</h1>;
   }
 
@@ -27,6 +53,7 @@ export function FormNiveles() {
     let nivel = niveles.filter((p) => p.id == id)[0];
 
     valuesForm = {
+      id: id,
       nombre: nivel.name,
       id_departamento: nivel.departmentsId,
     };
@@ -43,10 +70,23 @@ export function FormNiveles() {
             errors.nombre = 'Requerido';
           }
 
+          if (selectDept.length === 0) {
+            errors.id_departamento = 'Requerido';
+          }
+
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          console.log('Nivel: ', values);
+          let arrayAuxDept = selectDept.map((dept) => {
+            return dept.id;
+          });
+          values.id_departamento = arrayAuxDept;
+
+          if (id) {
+            modificarNivel(values);
+          } else {
+            altaNivel(values);
+          }
         }}
       >
         {({
@@ -77,21 +117,18 @@ export function FormNiveles() {
               )}
             </Form.Group>
 
-            <Form.Group className='mb-3'>
-              <Form.Label>Asociar a Departamento: </Form.Label>
-              <Form.Select
+            <Form.Group className='mb-3 form-multiple-select-custom'>
+              <Form.Label>Asociar a Departamentos: </Form.Label>
+              <MultiSelect
                 name='id_departamento'
-                value={values.id_departamento}
-                onChange={handleChange}
+                value={selectDept}
+                onChange={(e) => setSelectDept(e.target.value)}
                 onBlur={handleBlur}
-              >
-                <option value=''>No</option>
-                {departamentos.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.name}
-                  </option>
-                ))}
-              </Form.Select>
+                options={departamentos}
+                optionLabel='name'
+                placeholder='Seleccione Departamentos'
+                maxSelectedLabels={5}
+              />
               {touched.id_departamento && errors.id_departamento && (
                 <Form.Text className='text-muted'>
                   {errors.id_departamento}

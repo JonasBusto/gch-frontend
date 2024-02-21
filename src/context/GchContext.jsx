@@ -44,6 +44,9 @@ export function GchProvider({ children }) {
         altaRol,
         roles,
         eliminarRol,
+        altaNivel,
+        eliminarNivel,
+        modificarNivel,
       }}
     >
       {children}

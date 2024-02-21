@@ -10,7 +10,8 @@ export const altaNivel = (rol) => {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({
-      name: rol.nombre_rol,
+      name: rol.nombre,
+      departmentsId: rol.id_departamento,
     }),
   }).then((res) => {
     res.json();
@@ -19,6 +20,36 @@ export const altaNivel = (rol) => {
   });
 };
 
-export const eliminarNivel = (rol) => {};
+export const eliminarNivel = (rol) => {
+  fetch(`${URL_BACKEND}levels/${rol.id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then(() => {
+      alert('Nivel borrado');
+      window.location.reload();
+    });
+};
 
-export const modificarNivel = (rol) => {};
+export const modificarNivel = (rol) => {
+  fetch(`${URL_BACKEND}levels/${rol.id}`, {
+    method: 'PUT',
+    crossDomain: true,
+    headers: {
+      'Content-type': 'application/json',
+      Accept: 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify({
+      name: rol.nombre,
+      departmentsId: rol.id_departamento,
+    }),
+  }).then((res) => {
+    res.json();
+    alert('Nivel cargado exitosamente');
+    window.location.reload();
+  });
+};

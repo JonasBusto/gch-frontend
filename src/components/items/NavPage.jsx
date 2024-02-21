@@ -36,13 +36,13 @@ export function NavPage() {
                 <i className='fa-solid fa-user-tie'></i> Empleados ABM
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/habilidades'>
-                <i className='fa-regular fa-address-book'></i> Habilidades ABM
+                <i className='fa-regular fa-address-book'></i> Habilidades ABM X
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/puestos'>
-                <i className='fa-solid fa-briefcase'></i> Puestos ABM
+                <i className='fa-solid fa-briefcase'></i> Puestos ABM X
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/niveles'>
-                <i className='fa-solid fa-layer-group'></i> Niveles ABM
+                <i className='fa-solid fa-layer-group'></i> Niveles ABM X
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/departamentos'>
                 <i className='fa-solid fa-building'></i> Departamentos ABM
@@ -52,7 +52,7 @@ export function NavPage() {
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/roles'>
                 <i className='fa-regular fa-address-book'></i> Roles del
-                empleado ABM
+                empleado ABM X
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title='Opciones' id='basic-nav-dropdown'>

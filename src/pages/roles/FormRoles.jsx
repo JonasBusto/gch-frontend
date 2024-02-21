@@ -7,9 +7,12 @@ import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
 import '../../styles/formAM.css';
 import GchContext from '../../context/GchContext';
+import departamentos from '../../helpers/departamentos';
+import { MultiSelect } from 'primereact/multiselect';
 
 export function FormRoles() {
-  const { altaRol, roles, modificarRol } = useContext(GchContext);
+  const { altaRol, roles, departamentos, modificarRol, puestos, niveles } =
+    useContext(GchContext);
   const { id } = useParams();
 
   let valuesForm = {
@@ -17,9 +20,10 @@ export function FormRoles() {
     desc_rol: '',
   };
 
-  if (roles.length === 0) {
+  if (!roles) {
     return <h1>Cargando</h1>;
   }
+
   if (id) {
     let rol = roles?.filter((r) => r.id == id)[0];
 
@@ -49,7 +53,7 @@ export function FormRoles() {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          // console.log("Rol: ", values);
+          console.log('Rol: ', values);
           if (id) {
             modificarRol(values);
           } else {

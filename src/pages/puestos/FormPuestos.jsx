@@ -22,10 +22,9 @@ export function FormPuestos() {
     id_departamento: '',
   };
 
-  if (departamentos.length == 0) {
+  if (!departamentos) {
     return <h1>Cargando...</h1>;
-  }
-  if (puestos.length == 0) {
+  } else if (!puestos) {
     return <h1>Cargando...</h1>;
   }
 

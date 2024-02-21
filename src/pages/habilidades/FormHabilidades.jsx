@@ -20,7 +20,7 @@ export function FormHabilidades() {
     desc: '',
   };
 
-  if (habilidades.length === 0) {
+  if (!habilidades) {
     return <h1>Cargando</h1>;
   }
 

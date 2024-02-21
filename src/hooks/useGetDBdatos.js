@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { URL_BACKEND } from '../constants';
 
 export function useGetDBdatos() {
-  const [roles, setRoles] = useState([]);
-  const [niveles, setNiveles] = useState([]);
-  const [departamentos, setDepartamentos] = useState([]);
-  const [habilidades, setHabilidades] = useState([]);
-  const [puestos, setPuestos] = useState([]);
+  const [roles, setRoles] = useState(null);
+  const [niveles, setNiveles] = useState(null);
+  const [departamentos, setDepartamentos] = useState(null);
+  const [habilidades, setHabilidades] = useState(null);
+  const [puestos, setPuestos] = useState(null);
 
   const getPuestos = () => {
     fetch(`${URL_BACKEND}positions`)

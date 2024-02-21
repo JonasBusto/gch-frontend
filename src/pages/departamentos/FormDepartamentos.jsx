@@ -20,7 +20,7 @@ export function FormDepartamentos() {
     desc: '',
   };
 
-  if (departamentos.length === 0) {
+  if (!departamentos) {
     return <h1>Cargando</h1>;
   }
 
