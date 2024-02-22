@@ -5,9 +5,9 @@ import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Link } from 'react-router-dom';
 import { Load } from '../../components/items/Load';
-import Modal from 'react-bootstrap/Modal';
 import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
+import { AccionesRol } from '../../components/items/roles/DataTableRol';
 
 export function Roles() {
   const { roles, eliminarRol } = useContext(GchContext);
@@ -19,39 +19,6 @@ export function Roles() {
   if (!roles) {
     return <Load />;
   }
-
-  const accion = (rol) => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    return (
-      <div className='btn-acciones'>
-        <Link to={'/roles/cargar/' + rol.id}>
-          <i className='fa-solid fa-pencil'></i>
-        </Link>
-        <button onClick={handleShow}>
-          <i className='fa-solid fa-trash-can'></i>
-        </button>
-        <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>{'Eliminar Rol '}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {/* Cuando este el backend, alertar que no puede eliminar
-            al empleado porque tiene usuarios asociados. Que primero desvincule
-            o elimine a esos usuarios */}
-            {"¿Esta seguro de eliminar al rol '" + rol.name + "'?"}
-          </Modal.Body>
-          <Modal.Footer>
-            <button onClick={handleClose}>Cancelar</button>
-            <button onClick={() => eliminarRol(rol)}>Confirmar</button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  };
 
   return (
     <div className='container-datatable'>
@@ -99,7 +66,10 @@ export function Roles() {
           style={{ minWidth: '400px' }}
         ></Column>
 
-        <Column header='Acciones' body={accion}></Column>
+        <Column
+          header='Acciones'
+          body={(rol) => <AccionesRol rol={rol} eliminarRol={eliminarRol} />}
+        ></Column>
       </DataTable>
     </div>
   );

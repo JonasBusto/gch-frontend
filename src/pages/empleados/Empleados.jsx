@@ -5,7 +5,13 @@ import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Link } from 'react-router-dom';
 import { Load } from '../../components/items/Load';
-import Modal from 'react-bootstrap/Modal';
+import {
+  AccionesEmpleado,
+  PuestosBody,
+  PuestosField,
+  RolesBody,
+  RolesField,
+} from '../../components/items/empleados/DataTableEmpleado';
 import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 
@@ -20,73 +26,6 @@ export function Empleados() {
   if (!empleados || !puestos || !roles) {
     return <Load />;
   }
-
-  const accion = (empleado) => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    return (
-      <div className='btn-acciones'>
-        <Link to={'/empleados/cargar/' + empleado.id}>
-          <i className='fa-solid fa-pencil'></i>
-        </Link>
-        <button onClick={handleShow}>
-          <i className='fa-solid fa-trash-can'></i>
-        </button>
-        <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>{'Eliminar Empleado'}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {/* Cuando este el backend, alertar que no puede eliminar
-            al empleado porque tiene usuarios asociados. Que primero desvincule
-            o elimine a esos usuarios */}
-            {"¿Esta seguro de eliminar al empleado '" +
-              empleado.lastName +
-              ', ' +
-              empleado.firstName +
-              "'"}
-          </Modal.Body>
-          <Modal.Footer>
-            <button onClick={handleClose}>Cancelar</button>
-            <button onClick={() => eliminarEmpleado(empleado)}>
-              Confirmar
-            </button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  };
-
-  const rolesBody = (empleado) => {
-    let rolEmpleado = roles.filter((r) => r.id == empleado.roleId)[0];
-
-    return <span>{rolEmpleado ? rolEmpleado.name : 'Sin rol Asignado'}</span>;
-  };
-
-  const rolesField = (empleado) => {
-    let rolEmpleado = roles.filter((r) => r.id == empleado.roleId)[0];
-
-    return rolEmpleado ? rolEmpleado.name : 'Sin rol Asignado';
-  };
-
-  const puestosBody = (empleado) => {
-    let puestoEmpleado = puestos.filter((p) => p.id == empleado.positionId)[0];
-
-    return (
-      <span>
-        {puestoEmpleado ? puestoEmpleado.name : 'Sin puesto Asignado'}
-      </span>
-    );
-  };
-
-  const puestosField = (empleado) => {
-    let puestoEmpleado = roles.filter((p) => p.id == empleado.positionId)[0];
-
-    return puestoEmpleado ? puestoEmpleado.name : 'Sin puesto Asignado';
-  };
 
   return (
     <div className='container-datatable'>
@@ -140,15 +79,19 @@ export function Empleados() {
           style={{ minWidth: '250px' }}
         ></Column>
         <Column
-          field={rolesField}
+          field={(empleado) => <RolesField empleado={empleado} roles={roles} />}
           header='Rol'
-          body={rolesBody}
+          body={(empleado) => <RolesBody empleado={empleado} roles={roles} />}
           style={{ minWidth: '250px' }}
         ></Column>
         <Column
-          field={puestosField}
+          field={(empleado) => (
+            <PuestosField empleado={empleado} puestos={puestos} />
+          )}
           header='Puesto'
-          body={puestosBody}
+          body={(empleado) => (
+            <PuestosBody empleado={empleado} puestos={puestos} />
+          )}
           style={{ minWidth: '250px' }}
         ></Column>
         <Column
@@ -163,7 +106,15 @@ export function Empleados() {
           header='Telefono'
           style={{ minWidth: '250px' }}
         ></Column>
-        <Column header='Acciones' body={accion}></Column>
+        <Column
+          header='Acciones'
+          body={(empleado) => (
+            <AccionesEmpleado
+              empleado={empleado}
+              eliminarEmpleado={eliminarEmpleado}
+            />
+          )}
+        ></Column>
       </DataTable>
     </div>
   );

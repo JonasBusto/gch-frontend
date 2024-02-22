@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { DataView } from 'primereact/dataview';
 import { InputText } from 'primereact/inputtext';
 import { Load } from '../../components/items/Load';
+import { CardEmpleado } from '../../components/items/empleados/CardEmpleado';
 import GchContext from '../../context/GchContext';
 import '../../styles/empListado.css';
 import 'primeflex/primeflex.css';
@@ -45,43 +46,15 @@ export function EmpListado() {
     return <Load />;
   }
 
-  const itemTemplate = (e) => {
-    const rolEmpleado = roles.filter((r) => r.id == e.roleId)[0]?.name;
+  const itemTemplate = (empleado) => {
+    const rolEmpleado = roles.filter((r) => r.id == empleado.roleId)[0]?.name;
 
     return (
-      <div key={e.id} className='col-12 col-md-6 col-lg-4 col-emp'>
-        <div className='d-flex flex-column col-card-emp'>
-          <div className='card-emp-img d-flex justify-content-center'>
-            <div></div>
-            <img className='img-fluid' src={e.profilePicture} alt='' />
-          </div>
-          <div className='col-info-emp-card'>
-            <div className='d-flex justify-content-center'>
-              <p>{e.lastName + ', ' + e.firstName}</p>
-            </div>
-            <div className='d-flex justify-content-center'>
-              <p className='text-center d-flex flex-column'>
-                <span>
-                  <b>{rolEmpleado ? rolEmpleado : 'Sin rol asignado'}</b>
-                </span>
-                <span>
-                  Supervisado por:{' '}
-                  {empleados.filter((r) => r.id == e.supervisorId)[0]
-                    ? empleados.filter((emp) => emp.id == e.supervisorId)[0]
-                        .firstName +
-                      ', ' +
-                      empleados.filter((emp) => emp.id == e.supervisorId)[0]
-                        .lastName
-                    : 'No tiene'}
-                </span>
-              </p>
-            </div>
-          </div>
-          <div className='d-flex justify-content-center col-detalle-emp-card'>
-            <Link to={'' + e.id}>Detalle</Link>
-          </div>
-        </div>
-      </div>
+      <CardEmpleado
+        empleados={empleados}
+        empleado={empleado}
+        rolEmpleado={rolEmpleado}
+      />
     );
   };
 

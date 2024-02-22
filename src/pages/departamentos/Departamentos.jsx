@@ -5,7 +5,7 @@ import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Link } from 'react-router-dom';
 import { Load } from '../../components/items/Load';
-import Modal from 'react-bootstrap/Modal';
+import { AccionesDepartamento } from '../../components/items/departamentos/DataTableDepartamento';
 import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 
@@ -19,40 +19,6 @@ export function Departamentos() {
   if (!departamentos) {
     return <Load />;
   }
-
-  const accion = (departamento) => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    return (
-      <div className='btn-acciones'>
-        <Link to={'/departamentos/cargar/' + departamento.id}>
-          <i className='fa-solid fa-pencil'></i>
-        </Link>
-        <button onClick={handleShow}>
-          <i className='fa-solid fa-trash-can'></i>
-        </button>
-        <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>{'Eliminar Departamento'}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {"¿Esta seguro de eliminar al departamento '" +
-              departamento.name +
-              "'?"}
-          </Modal.Body>
-          <Modal.Footer>
-            <button onClick={handleClose}>Cancelar</button>
-            <button onClick={() => eliminarDepartamento(departamento)}>
-              Confirmar
-            </button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  };
 
   return (
     <div className='container-datatable'>
@@ -99,7 +65,15 @@ export function Departamentos() {
           header='Descripción'
           style={{ minWidth: '400px' }}
         ></Column>
-        <Column header='Acciones' body={accion}></Column>
+        <Column
+          header='Acciones'
+          body={(departamento) => (
+            <AccionesDepartamento
+              departamento={departamento}
+              eliminarDepartamento={eliminarDepartamento}
+            />
+          )}
+        ></Column>
       </DataTable>
     </div>
   );

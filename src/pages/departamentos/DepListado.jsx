@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { DataView } from 'primereact/dataview';
 import { InputText } from 'primereact/inputtext';
 import { Load } from '../../components/items/Load';
+import { CardDepartamento } from '../../components/items/departamentos/CardDepartamento';
 import GchContext from '../../context/GchContext';
 import '../../styles/depListado.css';
 
@@ -40,32 +40,8 @@ export function DepListado() {
     return <Load />;
   }
 
-  const itemTemplate = (d) => {
-    return (
-      <div key={d.id} className='col-12 col-md-6 col-lg-4 col-card-dep'>
-        <div className='d-flex flex-column card-dep'>
-          <div className='card-dep-img'>
-            <img
-              className='img-fluid'
-              src='https://concepto.de/wp-content/uploads/2015/03/desarrollo-organizacional-e1550156922140.jpg'
-              alt=''
-            />
-          </div>
-          <div className='card-dep-info d-flex flex-column align-items-center'>
-            <div className='w-100'>
-              <p>{d.nombre}</p>
-              <p>
-                <strong>Nombre:</strong> {d.name}
-              </p>
-              <p>
-                <strong>Descripción:</strong> {d.description}
-              </p>
-            </div>
-            <Link to={'/departamentos-listado/' + d.id}>Ingresar</Link>
-          </div>
-        </div>
-      </div>
-    );
+  const itemTemplate = (departamento) => {
+    return <CardDepartamento departamento={departamento} />;
   };
 
   return (

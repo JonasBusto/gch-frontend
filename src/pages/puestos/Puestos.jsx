@@ -5,9 +5,14 @@ import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Link } from 'react-router-dom';
 import { Load } from '../../components/items/Load';
-import Modal from 'react-bootstrap/Modal';
+
 import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
+import {
+  AccionesPuesto,
+  DepartamentoAsociadoBody,
+  DepartamentoAsociadoField,
+} from '../../components/items/puestos/DataTablePuesto';
 
 export function Puestos() {
   const { puestos, departamentos, eliminarPuesto } = useContext(GchContext);
@@ -19,76 +24,6 @@ export function Puestos() {
   if (!puestos || !departamentos) {
     return <Load />;
   }
-
-  const accion = (puesto) => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    return (
-      <div className='btn-acciones'>
-        <Link to={'/puestos/cargar/' + puesto.id}>
-          <i className='fa-solid fa-pencil'></i>
-        </Link>
-        <button onClick={handleShow}>
-          <i className='fa-solid fa-trash-can'></i>
-        </button>
-        <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>{'Eliminar Puesto ' + puesto.id}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {/* Cuando este el backend, alertar que no puede eliminar
-            al empleado porque tiene usuarios asociados. Que primero desvincule
-            o elimine a esos usuarios */}
-            {"¿Esta seguro de eliminar al empleado '" + puesto.nombre + "'?"}
-          </Modal.Body>
-          <Modal.Footer>
-            <button onClick={handleClose}>Cancelar</button>
-            <button onClick={() => eliminarPuesto(puesto)}>Confirmar</button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  };
-
-  const departamentoAsociado = (puesto) => {
-    let departamento = departamentos.filter(
-      (d) => d.id === puesto.departmentId
-    )[0];
-
-    if (departamento) {
-      return (
-        <div className='item-asociado'>
-          <span>
-            <Link to={'/departamentos/cargar/' + departamento.id}>
-              {'#' + departamento.name}
-            </Link>
-          </span>
-        </div>
-      );
-    } else {
-      return (
-        <div className='item-asociado'>
-          <span>Sin departamento asociado</span>
-        </div>
-      );
-    }
-  };
-
-  const fieldDepartamentoAsociado = (puesto) => {
-    let departamento = departamentos.filter(
-      (d) => d.id === puesto.departmentId
-    )[0];
-    let field;
-    if (departamento) {
-      field = '#' + departamento.name;
-    } else {
-      field = 'Sin departamento asociado';
-    }
-    return field;
-  };
 
   return (
     <div className='container-datatable'>
@@ -143,12 +78,27 @@ export function Puestos() {
         ></Column>
 
         <Column
-          field={fieldDepartamentoAsociado}
+          field={(puesto) => (
+            <DepartamentoAsociadoField
+              puesto={puesto}
+              departamentos={departamentos}
+            />
+          )}
           header='ID Departamento asociado'
-          body={departamentoAsociado}
+          body={(puesto) => (
+            <DepartamentoAsociadoBody
+              puesto={puesto}
+              departamentos={departamentos}
+            />
+          )}
           style={{ minWidth: '250px' }}
         ></Column>
-        <Column header='Acciones' body={accion}></Column>
+        <Column
+          header='Acciones'
+          body={(puesto) => (
+            <AccionesPuesto puesto={puesto} eliminarPuesto={eliminarPuesto} />
+          )}
+        ></Column>
       </DataTable>
     </div>
   );
