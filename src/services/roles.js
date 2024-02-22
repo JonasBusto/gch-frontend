@@ -44,6 +44,7 @@ export const modificarRol = (rol) => {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({
+      id: rol.id,
       name: rol.nombre_rol,
       description: rol.desc_rol,
     }),

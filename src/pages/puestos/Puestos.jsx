@@ -11,7 +11,7 @@ import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 
 export function Puestos() {
-  const { puestos, departamentos } = useContext(GchContext);
+  const { puestos, departamentos, eliminarPuesto } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -43,7 +43,7 @@ export function Puestos() {
           </Modal.Body>
           <Modal.Footer>
             <button onClick={handleClose}>Cancelar</button>
-            <button onClick={handleClose}>Confirmar</button>
+            <button onClick={() => eliminarPuesto(puesto)}>Confirmar</button>
           </Modal.Footer>
         </Modal>
       </div>

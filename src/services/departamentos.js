@@ -50,6 +50,7 @@ export const modificarDepartamento = (departamento) => {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({
+      id: departamento.id,
       name: departamento.nombre,
       description: departamento.desc,
       levelId: departamento.nivel_id,

@@ -44,6 +44,7 @@ export const modificarNivel = (rol) => {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({
+      id: rol.id,
       name: rol.nombre,
       departmentsId: [...rol.id_departamento],
     }),

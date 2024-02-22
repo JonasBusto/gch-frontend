@@ -46,6 +46,7 @@ export const modificarPuesto = (puesto) => {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({
+      id: puesto.id,
       name: puesto.nombre,
       description: puesto.desc,
       salary: puesto.salario,

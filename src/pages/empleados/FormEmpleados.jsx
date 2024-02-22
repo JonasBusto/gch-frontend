@@ -1,20 +1,37 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom/dist';
 import empleados from '../../helpers/empleados';
 import roles from '../../helpers/roles';
+import AppContext from '../../context/GchContext';
 import puestos from '../../helpers/puestos';
+import usuarios from '../../helpers/usuarios';
 import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
+import { MultiSelect } from 'primereact/multiselect';
 import '../../styles/formAM.css';
 
 export function FormEmpleados() {
   const { id } = useParams();
+  const {
+    roles,
+    puestos,
+    habilidades,
+    usuarios,
+    altaEmpleado,
+    empleados,
+    eliminarEmpleado,
+    modificarEmpleado,
+  } = useContext(AppContext);
+  const [selectHabilidades, setSelectHabilidades] = useState([]);
+  const [selectSubordinados, setSelectSubordinados] = useState([]);
+  // const [habSelect, habSelect] = useState([])
 
   let valuesForm = {
     nombre: '',
     apellido: '',
     dni: '',
-    foto_perfil: '',
+    foto_perfil:
+      'https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg',
     direccion: '',
     fecha_nac: '',
     habilitado: false,
@@ -23,26 +40,66 @@ export function FormEmpleados() {
     id_rol: '',
     id_puesto: '',
     id_supervisor: '',
+    id_subordinados: [],
+    id_habilidades: [],
+    id_usuario: '',
   };
+
+  useEffect(() => {
+    if (empleados && habilidades && id) {
+      let empleado = empleados.filter((e) => e.id == id)[0];
+      let auxHabSelected = habilidades.filter((h) =>
+        empleado.skillsId.includes(h.id)
+      );
+      // console.log(empleado);
+      setSelectHabilidades(auxHabSelected);
+    }
+  }, [empleados]);
+
+  if (!roles) {
+    return <h1>Cargando</h1>;
+  } else if (!habilidades) {
+    return <h1>Cargando</h1>;
+  } else if (!puestos) {
+    return <h1>Cargando</h1>;
+  } else if (!usuarios) {
+    return <h1>Cargando</h1>;
+  } else if (!empleados) {
+    return <h1>Cargando</h1>;
+  }
 
   if (id) {
     let empleado = empleados.filter((e) => e.id == id)[0];
+    let fecha = empleado.birthDate;
+
+    const [dia, mes, año] = fecha.split('-');
 
     valuesForm = {
-      nombre: empleado.nombre,
-      apellido: empleado.apellido,
+      id: id,
+      nombre: empleado.firstName,
+      apellido: empleado.lastName,
       dni: empleado.dni,
-      foto_perfil: empleado.foto_perfil,
-      direccion: empleado.direccion,
-      fecha_nac: empleado.fecha_nac,
-      habilitado: empleado.habilitado,
-      email: empleado.email,
-      telefono: empleado.telefono,
-      id_rol: empleado.id_rol,
-      id_puesto: empleado.id_puesto,
-      id_supervisor: empleado.id_supervisor,
+      foto_perfil: empleado.profilePicture ? empleado.profilePicture : '',
+      direccion: empleado.address,
+      fecha_nac: año + '-' + mes + '-' + dia,
+      habilitado: empleado.active,
+      email: empleado.mail,
+      telefono: empleado.phoneNumber,
+      id_rol: empleado.roleId ? empleado.roleId : '',
+      id_puesto: empleado.positionId ? empleado.positionId : '',
+      id_supervisor: empleado.supervisorId ? empleado.supervisorId : '',
+      id_subordinados: empleado.subordinatesId,
+      id_habilidades: empleado.skillsId,
+      id_usuario: empleado.userId ? empleado.userId : '',
     };
+    // console.log('fecha: ', valuesForm.id);
+    // console.log('fecha: ', empleado);
   }
+
+  const valueInput = (empleado) => {
+    let nombreCompleto = empleado.lastName + ', ' + empleado.firstName;
+    return nombreCompleto;
+  };
 
   return (
     <div>
@@ -102,18 +159,40 @@ export function FormEmpleados() {
             errors.telefono = 'Requerido';
           }
 
-          if (values.id_puesto.toString().trim() === '') {
-            errors.id_puesto = 'Requerido';
-          }
+          // if (values.id_puesto.toString().trim() === '') {
+          //   errors.id_puesto = 'Requerido';
+          // }
 
-          if (values.id_rol.toString().trim() === '') {
-            errors.id_rol = 'Requerido';
+          // if (values.id_rol.toString().trim() === '') {
+          //   errors.id_rol = 'Requerido';
+          // }
+
+          if (selectHabilidades.length === 0) {
+            errors.id_habilidades = 'Requerido';
           }
 
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          console.log('Empleado: ', values);
+          let arrayAuxHab = selectHabilidades.map((h) => {
+            return h.id;
+          });
+          let arrayAuxSub = selectSubordinados.map((h) => {
+            return h.id;
+          });
+
+          let fecha = values.fecha_nac;
+          console.log('fecha submit: ', fecha);
+          const [año, mes, dia] = fecha.split('-');
+          values.fecha_nac = dia + '-' + mes + '-' + año;
+
+          values.id_habilidades = arrayAuxHab;
+          values.id_subordinados = arrayAuxSub;
+          if (id) {
+            modificarEmpleado(values);
+          } else {
+            altaEmpleado(values);
+          }
         }}
       >
         {({
@@ -289,10 +368,10 @@ export function FormEmpleados() {
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                <option value=''>Seleccione una opción</option>
+                <option value=''>Sin Rol</option>
                 {roles.map((r) => (
                   <option key={r.id} value={r.id}>
-                    {r.nombre_rol}
+                    {r.name}
                   </option>
                 ))}
               </Form.Select>
@@ -308,10 +387,10 @@ export function FormEmpleados() {
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                <option value=''>Seleccione un puesto</option>
+                <option value=''>Sin Puesto</option>
                 {puestos.map((p) => (
                   <option key={p.id} value={p.id}>
-                    {p.nombre + ' (' + p.nombre_abrev + ')'}
+                    {p.name}
                   </option>
                 ))}
               </Form.Select>
@@ -328,23 +407,75 @@ export function FormEmpleados() {
                 onBlur={handleBlur}
               >
                 <option value=''>Nadie</option>
-                {empleados.map(
-                  (s) =>
-                    s.id != id && (
-                      <option key={s.id} value={s.id}>
-                        {'' +
-                          roles.filter((r) => r.id == s.id_rol)[0].nombre_rol +
-                          ' - ' +
-                          s.apellido +
-                          ', ' +
-                          s.nombre +
-                          ''}
-                      </option>
-                    )
-                )}
+                {empleados.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.firstName}
+                  </option>
+                ))}
               </Form.Select>
-              {touched.sexo && errors.sexo && (
-                <Form.Text className='text-muted'>{errors.sexo}</Form.Text>
+              {touched.id_supervisor && errors.id_supervisor && (
+                <Form.Text className='text-muted'>
+                  {errors.id_supervisor}
+                </Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className='mb-3 form-multiple-select-custom'>
+              <Form.Label>Supervisa a: </Form.Label>
+              <MultiSelect
+                name='id_subordinados'
+                value={selectSubordinados}
+                onChange={(e) => setSelectSubordinados(e.target.value)}
+                onBlur={handleBlur}
+                options={empleados}
+                optionLabel={valueInput}
+                placeholder='Seleccione Subordinados'
+                maxSelectedLabels={5}
+              />
+
+              {touched.id_subordinados && errors.id_subordinados && (
+                <Form.Text className='text-muted'>
+                  {errors.id_subordinados}
+                </Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className='mb-3 form-multiple-select-custom'>
+              <Form.Label>Habilidades: </Form.Label>
+              <MultiSelect
+                name='id_habilidades'
+                value={selectHabilidades}
+                onChange={(e) => setSelectHabilidades(e.target.value)}
+                onBlur={handleBlur}
+                options={habilidades}
+                optionLabel='name'
+                placeholder='Seleccione Habilidades'
+                maxSelectedLabels={5}
+              />
+
+              {touched.id_habilidades && errors.id_habilidades && (
+                <Form.Text className='text-muted'>
+                  {errors.id_habilidades}
+                </Form.Text>
+              )}
+            </Form.Group>
+            <Form.Group className='mb-3'>
+              <Form.Label>Usuario del Sistema:</Form.Label>
+              <Form.Select
+                name='id_usuario'
+                value={values.id_usuario}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value=''>Seleccione una opción</option>
+                {usuarios.map((r) => (
+                  <option key={r.id} value={r.id}>
+                    {r.username}
+                  </option>
+                ))}
+              </Form.Select>
+              {touched.id_usuario && errors.id_usuario && (
+                <Form.Text className='text-muted'>
+                  {errors.id_usuario}
+                </Form.Text>
               )}
             </Form.Group>
             <div className='d-flex justify-content-center'>

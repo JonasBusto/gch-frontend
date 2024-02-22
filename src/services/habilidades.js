@@ -44,6 +44,7 @@ export const modificarHabilidad = (habilidad) => {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({
+      id: habilidad.id,
       name: habilidad.nombre,
       description: habilidad.desc,
     }),

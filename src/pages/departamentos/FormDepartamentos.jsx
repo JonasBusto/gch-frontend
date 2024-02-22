@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom/dist';
 import empleados from '../../helpers/empleados';
 import usuarios from '../../helpers/usuarios';
@@ -34,6 +34,17 @@ export function FormDepartamentos() {
     puestos_id: [],
   };
 
+  useEffect(() => {
+    if (departamentos && id && puestos) {
+      let departamento = departamentos.filter((d) => d.id == id)[0];
+      let auxPuestosSelect = puestos.filter((p) =>
+        departamento.positionsId.includes(p.id)
+      );
+
+      setRolPuestos(auxPuestosSelect);
+    }
+  }, [departamentos]);
+
   if (!roles) {
     return <h1>Cargando</h1>;
   } else if (!niveles) {
@@ -51,10 +62,10 @@ export function FormDepartamentos() {
       id: id,
       nombre: departamento.name,
       desc: departamento.description,
-      nivel_id: departamento?.levelId ? departamento.levelId : '',
-      depart_h: departamento?.childDepartmentsId,
-      depart_p: departamento?.parentDepartmentsId
-        ? departamento.parentDepartmentsId
+      nivel_id: departamento.levelId ? departamento.levelId : '',
+      depart_h: departamento.childDepartmentsId,
+      depart_p: departamento.parentDepartmentId
+        ? departamento.parentDepartmentId
         : '',
       puestos_id: departamento?.positionsId,
     };

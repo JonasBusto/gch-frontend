@@ -7,6 +7,8 @@ export function useGetDBdatos() {
   const [departamentos, setDepartamentos] = useState(null);
   const [habilidades, setHabilidades] = useState(null);
   const [puestos, setPuestos] = useState(null);
+  const [usuarios, setUsuarios] = useState(null);
+  const [empleados, setEmpleados] = useState(null);
 
   const getPuestos = () => {
     fetch(`${URL_BACKEND}positions`)
@@ -38,12 +40,26 @@ export function useGetDBdatos() {
       .then((data) => setHabilidades([...data]));
   };
 
+  const getUsuarios = () => {
+    fetch(`${URL_BACKEND}users`)
+      .then((resultado) => resultado.json())
+      .then((data) => setUsuarios([...data]));
+  };
+
+  const getEmpleados = () => {
+    fetch(`${URL_BACKEND}employees`)
+      .then((resultado) => resultado.json())
+      .then((data) => setEmpleados([...data]));
+  };
+
   useEffect(() => {
     getRol();
     getDepartamentos();
     getNiveles();
     getHabilidades();
     getPuestos();
+    getUsuarios();
+    getEmpleados();
   }, []);
 
   return {
@@ -52,5 +68,7 @@ export function useGetDBdatos() {
     departamentos,
     habilidades,
     puestos,
+    usuarios,
+    empleados,
   };
 }

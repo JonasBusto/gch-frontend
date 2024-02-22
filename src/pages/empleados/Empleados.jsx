@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import empleados from '../../helpers/empleados';
 import roles from '../../helpers/roles';
 import puestos from '../../helpers/puestos';
@@ -7,13 +7,20 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
+import AppContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
 
 export function Empleados() {
+  const { empleados, eliminarEmpleado } = useContext(AppContext);
+
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
+
+  if (!empleados) {
+    return <h1>Cargando...</h1>;
+  }
 
   const accion = (empleado) => {
     const [show, setShow] = useState(false);
@@ -45,7 +52,9 @@ export function Empleados() {
           </Modal.Body>
           <Modal.Footer>
             <button onClick={handleClose}>Cancelar</button>
-            <button onClick={handleClose}>Confirmar</button>
+            <button onClick={() => eliminarEmpleado(empleado)}>
+              Confirmar
+            </button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -117,17 +126,17 @@ export function Empleados() {
         ></Column>
         <Column
           sortable
-          field='nombre'
+          field='firstName'
           header='Nombre'
           style={{ minWidth: '250px' }}
         ></Column>
         <Column
           sortable
-          field='apellido'
+          field='lastName'
           header='Apellido'
           style={{ minWidth: '250px' }}
         ></Column>
-        <Column
+        {/* <Column
           field={rolesField}
           header='Rol'
           body={rolesBody}
@@ -138,16 +147,16 @@ export function Empleados() {
           header='Puesto'
           body={puestosBody}
           style={{ minWidth: '250px' }}
-        ></Column>
+        ></Column> */}
         <Column
           sortable
-          field='email'
+          field='mail'
           header='Email'
           style={{ minWidth: '250px' }}
         ></Column>
         <Column
           sortable
-          field='telefono'
+          field='phoneNumber'
           header='Telefono'
           style={{ minWidth: '250px' }}
         ></Column>

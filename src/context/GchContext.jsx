@@ -17,12 +17,24 @@ import {
   eliminarHabilidad,
   modificarHabilidad,
 } from '../services/habilidades';
+import {
+  altaEmpleado,
+  eliminarEmpleado,
+  modificarEmpleado,
+} from '../services/empleados';
 
 const GchContext = createContext();
 
 export function GchProvider({ children }) {
-  const { roles, niveles, departamentos, habilidades, puestos } =
-    useGetDBdatos();
+  const {
+    roles,
+    niveles,
+    departamentos,
+    habilidades,
+    puestos,
+    empleados,
+    usuarios,
+  } = useGetDBdatos();
 
   return (
     <GchContext.Provider
@@ -47,6 +59,11 @@ export function GchProvider({ children }) {
         altaNivel,
         eliminarNivel,
         modificarNivel,
+        usuarios,
+        empleados,
+        altaEmpleado,
+        eliminarEmpleado,
+        modificarEmpleado,
       }}
     >
       {children}
