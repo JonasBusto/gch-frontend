@@ -1,33 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import empleados from '../../helpers/empleados';
 import roles from '../../helpers/roles';
+import AppContext from '../../context/GchContext';
 import { DataView } from 'primereact/dataview';
 import { InputText } from 'primereact/inputtext';
 import '../../styles/empListado.css';
 import 'primeflex/primeflex.css';
 
 export function EmpListado() {
+  const { empleados, roles } = useContext(AppContext);
   const [filter, setFilter] = useState([]);
   const [inputBuscar, setInputBuscar] = useState('');
 
   const onChangeInput = (inputBuscar) => {
-    let arrayAux = [];
-    let arrayAuxEmpleados = [...empleados];
-
-    arrayAux = arrayAuxEmpleados.filter(
-      (p) =>
-        (p.nombre + ' ' + p.apellido)
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase()
-          .includes(inputBuscar.toLowerCase().trim()) ||
-        (p.apellido + ' ' + p.nombre)
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase()
-          .includes(inputBuscar.toLowerCase().trim())
-    );
+    let arrayAux =
+      empleados?.filter(
+        (p) =>
+          (p.firstName + ' ' + p.lastName)
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .includes(inputBuscar.toLowerCase().trim()) ||
+          (p.lastName + ' ' + p.firstName)
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .includes(inputBuscar.toLowerCase().trim())
+      ) || [];
 
     setFilter([...arrayAux]);
   };
@@ -37,34 +37,42 @@ export function EmpListado() {
   }, [inputBuscar]);
 
   useEffect(() => {
-    setFilter([...empleados]);
-  }, []);
+    if (empleados) {
+      setFilter([...empleados]);
+    }
+  }, [empleados]);
+
+  if (!empleados) {
+    return <h1>Caasdasd-</h1>;
+  }
 
   const itemTemplate = (e) => {
+    const rolEmpleado = roles.filter((r) => r.id == e.roleId)[0]?.name;
+
     return (
       <div key={e.id} className='col-12 col-md-6 col-lg-4 col-emp'>
         <div className='d-flex flex-column col-card-emp'>
           <div className='card-emp-img d-flex justify-content-center'>
             <div></div>
-            <img className='img-fluid' src={e.foto_perfil} alt='' />
+            <img className='img-fluid' src={e.profilePicture} alt='' />
           </div>
           <div className='col-info-emp-card'>
             <div className='d-flex justify-content-center'>
-              <p>{e.apellido + ', ' + e.nombre}</p>
+              <p>{e.lastName + ', ' + e.firstName}</p>
             </div>
             <div className='d-flex justify-content-center'>
               <p className='text-center d-flex flex-column'>
                 <span>
-                  <b>{roles.filter((r) => r.id == e.id_rol)[0].nombre_rol}</b>
+                  <b>{rolEmpleado ? rolEmpleado : 'Sin rol asignado'}</b>
                 </span>
                 <span>
                   Supervisado por:{' '}
-                  {empleados.filter((r) => r.id == e.id_supervisor)[0]
-                    ? empleados.filter((emp) => emp.id == e.id_supervisor)[0]
-                        .nombre +
+                  {empleados.filter((r) => r.id == e.supervisorId)[0]
+                    ? empleados.filter((emp) => emp.id == e.supervisorId)[0]
+                        .firstName +
                       ', ' +
-                      empleados.filter((emp) => emp.id == e.id_supervisor)[0]
-                        .apellido
+                      empleados.filter((emp) => emp.id == e.supervisorId)[0]
+                        .lastName
                     : 'No tiene'}
                 </span>
               </p>

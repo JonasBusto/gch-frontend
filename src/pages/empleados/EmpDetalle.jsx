@@ -2,10 +2,22 @@ import { useParams } from 'react-router-dom';
 import empleados from '../../helpers/empleados';
 import roles from '../../helpers/roles';
 import '../../styles/empDetalle.css';
+import AppContext from '../../context/GchContext';
+import { useContext } from 'react';
 
 export function EmpDetalle() {
+  const { empleados, roles } = useContext(AppContext);
   const { id } = useParams();
-  const empleadoObjeto = empleados.filter((e) => e.id == id)[0];
+  const empleadoObjeto = empleados?.filter((e) => e.id == id)[0];
+
+  if (!empleados) {
+    return <h1>Cargando...</h1>;
+  } else if (!roles) {
+    return <h1>Cargando...</h1>;
+  }
+
+  const puestoEmpleado = roles.filter((r) => r.id == empleadoObjeto.roleId)[0]
+    ?.name;
 
   return (
     <div className='d-flex flex-column'>
@@ -17,7 +29,7 @@ export function EmpDetalle() {
           <div className='col-6 col-lg-4 img-det-emp'>
             <img
               className='img-fluid'
-              src={empleadoObjeto.foto_perfil}
+              src={empleadoObjeto.profilePicture}
               alt=''
             />
           </div>
@@ -27,33 +39,35 @@ export function EmpDetalle() {
                 <p>
                   <b>Nombre completo: </b>
                 </p>
-                <p>{empleadoObjeto.apellido + ', ' + empleadoObjeto.nombre}</p>
+                <p>
+                  {empleadoObjeto.lastName + ', ' + empleadoObjeto.firstName}
+                </p>
               </div>
               <div className='d-flex flex-column detalle-emp'>
                 <p>
                   <b>Fecha Nacimiento: </b>
                 </p>
-                <p>{empleadoObjeto.fecha_nac}</p>
+                <p>{empleadoObjeto.birthDate}</p>
               </div>
               <div className='d-flex flex-column detalle-emp'>
                 <p>
                   <b>Email: </b>
                 </p>
-                <a href={'mailto:' + empleadoObjeto.email}>
-                  {empleadoObjeto.email}
+                <a href={'mailto:' + empleadoObjeto.mail}>
+                  {empleadoObjeto.mail}
                 </a>
               </div>
               <div className='d-flex flex-column detalle-emp'>
                 <p>
                   <b>Telefono: </b>
                 </p>
-                <p>{empleadoObjeto.telefono}</p>
+                <p>{empleadoObjeto.phoneNumber}</p>
               </div>
               <div className='d-flex flex-column detalle-emp'>
                 <p>
                   <b>Dirección: </b>
                 </p>
-                <p>{empleadoObjeto.direccion}</p>
+                <p>{empleadoObjeto.address}</p>
               </div>
             </div>
           </div>
@@ -61,47 +75,30 @@ export function EmpDetalle() {
             <div className='d-flex flex-column'>
               <div className='d-flex flex-column detalle-emp'>
                 <p>
-                  <b>Sexo: </b>
-                </p>
-                <p>{empleadoObjeto.sexo == 'h' ? 'Hombre' : 'Mujer'}</p>
-              </div>
-              <div className='d-flex flex-column detalle-emp'>
-                <p>
                   <b>Puesto: </b>
                 </p>
                 <p>
-                  {
-                    roles.filter((r) => r.id == empleadoObjeto.id_rol)[0]
-                      .nombre_rol
-                  }
+                  {puestoEmpleado
+                    ? puestoEmpleado
+                    : 'No tiene asignado un Puesto'}
                 </p>
               </div>
-              <div className='d-flex flex-column detalle-emp'>
-                <p>
-                  <b>Descripción del puesto: </b>
-                </p>
-                <p>
-                  {
-                    roles.filter((r) => r.id == empleadoObjeto.id_rol)[0]
-                      .desc_rol
-                  }
-                </p>
-              </div>
+
               <div className='d-flex flex-column detalle-emp'>
                 <p>
                   <b>Supervisado por: </b>
                 </p>
                 <p>
                   {empleados.filter(
-                    (r) => r.id == empleadoObjeto.id_supervisor
+                    (r) => r.id == empleadoObjeto.supervisorId
                   )[0]
                     ? empleados.filter(
-                        (r) => r.id == empleadoObjeto.id_supervisor
-                      )[0].apellido +
+                        (r) => r.id == empleadoObjeto.supervisorId
+                      )[0]?.lastName +
                       ', ' +
                       empleados.filter(
-                        (r) => r.id == empleadoObjeto.id_supervisor
-                      )[0].nombre
+                        (r) => r.id == empleadoObjeto.supervisorId
+                      )[0]?.firstName
                     : 'No tiene supervisor'}
                 </p>
               </div>
