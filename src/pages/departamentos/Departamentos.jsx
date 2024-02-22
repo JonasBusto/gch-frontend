@@ -1,13 +1,13 @@
 import { useState, useContext } from 'react';
-import empleados from '../../helpers/empleados';
-import Modal from 'react-bootstrap/Modal';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
-import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
+import { Load } from '../../components/items/Load';
+import Modal from 'react-bootstrap/Modal';
 import GchContext from '../../context/GchContext';
+import '../../styles/empleados.css';
 
 export function Departamentos() {
   const { departamentos, eliminarDepartamento } = useContext(GchContext);
@@ -15,6 +15,10 @@ export function Departamentos() {
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
+
+  if (!departamentos) {
+    return <Load />;
+  }
 
   const accion = (departamento) => {
     const [show, setShow] = useState(false);

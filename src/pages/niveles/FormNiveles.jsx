@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom/dist';
 import { Formik } from 'formik';
 import { MultiSelect } from 'primereact/multiselect';
+import { Load } from '../../components/items/Load';
 import Form from 'react-bootstrap/Form';
 import GchContext from '../../context/GchContext';
 import '../../styles/formAM.css';
@@ -54,7 +55,7 @@ export function FormNiveles() {
   }, [niveles]);
 
   if (!niveles || !departamentos) {
-    return <h1>Cargando...</h1>;
+    return <Load />;
   }
 
   if (id) {

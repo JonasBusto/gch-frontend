@@ -4,6 +4,7 @@ import { Column } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Link } from 'react-router-dom';
+import { Load } from '../../components/items/Load';
 import Modal from 'react-bootstrap/Modal';
 import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
@@ -17,7 +18,7 @@ export function Empleados() {
   });
 
   if (!empleados || !puestos || !roles) {
-    return <h1>Cargando...</h1>;
+    return <Load />;
   }
 
   const accion = (empleado) => {

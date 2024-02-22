@@ -1,11 +1,12 @@
 import { useState, useContext } from 'react';
-import Modal from 'react-bootstrap/Modal';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
-import GchContext from '../../context/GchContext';
+import { Load } from '../../components/items/Load';
 import { Link } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 
 export function Niveles() {
@@ -16,7 +17,7 @@ export function Niveles() {
   });
 
   if (!niveles || !departamentos) {
-    return <h1>Cargando...</h1>;
+    return <Load />;
   }
 
   const accion = (nivel) => {

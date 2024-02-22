@@ -1,15 +1,15 @@
 import { useParams } from 'react-router-dom';
-import departamentos from '../../helpers/departamentos';
-import '../../styles/depListado.css';
-import AppContext from '../../context/GchContext';
+import { Load } from '../../components/items/Load';
 import { useContext } from 'react';
+import GchContext from '../../context/GchContext';
+import '../../styles/depListado.css';
 
 export function DepDetalles() {
-  const { departamentos } = useContext(AppContext);
+  const { departamentos } = useContext(GchContext);
   const { id } = useParams();
 
   if (!departamentos) {
-    return <h1>Cargando...</h1>;
+    return <Load />;
   }
 
   let depObjeto = departamentos.filter((d) => d.id == id)[0];

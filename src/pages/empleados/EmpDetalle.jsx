@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
+import { Load } from '../../components/items/Load';
 import GchContext from '../../context/GchContext';
 import '../../styles/empDetalle.css';
 
@@ -9,7 +10,7 @@ export function EmpDetalle() {
   const empleadoObjeto = empleados?.filter((e) => e.id == id)[0];
 
   if (!empleados || !roles) {
-    return <h1>Cargando...</h1>;
+    return <Load />;
   }
 
   const puestoEmpleado = roles.filter((r) => r.id == empleadoObjeto.roleId)[0]

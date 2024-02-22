@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { DataView } from 'primereact/dataview';
 import { InputText } from 'primereact/inputtext';
+import { Load } from '../../components/items/Load';
 import GchContext from '../../context/GchContext';
 import '../../styles/depListado.css';
 
@@ -36,7 +37,7 @@ export function DepListado() {
   }, [departamentos]);
 
   if (!departamentos) {
-    return <h1>cargando...</h1>;
+    return <Load />;
   }
 
   const itemTemplate = (d) => {

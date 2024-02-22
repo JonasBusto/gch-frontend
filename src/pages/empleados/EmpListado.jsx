@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DataView } from 'primereact/dataview';
 import { InputText } from 'primereact/inputtext';
+import { Load } from '../../components/items/Load';
 import GchContext from '../../context/GchContext';
 import '../../styles/empListado.css';
 import 'primeflex/primeflex.css';
@@ -41,7 +42,7 @@ export function EmpListado() {
   }, [empleados]);
 
   if (!empleados) {
-    return <h1>Cargando...</h1>;
+    return <Load />;
   }
 
   const itemTemplate = (e) => {
