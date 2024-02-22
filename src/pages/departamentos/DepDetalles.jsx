@@ -34,9 +34,6 @@ export function DepDetalles() {
             <div className='titulo-dep-info'>
               <p>{depObjeto.name}</p>
             </div>
-            {/* <div className='titulo2-dep-info'>
-              <p>Director: Pepito</p>
-            </div> */}
             <div className='mt-3'>
               <p>{depObjeto.description}</p>
             </div>

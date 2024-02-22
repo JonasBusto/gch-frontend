@@ -1,24 +1,22 @@
 import { useContext, useState } from 'react';
-import empleados from '../../helpers/empleados';
-import roles from '../../helpers/roles';
-import puestos from '../../helpers/puestos';
-import Modal from 'react-bootstrap/Modal';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
-import AppContext from '../../context/GchContext';
-import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+import GchContext from '../../context/GchContext';
+import '../../styles/empleados.css';
 
 export function Empleados() {
-  const { empleados, eliminarEmpleado } = useContext(AppContext);
+  const { empleados, eliminarEmpleado, roles, puestos } =
+    useContext(GchContext);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
-  if (!empleados) {
+  if (!empleados || !puestos || !roles) {
     return <h1>Cargando...</h1>;
   }
 
@@ -38,17 +36,17 @@ export function Empleados() {
         </button>
         <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{'Eliminar Empleado ' + empleado.id}</Modal.Title>
+            <Modal.Title>{'Eliminar Empleado'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {/* Cuando este el backend, alertar que no puede eliminar
             al empleado porque tiene usuarios asociados. Que primero desvincule
             o elimine a esos usuarios */}
             {"¿Esta seguro de eliminar al empleado '" +
-              empleado.apellido +
+              empleado.lastName +
               ', ' +
-              empleado.nombre +
-              "', y a sus usuarios asociados?"}
+              empleado.firstName +
+              "'"}
           </Modal.Body>
           <Modal.Footer>
             <button onClick={handleClose}>Cancelar</button>
@@ -62,27 +60,31 @@ export function Empleados() {
   };
 
   const rolesBody = (empleado) => {
-    let rolEmpleado = roles.filter((r) => r.id == empleado.id_rol)[0];
+    let rolEmpleado = roles.filter((r) => r.id == empleado.roleId)[0];
 
-    return <span>{rolEmpleado.nombre_rol}</span>;
+    return <span>{rolEmpleado ? rolEmpleado.name : 'Sin rol Asignado'}</span>;
   };
 
   const rolesField = (empleado) => {
-    let rolEmpleado = roles.filter((r) => r.id == empleado.id_rol)[0];
+    let rolEmpleado = roles.filter((r) => r.id == empleado.roleId)[0];
 
-    return rolEmpleado.nombre_rol;
+    return rolEmpleado ? rolEmpleado.name : 'Sin rol Asignado';
   };
 
   const puestosBody = (empleado) => {
-    let puestoEmpleado = puestos.filter((p) => p.id == empleado.id_puesto)[0];
+    let puestoEmpleado = puestos.filter((p) => p.id == empleado.positionId)[0];
 
-    return <span>{puestoEmpleado.nombre}</span>;
+    return (
+      <span>
+        {puestoEmpleado ? puestoEmpleado.name : 'Sin puesto Asignado'}
+      </span>
+    );
   };
 
   const puestosField = (empleado) => {
-    let puestoEmpleado = roles.filter((p) => p.id == empleado.id_puesto)[0];
+    let puestoEmpleado = roles.filter((p) => p.id == empleado.positionId)[0];
 
-    return puestoEmpleado.nombre;
+    return puestoEmpleado ? puestoEmpleado.name : 'Sin puesto Asignado';
   };
 
   return (
@@ -136,7 +138,7 @@ export function Empleados() {
           header='Apellido'
           style={{ minWidth: '250px' }}
         ></Column>
-        {/* <Column
+        <Column
           field={rolesField}
           header='Rol'
           body={rolesBody}
@@ -147,7 +149,7 @@ export function Empleados() {
           header='Puesto'
           body={puestosBody}
           style={{ minWidth: '250px' }}
-        ></Column> */}
+        ></Column>
         <Column
           sortable
           field='mail'

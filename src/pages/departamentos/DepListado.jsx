@@ -1,13 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import departamentos from '../../helpers/departamentos';
 import { DataView } from 'primereact/dataview';
-import AppContext from '../../context/GchContext';
 import { InputText } from 'primereact/inputtext';
+import GchContext from '../../context/GchContext';
 import '../../styles/depListado.css';
 
 export function DepListado() {
-  const { departamentos } = useContext(AppContext);
+  const { departamentos } = useContext(GchContext);
   const [filter, setFilter] = useState([]);
   const [inputBuscar, setInputBuscar] = useState('');
 

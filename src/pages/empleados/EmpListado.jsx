@@ -1,15 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import empleados from '../../helpers/empleados';
-import roles from '../../helpers/roles';
-import AppContext from '../../context/GchContext';
 import { DataView } from 'primereact/dataview';
 import { InputText } from 'primereact/inputtext';
+import GchContext from '../../context/GchContext';
 import '../../styles/empListado.css';
 import 'primeflex/primeflex.css';
 
 export function EmpListado() {
-  const { empleados, roles } = useContext(AppContext);
+  const { empleados, roles } = useContext(GchContext);
   const [filter, setFilter] = useState([]);
   const [inputBuscar, setInputBuscar] = useState('');
 
@@ -43,7 +41,7 @@ export function EmpListado() {
   }, [empleados]);
 
   if (!empleados) {
-    return <h1>Caasdasd-</h1>;
+    return <h1>Cargando...</h1>;
   }
 
   const itemTemplate = (e) => {

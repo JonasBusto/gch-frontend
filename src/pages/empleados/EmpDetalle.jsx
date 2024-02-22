@@ -1,18 +1,14 @@
 import { useParams } from 'react-router-dom';
-import empleados from '../../helpers/empleados';
-import roles from '../../helpers/roles';
-import '../../styles/empDetalle.css';
-import AppContext from '../../context/GchContext';
 import { useContext } from 'react';
+import GchContext from '../../context/GchContext';
+import '../../styles/empDetalle.css';
 
 export function EmpDetalle() {
-  const { empleados, roles } = useContext(AppContext);
+  const { empleados, roles } = useContext(GchContext);
   const { id } = useParams();
   const empleadoObjeto = empleados?.filter((e) => e.id == id)[0];
 
-  if (!empleados) {
-    return <h1>Cargando...</h1>;
-  } else if (!roles) {
+  if (!empleados || !roles) {
     return <h1>Cargando...</h1>;
   }
 

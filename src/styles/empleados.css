@@ -162,3 +162,8 @@
 .modal-custom-accion .modal-footer > button:last-child {
   background-color: #ff6c22;
 }
+
+.item-asociado > span {
+  display: flex;
+  flex-direction: column;
+}

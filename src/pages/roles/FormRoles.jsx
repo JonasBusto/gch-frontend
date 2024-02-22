@@ -1,18 +1,12 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom/dist';
-import empleados from '../../helpers/empleados';
-// import roles from "../../helpers/roles";
-import usuarios from '../../helpers/usuarios';
-import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
-import '../../styles/formAM.css';
+import Form from 'react-bootstrap/Form';
 import GchContext from '../../context/GchContext';
-import departamentos from '../../helpers/departamentos';
-import { MultiSelect } from 'primereact/multiselect';
+import '../../styles/formAM.css';
 
 export function FormRoles() {
-  const { altaRol, roles, departamentos, modificarRol, puestos, niveles } =
-    useContext(GchContext);
+  const { altaRol, roles, modificarRol } = useContext(GchContext);
   const { id } = useParams();
 
   let valuesForm = {
@@ -53,7 +47,6 @@ export function FormRoles() {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          console.log('Rol: ', values);
           if (id) {
             modificarRol(values);
           } else {

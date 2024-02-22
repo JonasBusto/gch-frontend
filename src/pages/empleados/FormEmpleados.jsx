@@ -1,13 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom/dist';
-import empleados from '../../helpers/empleados';
-import roles from '../../helpers/roles';
-import AppContext from '../../context/GchContext';
-import puestos from '../../helpers/puestos';
-import usuarios from '../../helpers/usuarios';
-import Form from 'react-bootstrap/Form';
+import { useParams } from 'react-router-dom/dist';
 import { Formik } from 'formik';
 import { MultiSelect } from 'primereact/multiselect';
+import GchContext from '../../context/GchContext';
+import Form from 'react-bootstrap/Form';
 import '../../styles/formAM.css';
 
 export function FormEmpleados() {
@@ -19,12 +15,10 @@ export function FormEmpleados() {
     usuarios,
     altaEmpleado,
     empleados,
-    eliminarEmpleado,
     modificarEmpleado,
-  } = useContext(AppContext);
+  } = useContext(GchContext);
   const [selectHabilidades, setSelectHabilidades] = useState([]);
   const [selectSubordinados, setSelectSubordinados] = useState([]);
-  // const [habSelect, habSelect] = useState([])
 
   let valuesForm = {
     nombre: '',
@@ -51,20 +45,11 @@ export function FormEmpleados() {
       let auxHabSelected = habilidades.filter((h) =>
         empleado.skillsId.includes(h.id)
       );
-      // console.log(empleado);
       setSelectHabilidades(auxHabSelected);
     }
   }, [empleados]);
 
-  if (!roles) {
-    return <h1>Cargando</h1>;
-  } else if (!habilidades) {
-    return <h1>Cargando</h1>;
-  } else if (!puestos) {
-    return <h1>Cargando</h1>;
-  } else if (!usuarios) {
-    return <h1>Cargando</h1>;
-  } else if (!empleados) {
+  if (!roles || !habilidades || !puestos || !usuarios || !empleados) {
     return <h1>Cargando</h1>;
   }
 
@@ -92,8 +77,6 @@ export function FormEmpleados() {
       id_habilidades: empleado.skillsId,
       id_usuario: empleado.userId ? empleado.userId : '',
     };
-    // console.log('fecha: ', valuesForm.id);
-    // console.log('fecha: ', empleado);
   }
 
   const valueInput = (empleado) => {
@@ -159,14 +142,6 @@ export function FormEmpleados() {
             errors.telefono = 'Requerido';
           }
 
-          // if (values.id_puesto.toString().trim() === '') {
-          //   errors.id_puesto = 'Requerido';
-          // }
-
-          // if (values.id_rol.toString().trim() === '') {
-          //   errors.id_rol = 'Requerido';
-          // }
-
           if (selectHabilidades.length === 0) {
             errors.id_habilidades = 'Requerido';
           }
@@ -182,12 +157,12 @@ export function FormEmpleados() {
           });
 
           let fecha = values.fecha_nac;
-          console.log('fecha submit: ', fecha);
           const [año, mes, dia] = fecha.split('-');
-          values.fecha_nac = dia + '-' + mes + '-' + año;
 
+          values.fecha_nac = dia + '-' + mes + '-' + año;
           values.id_habilidades = arrayAuxHab;
           values.id_subordinados = arrayAuxSub;
+
           if (id) {
             modificarEmpleado(values);
           } else {

@@ -1,13 +1,9 @@
 import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom/dist';
-import empleados from '../../helpers/empleados';
-import usuarios from '../../helpers/usuarios';
-import puestos from '../../helpers/puestos';
-// import departamentos from "../../helpers/departamentos";
-import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
-import GchContext from '../../context/GchContext';
 import { MultiSelect } from 'primereact/multiselect';
+import GchContext from '../../context/GchContext';
+import Form from 'react-bootstrap/Form';
 import '../../styles/formAM.css';
 
 export function FormDepartamentos() {
@@ -45,14 +41,8 @@ export function FormDepartamentos() {
     }
   }, [departamentos]);
 
-  if (!roles) {
-    return <h1>Cargando</h1>;
-  } else if (!niveles) {
-    return <h1>Cargando</h1>;
-  } else if (!departamentos) {
-    return <h1>Cargando</h1>;
-  } else if (!puestos) {
-    return <h1>Cargando</h1>;
+  if (!roles || !niveles || !departamentos || !puestos) {
+    return <h1>Cargando...</h1>;
   }
 
   if (id) {

@@ -1,6 +1,4 @@
 import { useState, useContext } from 'react';
-import puestos from '../../helpers/puestos';
-import departamentos from '../../helpers/departamentos';
 import Modal from 'react-bootstrap/Modal';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -11,13 +9,17 @@ import { Link } from 'react-router-dom';
 import '../../styles/empleados.css';
 
 export function Niveles() {
-  const { niveles, eliminarNivel } = useContext(GchContext);
+  const { niveles, departamentos, eliminarNivel } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
-  const accion = (puesto) => {
+  if (!niveles || !departamentos) {
+    return <h1>Cargando...</h1>;
+  }
+
+  const accion = (nivel) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -25,7 +27,7 @@ export function Niveles() {
 
     return (
       <div className='btn-acciones'>
-        <Link to={'/niveles/cargar/' + puesto.id}>
+        <Link to={'/niveles/cargar/' + nivel.id}>
           <i className='fa-solid fa-pencil'></i>
         </Link>
         <button onClick={handleShow}>
@@ -33,44 +35,46 @@ export function Niveles() {
         </button>
         <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{'Eliminar Nivel ' + puesto.id}</Modal.Title>
+            <Modal.Title>{'Eliminar Nivel ' + nivel.id}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {/* Cuando este el backend, alertar que no puede eliminar
             al empleado porque tiene usuarios asociados. Que primero desvincule
             o elimine a esos usuarios */}
-            {"¿Esta seguro de eliminar al empleado '" + puesto.nombre + "'?"}
+            {"¿Esta seguro de eliminar al empleado '" + nivel.nombre + "'?"}
           </Modal.Body>
           <Modal.Footer>
             <button onClick={handleClose}>Cancelar</button>
-            <button onClick={() => eliminarNivel(puesto)}>Confirmar</button>
+            <button onClick={() => eliminarNivel(nivel)}>Confirmar</button>
           </Modal.Footer>
         </Modal>
       </div>
     );
   };
 
-  const departamentoAsociado = (puesto) => {
-    let departamento = departamentos.filter(
-      (d) => d.id == puesto.id_departamento
-    )[0];
+  const departamentoAsociado = (nivel) => {
+    let departamento = departamentos.filter((d) =>
+      nivel.departmentsId.includes(d.id)
+    );
 
     return (
       <div className='item-asociado'>
         <span>
-          <Link to={'/departamentos/cargar/' + departamento.id_departamento}>
-            {'#' + departamento.id + ' - ' + departamento.nombre}
-          </Link>
+          {departamento.map((d) => (
+            <Link key={d.id} to={'/departamentos/cargar/' + d.id}>
+              {'#' + d.name}
+            </Link>
+          ))}
         </span>
       </div>
     );
   };
 
-  const fieldDepartamentoAsociado = (puesto) => {
+  const fieldDepartamentoAsociado = (nivel) => {
     let departamento = departamentos.filter(
-      (d) => d.id == puesto.id_departamento
+      (d) => d.id == nivel.departmentsId
     )[0];
-    let field = '#' + departamento.id + ' - ' + departamento.nombre;
+    let field = '#' + departamento?.id + ' - ' + departamento?.name;
 
     return field;
   };
@@ -108,17 +112,17 @@ export function Niveles() {
         rowsPerPageOptions={[5, 10, 25, 50]}
         value={niveles}
       >
-        {/* <Column
-          sortable
-          field="id"
-          header="ID"
-          style={{ minWidth: "100px" }}
-        ></Column> */}
         <Column
           sortable
           field='name'
           header='Nombre'
           style={{ minWidth: '250px' }}
+        ></Column>
+        <Column
+          field={fieldDepartamentoAsociado}
+          header='Departamentos asociados'
+          body={departamentoAsociado}
+          style={{ minWidth: '100px' }}
         ></Column>
         <Column header='Acciones' body={accion}></Column>
       </DataTable>

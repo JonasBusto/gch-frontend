@@ -1,15 +1,12 @@
 import { useState, useContext } from 'react';
-import puestos from '../../helpers/puestos';
-import departamentos from '../../helpers/departamentos';
-// import roles from "../../helpers/roles";
-import Modal from 'react-bootstrap/Modal';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
-import '../../styles/empleados.css';
 import { Link } from 'react-router-dom';
 import GchContext from '../../context/GchContext';
+import Modal from 'react-bootstrap/Modal';
+import '../../styles/empleados.css';
 
 export function Roles() {
   const { roles, eliminarRol } = useContext(GchContext);
@@ -84,12 +81,6 @@ export function Roles() {
         rowsPerPageOptions={[5, 10, 25, 50]}
         value={roles}
       >
-        {/* <Column
-          sortable
-          field="id"
-          header="ID"
-          style={{ minWidth: "100px" }}
-        ></Column> */}
         <Column
           sortable
           field='name'

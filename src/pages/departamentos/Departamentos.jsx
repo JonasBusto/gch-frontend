@@ -32,7 +32,7 @@ export function Departamentos() {
         </button>
         <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{'Eliminar Departamento '}</Modal.Title>
+            <Modal.Title>{'Eliminar Departamento'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {"¿Esta seguro de eliminar al departamento '" +

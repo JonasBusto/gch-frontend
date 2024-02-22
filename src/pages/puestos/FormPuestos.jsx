@@ -1,11 +1,7 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom/dist';
-import empleados from '../../helpers/empleados';
-import usuarios from '../../helpers/usuarios';
-import puestos from '../../helpers/puestos';
-import departamentos from '../../helpers/departamentos';
-import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
+import Form from 'react-bootstrap/Form';
 import GchContext from '../../context/GchContext';
 import '../../styles/formAM.css';
 
@@ -22,9 +18,7 @@ export function FormPuestos() {
     id_departamento: '',
   };
 
-  if (!departamentos) {
-    return <h1>Cargando...</h1>;
-  } else if (!puestos) {
+  if (!departamentos || !puestos) {
     return <h1>Cargando...</h1>;
   }
 
@@ -63,14 +57,9 @@ export function FormPuestos() {
             errors.salario = 'Salario no valido';
           }
 
-          // if (values.id_departamento?.toString().trim() === "") {
-          //   errors.id_departamento = "Requerido";
-          // }
-
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          // console.log("Puesto: ", values);
           if (id) {
             modificarPuesto(values);
           } else {

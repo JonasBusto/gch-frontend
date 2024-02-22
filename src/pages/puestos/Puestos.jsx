@@ -1,12 +1,10 @@
 import { useState, useContext } from 'react';
-import puestos from '../../helpers/puestos';
-import departamentos from '../../helpers/departamentos';
-import Modal from 'react-bootstrap/Modal';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Link } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
 import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 
@@ -16,6 +14,10 @@ export function Puestos() {
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
+
+  if (!puestos || !departamentos) {
+    return <h1>Cargando...</h1>;
+  }
 
   const accion = (puesto) => {
     const [show, setShow] = useState(false);
@@ -52,26 +54,38 @@ export function Puestos() {
 
   const departamentoAsociado = (puesto) => {
     let departamento = departamentos.filter(
-      (d) => d.id == puesto.id_departamento
+      (d) => d.id === puesto.departmentId
     )[0];
 
-    return (
-      <div className='item-asociado'>
-        <span>
-          <Link to={'/departamentos/cargar/' + departamento.id_departamento}>
-            {'#' + departamento.id + ' - ' + departamento.nombre}
-          </Link>
-        </span>
-      </div>
-    );
+    if (departamento) {
+      return (
+        <div className='item-asociado'>
+          <span>
+            <Link to={'/departamentos/cargar/' + departamento.id}>
+              {'#' + departamento.name}
+            </Link>
+          </span>
+        </div>
+      );
+    } else {
+      return (
+        <div className='item-asociado'>
+          <span>Sin departamento asociado</span>
+        </div>
+      );
+    }
   };
 
   const fieldDepartamentoAsociado = (puesto) => {
     let departamento = departamentos.filter(
-      (d) => d.id == puesto.id_departamento
+      (d) => d.id === puesto.departmentId
     )[0];
-    let field = '#' + departamento.id + ' - ' + departamento.nombre;
-
+    let field;
+    if (departamento) {
+      field = '#' + departamento.name;
+    } else {
+      field = 'Sin departamento asociado';
+    }
     return field;
   };
 
@@ -108,12 +122,6 @@ export function Puestos() {
         rowsPerPageOptions={[5, 10, 25, 50]}
         value={puestos}
       >
-        {/* <Column
-          sortable
-          field="id"
-          header="ID"
-          style={{ minWidth: "100px" }}
-        ></Column> */}
         <Column
           sortable
           field='name'
@@ -133,12 +141,12 @@ export function Puestos() {
           style={{ minWidth: '250px' }}
         ></Column>
 
-        {/* <Column
+        <Column
           field={fieldDepartamentoAsociado}
-          header="ID Departamento asociado"
+          header='ID Departamento asociado'
           body={departamentoAsociado}
-          style={{ minWidth: "250px" }}
-        ></Column> */}
+          style={{ minWidth: '250px' }}
+        ></Column>
         <Column header='Acciones' body={accion}></Column>
       </DataTable>
     </div>

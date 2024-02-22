@@ -1,17 +1,13 @@
 import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom/dist';
-import empleados from '../../helpers/empleados';
-import usuarios from '../../helpers/usuarios';
-import puestos from '../../helpers/puestos';
-import departamentos from '../../helpers/departamentos';
-import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
-import GchContext from '../../context/GchContext';
 import { MultiSelect } from 'primereact/multiselect';
+import Form from 'react-bootstrap/Form';
+import GchContext from '../../context/GchContext';
 import '../../styles/formAM.css';
 
 export function FormNiveles() {
-  const { niveles, departamentos, altaNivel, eliminarNivel, modificarNivel } =
+  const { niveles, departamentos, altaNivel, modificarNivel } =
     useContext(GchContext);
 
   const { id } = useParams();
@@ -43,8 +39,6 @@ export function FormNiveles() {
       );
       setDeptsLibres(auxDeptsLibres);
       if (id) {
-        // console.log('auxDeptsLibres: ', auxDeptsLibres);
-
         for (let i = 0; i < nivel.departmentsId.length; i++) {
           for (let j = 0; j < departamentos.length; j++) {
             if (departamentos[j].id === nivel.departmentsId[i]) {
@@ -52,16 +46,14 @@ export function FormNiveles() {
             }
           }
         }
-        console.log(auxDepts);
+
         setSelectDept(auxDepts);
         setSelectedDepts(auxDepts);
       }
     }
   }, [niveles]);
 
-  if (!niveles) {
-    return <h1>Cargando...</h1>;
-  } else if (!departamentos) {
+  if (!niveles || !departamentos) {
     return <h1>Cargando...</h1>;
   }
 
@@ -86,19 +78,14 @@ export function FormNiveles() {
             errors.nombre = 'Requerido';
           }
 
-          // if (selectDept.length === 0) {
-          //   errors.id_departamento = 'Requerido';
-          // }
-
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
           let arrayAuxDept = selectDept.map((dept) => {
             return dept.id;
           });
-          values.id_departamento = arrayAuxDept;
 
-          // console.log(values);
+          values.id_departamento = arrayAuxDept;
 
           if (id) {
             modificarNivel(values);
