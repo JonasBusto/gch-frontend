@@ -32,8 +32,11 @@ export function GchProvider({ children }) {
     departamentos,
     habilidades,
     puestos,
+    empleado,
     empleados,
     usuarios,
+    getIdEmpleado,
+    historialEmpleado,
   } = useGetDBdatos();
 
   return (
@@ -60,10 +63,13 @@ export function GchProvider({ children }) {
         eliminarNivel,
         modificarNivel,
         usuarios,
+        empleado,
         empleados,
         altaEmpleado,
         eliminarEmpleado,
         modificarEmpleado,
+        getIdEmpleado,
+        historialEmpleado,
       }}
     >
       {children}

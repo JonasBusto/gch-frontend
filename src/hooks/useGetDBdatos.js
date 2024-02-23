@@ -9,6 +9,9 @@ export function useGetDBdatos() {
   const [puestos, setPuestos] = useState(null);
   const [usuarios, setUsuarios] = useState(null);
   const [empleados, setEmpleados] = useState(null);
+  const [empleado, setEmpleado] = useState(null);
+  const [idEmpleado, setIdEmpleado] = useState(null);
+  const [historialEmpleado, setHistorialEmpleado] = useState(null);
 
   const getPuestos = () => {
     fetch(`${URL_BACKEND}positions`)
@@ -52,6 +55,29 @@ export function useGetDBdatos() {
       .then((data) => setEmpleados([...data]));
   };
 
+  const getEmpleado = (id) => {
+    fetch(`${URL_BACKEND}employees/${id}`)
+      .then((resultado) => resultado.json())
+      .then((data) => setEmpleado(data));
+  };
+
+  const getIdEmpleado = (id) => {
+    setIdEmpleado(id);
+  };
+
+  const getHistorialEmpleado = (empleadoId) => {
+    fetch(`${URL_BACKEND}employmentHistory/getEmployeeHistory/${empleadoId}`)
+      .then((resultado) => resultado.json())
+      .then((data) => setHistorialEmpleado([...data]));
+  };
+
+  useEffect(() => {
+    if (idEmpleado) {
+      getHistorialEmpleado(idEmpleado);
+      getEmpleado(idEmpleado);
+    }
+  }, [idEmpleado]);
+
   useEffect(() => {
     getRol();
     getDepartamentos();
@@ -69,6 +95,9 @@ export function useGetDBdatos() {
     habilidades,
     puestos,
     usuarios,
+    empleado,
     empleados,
+    historialEmpleado,
+    getIdEmpleado,
   };
 }

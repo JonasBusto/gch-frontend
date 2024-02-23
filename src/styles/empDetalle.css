@@ -46,3 +46,16 @@
   object-fit: cover;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+.btn-historial > a {
+  background-color: #ff6c22;
+  color: white;
+  border: 0;
+  padding: 0.5rem 1.9rem;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: 0.7s all ease-in-out;
+}

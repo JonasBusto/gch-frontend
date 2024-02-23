@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { Load } from '../../components/items/Load';
 import GchContext from '../../context/GchContext';
@@ -68,7 +68,7 @@ export function EmpDetalle() {
               </div>
             </div>
           </div>
-          <div className='col-12 col-lg-4'>
+          <div className='col-12 col-lg-4 d-flex flex-column justify-content-between'>
             <div className='d-flex flex-column'>
               <div className='d-flex flex-column detalle-emp'>
                 <p>
@@ -99,6 +99,11 @@ export function EmpDetalle() {
                     : 'No tiene supervisor'}
                 </p>
               </div>
+            </div>
+            <div className='btn-historial mb-5'>
+              <Link to={'/empleado/historial/' + empleadoObjeto.id}>
+                Ver Historial
+              </Link>
             </div>
           </div>
         </div>

@@ -24,6 +24,7 @@ import { FormRoles } from '../../pages/roles/FormRoles';
 import { Usuarios } from '../../pages/usuarios/Usuarios';
 import { FormUsuarios } from '../../pages/usuarios/FormUsuarios';
 import { Route, Routes } from 'react-router-dom';
+import { HistorialEmpleado } from '../../pages/empleados/HistorialEmpleado';
 
 export function Main() {
   return (
@@ -63,6 +64,7 @@ export function Main() {
           element={<FormDepartamentos />}
         />
         <Route path='/departamentos/cargar/' element={<FormDepartamentos />} />
+        <Route path='/empleado/historial/:id' element={<HistorialEmpleado />} />
         <Route path='*' element={<Error404 />} />
       </Routes>
     </main>
