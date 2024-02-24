@@ -1,3 +1,12 @@
+.card-organigrama {
+  text-decoration: none;
+  color: black;
+}
+
+.card-organigrama:hover {
+  text-decoration: underline;
+}
+
 .card-organigrama > div {
   display: flex;
   flex-direction: column;

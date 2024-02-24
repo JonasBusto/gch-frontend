@@ -16,7 +16,8 @@ import { Habilidades } from '../../pages/habilidades/Habilidades';
 import { FormHabilidades } from '../../pages/habilidades/FormHabilidades';
 import { Niveles } from '../../pages/niveles/Niveles';
 import { FormNiveles } from '../../pages/niveles/FormNiveles';
-import { Organigrama } from '../../pages/organigrama/Organigrama';
+import { OrganigramaEmpleados } from '../../pages/organigrama/OrganigramaEmpleado';
+import { OrganigramaDepartamentos } from '../../pages/organigrama/OrganigramaDepartamentos';
 import { Puestos } from '../../pages/puestos/Puestos';
 import { FormPuestos } from '../../pages/puestos/FormPuestos';
 import { Roles } from '../../pages/roles/Roles';
@@ -40,7 +41,14 @@ export function Main() {
         <Route path='/niveles' element={<Niveles />} />
         <Route path='/puestos' element={<Puestos />} />
         <Route path='/habilidades' element={<Habilidades />} />
-        <Route path='/organigrama' element={<Organigrama />} />
+        <Route
+          path='/empleados/organigrama'
+          element={<OrganigramaEmpleados />}
+        />
+        <Route
+          path='/departamentos/organigrama'
+          element={<OrganigramaDepartamentos />}
+        />
         <Route path='/info' element={<Nosotros />} />
         <Route path='/departamentos' element={<Departamentos />} />
         <Route path='/empleados-listado' element={<EmpListado />} />

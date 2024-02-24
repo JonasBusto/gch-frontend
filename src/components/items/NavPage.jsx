@@ -64,8 +64,12 @@ export function NavPage() {
               </NavDropdown.Item>
 
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to='/organigrama'>
-                <i className='fa-solid fa-sitemap'></i> Organigrama
+              <NavDropdown.Item as={Link} to='/empleados/organigrama'>
+                <i className='fa-solid fa-sitemap'></i> Organigrama de Empleados
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/departamentos/organigrama'>
+                <i className='fa-solid fa-sitemap'></i> Organigrama de
+                Departamentos
               </NavDropdown.Item>
             </NavDropdown>
           </Navbar.Collapse>
