@@ -20,6 +20,7 @@ export function FormEmpleados() {
   } = useContext(GchContext);
   const [selectHabilidades, setSelectHabilidades] = useState([]);
   const [selectSubordinados, setSelectSubordinados] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let valuesForm = {
     nombre: '',
@@ -46,6 +47,10 @@ export function FormEmpleados() {
       let auxHabSelected = habilidades.filter((h) =>
         empleado.skillsId.includes(h.id)
       );
+      let auxSubSelected = empleados.filter((emp) =>
+        empleado.subordinatesId.includes(emp.id)
+      );
+      setSelectSubordinados(auxSubSelected);
       setSelectHabilidades(auxHabSelected);
     }
   }, [empleados]);
@@ -150,6 +155,7 @@ export function FormEmpleados() {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
+          setLoading(true);
           let arrayAuxHab = selectHabilidades.map((h) => {
             return h.id;
           });
@@ -385,7 +391,7 @@ export function FormEmpleados() {
                 <option value=''>Nadie</option>
                 {empleados.map((s) => (
                   <option key={s.id} value={s.id}>
-                    {s.firstName}
+                    {s.lastName + ', ' + s.firstName}
                   </option>
                 ))}
               </Form.Select>
@@ -402,7 +408,9 @@ export function FormEmpleados() {
                 value={selectSubordinados}
                 onChange={(e) => setSelectSubordinados(e.target.value)}
                 onBlur={handleBlur}
-                options={empleados}
+                options={
+                  id ? empleados.filter((emp) => emp.id !== id) : empleados
+                }
                 optionLabel={valueInput}
                 placeholder='Seleccione Subordinados'
                 maxSelectedLabels={5}
@@ -455,8 +463,12 @@ export function FormEmpleados() {
               )}
             </Form.Group>
             <div className='d-flex justify-content-center'>
-              <button className='btn-login-custom' type='submit'>
-                Cargar información
+              <button
+                disabled={loading}
+                className='btn-login-custom'
+                type='submit'
+              >
+                {loading ? 'Cargando...' : 'Cargar información'}
               </button>
             </div>
           </Form>

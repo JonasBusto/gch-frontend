@@ -16,6 +16,7 @@ export function FormNiveles() {
   const [selectedDepts, setSelectedDepts] = useState([]);
   const [selectDept, setSelectDept] = useState([]);
   const [deptsLibres, setDeptsLibres] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let valuesForm = {
     nombre: '',
@@ -82,6 +83,8 @@ export function FormNiveles() {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
+          setLoading(true);
+
           let arrayAuxDept = selectDept.map((dept) => {
             return dept.id;
           });
@@ -143,8 +146,12 @@ export function FormNiveles() {
             </Form.Group>
 
             <div className='d-flex justify-content-center'>
-              <button className='btn-login-custom' type='submit'>
-                Cargar información
+              <button
+                disabled={loading}
+                className='btn-login-custom'
+                type='submit'
+              >
+                {loading ? 'Cargando...' : 'Cargar información'}
               </button>
             </div>
           </Form>

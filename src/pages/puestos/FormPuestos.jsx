@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom/dist';
 import { Formik } from 'formik';
 import { Load } from '../../components/items/Load';
@@ -9,7 +9,7 @@ import '../../styles/formAM.css';
 export function FormPuestos() {
   const { puestos, departamentos, modificarPuesto, altaPuesto } =
     useContext(GchContext);
-
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
   let valuesForm = {
@@ -61,6 +61,7 @@ export function FormPuestos() {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
+          setLoading(true);
           if (id) {
             modificarPuesto(values);
           } else {
@@ -153,8 +154,12 @@ export function FormPuestos() {
             </Form.Group>
 
             <div className='d-flex justify-content-center'>
-              <button className='btn-login-custom' type='submit'>
-                Cargar información
+              <button
+                disabled={loading}
+                className='btn-login-custom'
+                type='submit'
+              >
+                {loading ? 'Cargando...' : 'Cargar información'}
               </button>
             </div>
           </Form>

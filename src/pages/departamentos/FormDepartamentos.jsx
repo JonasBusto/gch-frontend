@@ -21,6 +21,7 @@ export function FormDepartamentos() {
 
   const [deptHijos, setDeptHijos] = useState([]);
   const [rolPuestos, setRolPuestos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let valuesForm = {
     nombre: '',
@@ -80,6 +81,8 @@ export function FormDepartamentos() {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
+          setLoading(true);
+
           let arrayAuxDept_h = deptHijos.map((dept) => {
             return dept.id;
           });
@@ -89,7 +92,7 @@ export function FormDepartamentos() {
 
           values.depart_h = arrayAuxDept_h;
           values.puestos_id = arrayAuxPuestos;
-          console.log('Departamento: ', values);
+
           if (id) {
             modificarDepartamento(values);
           } else {
@@ -218,8 +221,12 @@ export function FormDepartamentos() {
               )}
             </Form.Group>
             <div className='d-flex justify-content-center'>
-              <button className='btn-login-custom' type='submit'>
-                Cargar información
+              <button
+                disabled={loading}
+                className='btn-login-custom'
+                type='submit'
+              >
+                {loading ? 'Cargando...' : 'Cargar información'}
               </button>
             </div>
           </Form>
