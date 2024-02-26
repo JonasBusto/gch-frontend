@@ -389,11 +389,19 @@ export function FormEmpleados() {
                 onBlur={handleBlur}
               >
                 <option value=''>Nadie</option>
-                {empleados.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.lastName + ', ' + s.firstName}
-                  </option>
-                ))}
+                {id
+                  ? empleados
+                      .filter((emp) => emp.id !== id)
+                      .map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.lastName + ', ' + s.firstName}
+                        </option>
+                      ))
+                  : empleados.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.lastName + ', ' + s.firstName}
+                      </option>
+                    ))}
               </Form.Select>
               {touched.id_supervisor && errors.id_supervisor && (
                 <Form.Text className='text-muted'>

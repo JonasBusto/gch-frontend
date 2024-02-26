@@ -45,16 +45,25 @@ export function HistorialEmpleado() {
         </div>
         <div className='row m-0'>
           <div className='row m-0'>
-            {historialEmpleado.map((h) => (
-              <CardHistorialEmp
-                key={h.id}
-                empleado={empleado}
-                puestos={puestos}
-                departamentos={departamentos}
-                roles={roles}
-                historial={h}
-              />
-            ))}
+            {historialEmpleado.length > 0 ? (
+              historialEmpleado.map((h) => (
+                <CardHistorialEmp
+                  key={h.id}
+                  empleado={empleado}
+                  puestos={puestos}
+                  departamentos={departamentos}
+                  roles={roles}
+                  historial={h}
+                />
+              ))
+            ) : (
+              <div className='alert-historial d-flex justify-content-center'>
+                <p>
+                  Sin historial: Este empleado debe haber ingresado a algun
+                  puesto
+                </p>
+              </div>
+            )}
           </div>
           <div className='col-4'></div>
         </div>

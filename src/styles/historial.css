@@ -48,3 +48,12 @@
 .rol-historial > p {
   color: rgb(36, 36, 36);
 }
+
+.alert-historial > p {
+  background-color: red;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin: 2rem 0;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

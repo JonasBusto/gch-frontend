@@ -20,20 +20,30 @@ export function AccionesEmpleado({ empleado, eliminarEmpleado }) {
         <Modal.Header closeButton>
           <Modal.Title>{'Eliminar Empleado'}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {/* Cuando este el backend, alertar que no puede eliminar
-            al empleado porque tiene usuarios asociados. Que primero desvincule
-            o elimine a esos usuarios */}
-          {"¿Esta seguro de eliminar al empleado '" +
-            empleado.lastName +
-            ', ' +
-            empleado.firstName +
-            "'"}
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose}>Cancelar</button>
-          <button onClick={() => eliminarEmpleado(empleado)}>Confirmar</button>
-        </Modal.Footer>
+        {empleado.subordinatesId.length > 0 || empleado.supervisorId ? (
+          <div className='p-3'>
+            <p>
+              No puede eliminar este empleado ya que esta supervisando a otros
+              empleados o es supervisado. Borre antes dichas asociaciones
+            </p>
+          </div>
+        ) : (
+          <>
+            <Modal.Body>
+              {"¿Esta seguro de eliminar al empleado '" +
+                empleado.lastName +
+                ', ' +
+                empleado.firstName +
+                "'"}
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>Cancelar</button>
+              <button onClick={() => eliminarEmpleado(empleado)}>
+                Confirmar
+              </button>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
     </div>
   );

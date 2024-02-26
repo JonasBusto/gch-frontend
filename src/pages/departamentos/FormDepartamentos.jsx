@@ -166,14 +166,18 @@ export function FormDepartamentos() {
                 <Form.Text className='text-muted'>{errors.nivel_id}</Form.Text>
               )}
             </Form.Group>
-            <Form.Group className='mb-3 form-multiple-select-custom'>
+            <Form.Group className='d-none mb-3 form-multiple-select-custom'>
               <Form.Label>Asociar a Departamento Hijos: </Form.Label>
               <MultiSelect
                 name='depart_h'
                 value={deptHijos}
                 onChange={(e) => setDeptHijos(e.target.value)}
                 onBlur={handleBlur}
-                options={departamentos}
+                options={
+                  id
+                    ? departamentos.filter((dep) => dep.id !== id)
+                    : departamentos
+                }
                 optionLabel='name'
                 placeholder='Seleccione Departamentos'
                 maxSelectedLabels={5}
@@ -191,11 +195,19 @@ export function FormDepartamentos() {
                 onBlur={handleBlur}
               >
                 <option value=''>Sin departamento</option>
-                {departamentos.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.name}
-                  </option>
-                ))}
+                {id
+                  ? departamentos
+                      .filter((dep) => dep.id !== id)
+                      .map((d) => (
+                        <option key={d.id} value={d.id}>
+                          {d.name}
+                        </option>
+                      ))
+                  : departamentos.map((d) => (
+                      <option key={d.id} value={d.id}>
+                        {d.name}
+                      </option>
+                    ))}
               </Form.Select>
               {touched.depart_p && errors.depart_p && (
                 <Form.Text className='text-muted'>{errors.depart_p}</Form.Text>

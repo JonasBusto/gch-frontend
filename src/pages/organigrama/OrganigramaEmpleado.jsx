@@ -17,6 +17,9 @@ export function OrganigramaEmpleados() {
       (emp) => !emp.supervisorId && emp.subordinatesId.length > 0
     );
     arrayOrg = [];
+    if (empleadosJefes.length === 0) {
+      setOrganigramaObjeto([]);
+    }
     for (let w = 0; w < empleadosJefes.length; w++) {
       let rolEmp = roles.filter(
         (rol) => rol.id === empleadosJefes[w].roleId
@@ -106,18 +109,24 @@ export function OrganigramaEmpleados() {
       <div className='contain-org-chart-titulo'>
         <p>Organigrama de Empleados</p>
       </div>
-      {organigramaObjeto.map((orgChar) => (
-        <Fragment key={crypto.randomUUID()}>
-          <OrganizationChart
-            value={[orgChar]}
-            selectionMode='multiple'
-            selection={selection}
-            onSelectionChange={(e) => setSelection(e.data)}
-            nodeTemplate={nodeTemplate}
-          />
-          <hr />
-        </Fragment>
-      ))}
+      {organigramaObjeto.length > 0 ? (
+        organigramaObjeto.map((orgChar) => (
+          <Fragment key={crypto.randomUUID()}>
+            <OrganizationChart
+              value={[orgChar]}
+              selectionMode='multiple'
+              selection={selection}
+              onSelectionChange={(e) => setSelection(e.data)}
+              nodeTemplate={nodeTemplate}
+            />
+            <hr />
+          </Fragment>
+        ))
+      ) : (
+        <div className='d-flex justify-content-center'>
+          <p>Sin información</p>
+        </div>
+      )}
     </div>
   );
 }

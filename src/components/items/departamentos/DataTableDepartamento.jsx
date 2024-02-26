@@ -20,17 +20,29 @@ export function AccionesDepartamento({ departamento, eliminarDepartamento }) {
         <Modal.Header closeButton>
           <Modal.Title>{'Eliminar Departamento'}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {"¿Esta seguro de eliminar al departamento '" +
-            departamento.name +
-            "'?"}
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose}>Cancelar</button>
-          <button onClick={() => eliminarDepartamento(departamento)}>
-            Confirmar
-          </button>
-        </Modal.Footer>
+        {departamento.childDepartmentsId.length > 0 ||
+        departamento.parentDepartmentId ? (
+          <div className='p-3'>
+            <p>
+              No puede eliminar este empleado ya que esta supervisando a otros
+              empleados o es supervisado. Borre antes dichas asociaciones
+            </p>
+          </div>
+        ) : (
+          <>
+            <Modal.Body>
+              {"¿Esta seguro de eliminar al departamento '" +
+                departamento.name +
+                "'?"}
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>Cancelar</button>
+              <button onClick={() => eliminarDepartamento(departamento)}>
+                Confirmar
+              </button>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
     </div>
   );

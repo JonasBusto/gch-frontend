@@ -18,6 +18,9 @@ export function OrganigramaDepartamentos() {
       (dep) => !dep.parentDepartmentId && dep.childDepartmentsId.length > 0
     );
     arrayOrg = [];
+    if (departamentosJefes.length === 0) {
+      setOrganigramaObjeto([]);
+    }
     for (let w = 0; w < departamentosJefes.length; w++) {
       let nivelDep = niveles.filter(
         (rol) => rol.id === departamentosJefes[w].levelId
@@ -109,18 +112,24 @@ export function OrganigramaDepartamentos() {
       <div className='contain-org-chart-titulo'>
         <p>Organigrama de Departamentos</p>
       </div>
-      {organigramaObjeto.map((orgChar) => (
-        <Fragment key={crypto.randomUUID()}>
-          <OrganizationChart
-            value={[orgChar]}
-            selectionMode='multiple'
-            selection={selection}
-            onSelectionChange={(e) => setSelection(e.data)}
-            nodeTemplate={nodeTemplate}
-          />
-          <hr />
-        </Fragment>
-      ))}
+      {organigramaObjeto.length > 0 ? (
+        organigramaObjeto.map((orgChar) => (
+          <Fragment key={crypto.randomUUID()}>
+            <OrganizationChart
+              value={[orgChar]}
+              selectionMode='multiple'
+              selection={selection}
+              onSelectionChange={(e) => setSelection(e.data)}
+              nodeTemplate={nodeTemplate}
+            />
+            <hr />
+          </Fragment>
+        ))
+      ) : (
+        <div className='d-flex justify-content-center'>
+          <p>Sin información</p>
+        </div>
+      )}
     </div>
   );
 }
