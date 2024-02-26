@@ -1,20 +1,54 @@
+import { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useContext } from 'react';
 import { Load } from '../../components/items/Load';
 import GchContext from '../../context/GchContext';
 import '../../styles/empDetalle.css';
 
 export function EmpDetalle() {
-  const { empleados, roles } = useContext(GchContext);
+  const { empleados, historialEmpleado, getIdEmpleado, roles } =
+    useContext(GchContext);
   const { id } = useParams();
   const empleadoObjeto = empleados?.filter((e) => e.id == id)[0];
+  const date = new Date();
+  const diaActual = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  const mesActual =
+    date.getMonth() + 1 < 10
+      ? '0' + (date.getMonth() + 1)
+      : date.getMonth() + 1;
+  const añoActual = date.getFullYear();
+  const añoEnMiliSegundo = 31536000000;
 
-  if (!empleados || !roles) {
+  useEffect(() => {
+    getIdEmpleado(id);
+  }, []);
+
+  if (!empleados || !roles || !historialEmpleado) {
     return <Load />;
   }
 
   const puestoEmpleado = roles.filter((r) => r.id == empleadoObjeto.roleId)[0]
     ?.name;
+
+  const fechaActual = diaActual + '-' + mesActual + '-' + añoActual;
+  const fechaPrimerPuesto = historialEmpleado[0]?.startDate;
+
+  const calcularAntiguedad = (fechaActual, fechaInicio) => {
+    if (fechaPrimerPuesto) {
+      const [diaI, mesI, añoI] = fechaInicio.split('-');
+      const [diaA, mesA, añoA] = fechaActual.split('-');
+
+      const antiguedad =
+        (new Date(añoA, mesA, diaA).getTime() -
+          new Date(añoI, mesI, diaI).getTime()) /
+        añoEnMiliSegundo;
+
+      return antiguedad;
+    } else {
+      return 0;
+    }
+  };
+
+  let antiguedad = calcularAntiguedad(fechaActual, fechaPrimerPuesto);
 
   return (
     <div className='d-flex flex-column'>
@@ -97,6 +131,18 @@ export function EmpDetalle() {
                         (r) => r.id == empleadoObjeto.supervisorId
                       )[0]?.firstName
                     : 'No tiene supervisor'}
+                </p>
+              </div>
+              <div className='d-flex flex-column detalle-emp'>
+                <p>
+                  <b>Años de antiguedad: </b>
+                </p>
+                <p>
+                  {historialEmpleado.length > 0
+                    ? antiguedad < 1
+                      ? 'Menos de un año'
+                      : Math.floor(antiguedad) + ' Años'
+                    : antiguedad + ' Años'}
                 </p>
               </div>
             </div>
