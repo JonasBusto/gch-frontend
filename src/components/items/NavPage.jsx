@@ -73,7 +73,7 @@ export function NavPage() {
               </NavDropdown.Item>
             </NavDropdown>
           </Navbar.Collapse>
-          <Navbar.Brand className='login-brand'>
+          <Navbar.Brand className='login-brand d-none'>
             <Link
               to='/iniciar-sesion'
               className='d-flex flex-column align-items-center w-100 justify-content-center'

@@ -43,6 +43,11 @@ export function HistorialEmpleado() {
             <h4>{empleado.lastName + ', ' + empleado.firstName}</h4>
           </div>
         </div>
+        {historialEmpleado.length > 0 && (
+          <div className='mt-3'>
+            <h3 className='m-0'>Puestos:</h3>
+          </div>
+        )}
         <div className='row m-0'>
           <div className='row m-0'>
             {historialEmpleado.length > 0 ? (
