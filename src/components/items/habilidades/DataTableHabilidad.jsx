@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 
-export function AccionesHabilidad({ habilidad, eliminarHabilidad }) {
+export function AccionesHabilidad({ empleados, habilidad, eliminarHabilidad }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  let habilidadOcupada = empleados.filter((emp) =>
+    emp.skillsId.includes(habilidad.id)
+  );
 
   return (
     <div className='btn-acciones'>
@@ -20,15 +24,28 @@ export function AccionesHabilidad({ habilidad, eliminarHabilidad }) {
         <Modal.Header closeButton>
           <Modal.Title>{'Eliminar Habilidad '}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {"¿Esta seguro de eliminar la habilidad '" + habilidad.name + "'?"}
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose}>Cancelar</button>
-          <button onClick={() => eliminarHabilidad(habilidad)}>
-            Confirmar
-          </button>
-        </Modal.Footer>
+        {habilidadOcupada.length > 0 ? (
+          <div className='p-3'>
+            <p>
+              No puede eliminar esta habilidad ya que esta asociada a uno o
+              varios empleados
+            </p>
+          </div>
+        ) : (
+          <>
+            <Modal.Body>
+              {"¿Esta seguro de eliminar la habilidad '" +
+                habilidad.name +
+                "'?"}
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>Cancelar</button>
+              <button onClick={() => eliminarHabilidad(habilidad)}>
+                Confirmar
+              </button>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
     </div>
   );

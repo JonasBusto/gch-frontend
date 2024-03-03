@@ -10,13 +10,13 @@ import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 
 export function Habilidades() {
-  const { eliminarHabilidad, habilidades } = useContext(GchContext);
+  const { empleados, eliminarHabilidad, habilidades } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
-  if (!habilidades) {
+  if (!habilidades || !empleados) {
     return <Load />;
   }
 
@@ -69,6 +69,7 @@ export function Habilidades() {
           header='Acciones'
           body={(habilidad) => (
             <AccionesHabilidad
+              empleados={empleados}
               habilidad={habilidad}
               eliminarHabilidad={eliminarHabilidad}
             />

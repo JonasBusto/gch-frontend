@@ -18,18 +18,27 @@ export function AccionesNivel({ nivel, eliminarNivel }) {
       </button>
       <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{'Eliminar Nivel ' + nivel.id}</Modal.Title>
+          <Modal.Title>{'Eliminar Nivel'}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {/* Cuando este el backend, alertar que no puede eliminar
-            al empleado porque tiene usuarios asociados. Que primero desvincule
-            o elimine a esos usuarios */}
-          {"¿Esta seguro de eliminar al empleado '" + nivel.nombre + "'?"}
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose}>Cancelar</button>
-          <button onClick={() => eliminarNivel(nivel)}>Confirmar</button>
-        </Modal.Footer>
+
+        {nivel.departmentsId.length > 0 ? (
+          <div className='p-3'>
+            <p>
+              No puede eliminar este nivel ya que esta asociada a uno o varios
+              departamentos
+            </p>
+          </div>
+        ) : (
+          <>
+            <Modal.Body>
+              {"¿Esta seguro de eliminar al nivel '" + nivel.name + "'?"}
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>Cancelar</button>
+              <button onClick={() => eliminarNivel(nivel)}>Confirmar</button>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
     </div>
   );

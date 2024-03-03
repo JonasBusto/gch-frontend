@@ -47,9 +47,9 @@ export function NavPage() {
               <NavDropdown.Item as={Link} to='/departamentos'>
                 <i className='fa-solid fa-building'></i> Departamentos ABM
               </NavDropdown.Item>
-              {/* <NavDropdown.Item as={Link} to='/usuarios'>
+              <NavDropdown.Item as={Link} to='/usuarios'>
                 <i className='fa-solid fa-users'></i> Usuarios del Sistema ABM
-              </NavDropdown.Item> */}
+              </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/roles'>
                 <i className='fa-regular fa-address-book'></i> Roles del
                 empleado ABM
@@ -73,7 +73,7 @@ export function NavPage() {
               </NavDropdown.Item>
             </NavDropdown>
           </Navbar.Collapse>
-          <Navbar.Brand className='login-brand d-none'>
+          <Navbar.Brand className='login-brand'>
             <Link
               to='/iniciar-sesion'
               className='d-flex flex-column align-items-center w-100 justify-content-center'

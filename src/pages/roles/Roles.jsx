@@ -10,13 +10,13 @@ import '../../styles/empleados.css';
 import { AccionesRol } from '../../components/items/roles/DataTableRol';
 
 export function Roles() {
-  const { roles, eliminarRol } = useContext(GchContext);
+  const { empleados, roles, eliminarRol } = useContext(GchContext);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
-  if (!roles) {
+  if (!roles || !empleados) {
     return <Load />;
   }
 
@@ -68,7 +68,13 @@ export function Roles() {
 
         <Column
           header='Acciones'
-          body={(rol) => <AccionesRol rol={rol} eliminarRol={eliminarRol} />}
+          body={(rol) => (
+            <AccionesRol
+              empleados={empleados}
+              rol={rol}
+              eliminarRol={eliminarRol}
+            />
+          )}
         ></Column>
       </DataTable>
     </div>

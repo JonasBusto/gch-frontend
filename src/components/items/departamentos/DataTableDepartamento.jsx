@@ -21,11 +21,13 @@ export function AccionesDepartamento({ departamento, eliminarDepartamento }) {
           <Modal.Title>{'Eliminar Departamento'}</Modal.Title>
         </Modal.Header>
         {departamento.childDepartmentsId.length > 0 ||
-        departamento.parentDepartmentId ? (
+        departamento.parentDepartmentId ||
+        departamento.positionsId.length > 0 ? (
           <div className='p-3'>
             <p>
-              No puede eliminar este empleado ya que esta supervisando a otros
-              empleados o es supervisado. Borre antes dichas asociaciones
+              No puede eliminar este departamento ya que esta asociado a uno o
+              varios departamentos, o tiene puestos que dependen de el. Borre
+              antes dichas asociaciones
             </p>
           </div>
         ) : (

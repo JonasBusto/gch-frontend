@@ -18,18 +18,27 @@ export function AccionesPuesto({ puesto, eliminarPuesto }) {
       </button>
       <Modal className='modal-custom-accion' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{'Eliminar Puesto ' + puesto.id}</Modal.Title>
+          <Modal.Title>{'Eliminar Puesto'}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {/* Cuando este el backend, alertar que no puede eliminar
-            al empleado porque tiene usuarios asociados. Que primero desvincule
-            o elimine a esos usuarios */}
-          {"¿Esta seguro de eliminar el puesto '" + puesto.name + "'?"}
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose}>Cancelar</button>
-          <button onClick={() => eliminarPuesto(puesto)}>Confirmar</button>
-        </Modal.Footer>
+
+        {puesto.departmentId ? (
+          <div className='p-3'>
+            <p>
+              No puede eliminar este puesto ya que esta asociada a un
+              departamento
+            </p>
+          </div>
+        ) : (
+          <>
+            <Modal.Body>
+              {"¿Esta seguro de eliminar el puesto '" + puesto.name + "'?"}
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>Cancelar</button>
+              <button onClick={() => eliminarPuesto(puesto)}>Confirmar</button>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
     </div>
   );
