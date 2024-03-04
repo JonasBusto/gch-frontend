@@ -10,13 +10,14 @@ import GchContext from '../../context/GchContext';
 import '../../styles/empleados.css';
 
 export function Departamentos() {
-  const { departamentos, eliminarDepartamento } = useContext(GchContext);
+  const { puestos, departamentos, eliminarDepartamento } =
+    useContext(GchContext);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
-  if (!departamentos) {
+  if (!departamentos || !puestos) {
     return <Load />;
   }
 
@@ -44,6 +45,7 @@ export function Departamentos() {
 
       <DataTable
         paginator
+        stripedRows
         removableSort
         selectionMode='single'
         scrollable
@@ -69,7 +71,9 @@ export function Departamentos() {
           header='Acciones'
           body={(departamento) => (
             <AccionesDepartamento
+              puestos={puestos}
               departamento={departamento}
+              departamentos={departamentos}
               eliminarDepartamento={eliminarDepartamento}
             />
           )}

@@ -44,6 +44,7 @@ export function Roles() {
 
       <DataTable
         paginator
+        stripedRows
         removableSort
         selectionMode='single'
         scrollable

@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 
-export function AccionesPuesto({ puesto, eliminarPuesto }) {
+export function AccionesPuesto({ departamentos, puesto, eliminarPuesto }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  let departamentosAsociados = departamentos.filter(
+    (dep) => dep.id === puesto.departmentId
+  )[0];
 
   return (
     <div className='btn-acciones'>
@@ -24,9 +28,17 @@ export function AccionesPuesto({ puesto, eliminarPuesto }) {
         {puesto.departmentId ? (
           <div className='p-3'>
             <p>
-              No puede eliminar este puesto ya que esta asociada a un
-              departamento
+              No puede eliminar este puesto ya que esta asociado al
+              departamento:
             </p>
+            <ul>
+              <li>
+                <Link
+                  to={'/departamentos/cargar/' + departamentosAsociados.id}
+                >{`${departamentosAsociados.name}`}</Link>
+              </li>
+            </ul>
+            <strong>Borre antes dicha asociación</strong>
           </div>
         ) : (
           <>

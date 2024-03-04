@@ -26,9 +26,18 @@ export function AccionesRol({ empleados, rol, eliminarRol }) {
         {rolAsignado.length > 0 ? (
           <div className='p-3'>
             <p>
-              No puede eliminar este rol ya que esta asociado a uno o varios
-              empleados
+              No puede eliminar este rol ya que esta asociado a los empleados:
             </p>
+            <ul>
+              {rolAsignado.map((emp) => (
+                <li key={emp.id}>
+                  <Link
+                    to={'/empleados/cargar/' + emp.id}
+                  >{`${emp.lastName}, ${emp.firstName}`}</Link>
+                </li>
+              ))}
+            </ul>
+            <strong>Borre antes dichas asociaciones</strong>
           </div>
         ) : (
           <>

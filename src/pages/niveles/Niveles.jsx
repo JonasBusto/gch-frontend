@@ -49,6 +49,7 @@ export function Niveles() {
 
       <DataTable
         paginator
+        stripedRows
         removableSort
         selectionMode='single'
         scrollable
@@ -83,7 +84,11 @@ export function Niveles() {
         <Column
           header='Acciones'
           body={(nivel) => (
-            <AccionesNivel nivel={nivel} eliminarNivel={eliminarNivel} />
+            <AccionesNivel
+              departamentos={departamentos}
+              nivel={nivel}
+              eliminarNivel={eliminarNivel}
+            />
           )}
         ></Column>
       </DataTable>

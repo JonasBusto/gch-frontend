@@ -25,11 +25,21 @@ export function AccionesHabilidad({ empleados, habilidad, eliminarHabilidad }) {
           <Modal.Title>{'Eliminar Habilidad '}</Modal.Title>
         </Modal.Header>
         {habilidadOcupada.length > 0 ? (
-          <div className='p-3'>
+          <div className='d-flex flex-column p-3'>
             <p>
-              No puede eliminar esta habilidad ya que esta asociada a uno o
-              varios empleados
+              No puede eliminar esta habilidad ya que esta asociada a los
+              empleados:
             </p>
+            <ul>
+              {habilidadOcupada.map((emp) => (
+                <li key={emp.id}>
+                  <Link
+                    to={'/empleados/cargar/' + emp.id}
+                  >{`${emp.lastName}, ${emp.firstName}`}</Link>
+                </li>
+              ))}
+            </ul>
+            <strong>Borre antes dichas asociaciones</strong>
           </div>
         ) : (
           <>

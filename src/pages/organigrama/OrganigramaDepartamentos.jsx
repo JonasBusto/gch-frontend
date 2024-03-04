@@ -127,7 +127,7 @@ export function OrganigramaDepartamentos() {
         ))
       ) : (
         <div className='d-flex justify-content-center'>
-          <p>Sin información</p>
+          <p>Sin información. Asocie a los departamentos.</p>
         </div>
       )}
     </div>

@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 
-export function AccionesNivel({ nivel, eliminarNivel }) {
+export function AccionesNivel({ departamentos, nivel, eliminarNivel }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  let departamentosAsociados = departamentos.filter((dep) =>
+    nivel.departmentsId.includes(dep.id)
+  );
 
   return (
     <div className='btn-acciones'>
@@ -27,6 +31,16 @@ export function AccionesNivel({ nivel, eliminarNivel }) {
               No puede eliminar este nivel ya que esta asociada a uno o varios
               departamentos
             </p>
+            <ul>
+              {departamentosAsociados.map((dep) => (
+                <li key={dep.id}>
+                  <Link
+                    to={'/departamentos/cargar/' + dep.id}
+                  >{`${dep.name}`}</Link>
+                </li>
+              ))}
+            </ul>
+            <strong>Borre antes dicha asociación</strong>
           </div>
         ) : (
           <>
@@ -49,17 +63,25 @@ export function DepartamentoAsociadoBody({ nivel, departamentos }) {
     nivel.departmentsId.includes(d.id)
   );
 
-  return (
-    <div className='item-asociado'>
-      <span>
-        {departamento.map((d) => (
-          <Link key={d.id} to={'/departamentos/cargar/' + d.id}>
-            {'#' + d.name}
-          </Link>
-        ))}
-      </span>
-    </div>
-  );
+  if (departamento.length > 0) {
+    return (
+      <div className='item-asociado'>
+        <span>
+          {departamento.map((d) => (
+            <Link key={d.id} to={'/departamentos/cargar/' + d.id}>
+              {'#' + d.name}
+            </Link>
+          ))}
+        </span>
+      </div>
+    );
+  } else {
+    return (
+      <div className='item-asociado'>
+        <span>Sin departamentos asociado</span>
+      </div>
+    );
+  }
 }
 
 export function DepartamentoAsociadoField({ nivel, departamentos }) {

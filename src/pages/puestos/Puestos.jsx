@@ -49,6 +49,7 @@ export function Puestos() {
 
       <DataTable
         paginator
+        stripedRows
         removableSort
         selectionMode='single'
         scrollable
@@ -96,7 +97,11 @@ export function Puestos() {
         <Column
           header='Acciones'
           body={(puesto) => (
-            <AccionesPuesto puesto={puesto} eliminarPuesto={eliminarPuesto} />
+            <AccionesPuesto
+              departamentos={departamentos}
+              puesto={puesto}
+              eliminarPuesto={eliminarPuesto}
+            />
           )}
         ></Column>
       </DataTable>

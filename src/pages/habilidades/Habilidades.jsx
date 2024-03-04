@@ -44,6 +44,7 @@ export function Habilidades() {
 
       <DataTable
         paginator
+        stripedRows
         removableSort
         selectionMode='single'
         scrollable

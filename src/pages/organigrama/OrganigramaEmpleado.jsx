@@ -124,7 +124,7 @@ export function OrganigramaEmpleados() {
         ))
       ) : (
         <div className='d-flex justify-content-center'>
-          <p>Sin información</p>
+          <p>Sin información. Asocie a los empleados.</p>
         </div>
       )}
     </div>

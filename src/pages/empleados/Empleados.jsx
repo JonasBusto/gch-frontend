@@ -51,6 +51,7 @@ export function Empleados() {
 
       <DataTable
         paginator
+        stripedRows
         removableSort
         selectionMode='single'
         scrollable
@@ -111,6 +112,7 @@ export function Empleados() {
           body={(empleado) => (
             <AccionesEmpleado
               empleado={empleado}
+              empleados={empleados}
               eliminarEmpleado={eliminarEmpleado}
             />
           )}

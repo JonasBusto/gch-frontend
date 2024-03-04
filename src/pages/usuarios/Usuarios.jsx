@@ -129,6 +129,7 @@ export function Usuarios() {
 
       <DataTable
         paginator
+        stripedRows
         removableSort
         selectionMode='single'
         scrollable

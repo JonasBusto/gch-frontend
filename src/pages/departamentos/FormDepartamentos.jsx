@@ -213,7 +213,7 @@ export function FormDepartamentos() {
                 <Form.Text className='text-muted'>{errors.depart_p}</Form.Text>
               )}
             </Form.Group>
-            <Form.Group className='mb-3 form-multiple-select-custom'>
+            <Form.Group className='d-none mb-3 form-multiple-select-custom'>
               <Form.Label>Asociar a Puestos: </Form.Label>
 
               <MultiSelect

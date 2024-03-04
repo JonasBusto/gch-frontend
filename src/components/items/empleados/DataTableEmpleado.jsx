@@ -2,11 +2,18 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 
-export function AccionesEmpleado({ empleado, eliminarEmpleado }) {
+export function AccionesEmpleado({ empleado, empleados, eliminarEmpleado }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  let empleadosSubAsociados = empleados.filter((emp) =>
+    empleado.subordinatesId.includes(emp.id)
+  );
+  let empleadoSupAsociado = empleados.filter(
+    (emp) => emp.id === empleado.supervisorId
+  )[0];
 
   return (
     <div className='btn-acciones'>
@@ -22,10 +29,37 @@ export function AccionesEmpleado({ empleado, eliminarEmpleado }) {
         </Modal.Header>
         {empleado.subordinatesId.length > 0 || empleado.supervisorId ? (
           <div className='p-3'>
-            <p>
-              No puede eliminar este empleado ya que esta supervisando a otros
-              empleados o es supervisado. Borre antes dichas asociaciones
-            </p>
+            {empleado.subordinatesId.length > 0 && (
+              <div className='d-flex flex-column'>
+                <p>
+                  No puede eliminar este empleado ya que esta supervisando a:
+                </p>
+                <ul>
+                  {empleadosSubAsociados.map((emp) => (
+                    <li key={emp.id}>
+                      <Link to={'/empleados/cargar/' + emp.id}>
+                        {`${emp.lastName}, ${emp.firstName}`}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {empleadoSupAsociado && (
+              <div className='d-flex flex-column'>
+                <p>
+                  No puede eliminar este empleado ya que es supervisado por:
+                </p>
+                <ul>
+                  <li>
+                    <Link
+                      to={'/empleados/cargar/' + empleadoSupAsociado.id}
+                    >{`${empleadoSupAsociado.lastName}, ${empleadoSupAsociado.firstName}`}</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+            <strong>Borre antes dichas asociaciones</strong>
           </div>
         ) : (
           <>
