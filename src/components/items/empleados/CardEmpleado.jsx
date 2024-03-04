@@ -15,6 +15,9 @@ export function CardEmpleado({ empleado, empleados, rolEmpleado }) {
           <div className='d-flex justify-content-center'>
             <p className='text-center d-flex flex-column'>
               <span>
+                <strong className='me-2'>
+                  <u>Rol:</u>
+                </strong>
                 <b>{rolEmpleado ? rolEmpleado : 'Sin rol asignado'}</b>
               </span>
               <span>

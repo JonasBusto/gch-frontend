@@ -5,7 +5,7 @@ import GchContext from '../../context/GchContext';
 import '../../styles/empDetalle.css';
 
 export function EmpDetalle() {
-  const { empleados, historialEmpleado, getIdEmpleado, roles } =
+  const { empleados, historialEmpleado, getIdEmpleado, roles, puestos } =
     useContext(GchContext);
   const { id } = useParams();
   const empleadoObjeto = empleados?.filter((e) => e.id == id)[0];
@@ -22,11 +22,13 @@ export function EmpDetalle() {
     getIdEmpleado(id);
   }, []);
 
-  if (!empleados || !roles || !historialEmpleado) {
+  if (!empleados || !roles || !historialEmpleado || !puestos) {
     return <Load />;
   }
 
-  const puestoEmpleado = roles.filter((r) => r.id == empleadoObjeto.roleId)[0]
+  const puestoEmpleado = puestos.filter((r) => r.id == empleadoObjeto.roleId)[0]
+    ?.name;
+  const rolEmpleado = roles.filter((r) => r.id == empleadoObjeto.roleId)[0]
     ?.name;
 
   const fechaActual = diaActual + '-' + mesActual + '-' + añoActual;
@@ -100,13 +102,19 @@ export function EmpDetalle() {
                 </p>
                 <p>{empleadoObjeto.address}</p>
               </div>
+              <div className='d-flex flex-column detalle-emp'>
+                <p>
+                  <b>Rol actual: </b>
+                </p>
+                <p>{rolEmpleado ? rolEmpleado : 'No tiene asignado un Rol'}</p>
+              </div>
             </div>
           </div>
           <div className='col-12 col-lg-4 d-flex flex-column justify-content-between'>
             <div className='d-flex flex-column'>
               <div className='d-flex flex-column detalle-emp'>
                 <p>
-                  <b>Puesto: </b>
+                  <b>Puesto actual: </b>
                 </p>
                 <p>
                   {puestoEmpleado
