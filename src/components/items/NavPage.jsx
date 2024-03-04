@@ -25,53 +25,52 @@ export function NavPage() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav'>
-            {/* <Nav.Link as={Link} to="/" eventKey="1">
-              Inicio
-            </Nav.Link> */}
-            {/* <Nav.Link as={Link} to="/iniciar-sesion" eventKey="2">
-              <i className="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
-            </Nav.Link> */}
-            <NavDropdown title='Administrador' id='basic-nav-dropdown'>
+            <NavDropdown title='Empleados' id='basic-nav-dropdown'>
+              <NavDropdown.Item as={Link} to='/empleados-listado'>
+                <i className='fa-solid fa-user-tie'></i> Ver Empleados
+              </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/empleados'>
-                <i className='fa-solid fa-user-tie'></i> Empleados ABM
+                <i className='fa-solid fa-user-tie'></i> Gestionar Empleados
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/habilidades'>
-                <i className='fa-regular fa-address-book'></i> Habilidades ABM
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/puestos'>
-                <i className='fa-solid fa-briefcase'></i> Puestos ABM
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/niveles'>
-                <i className='fa-solid fa-layer-group'></i> Niveles ABM
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/departamentos'>
-                <i className='fa-solid fa-building'></i> Departamentos ABM
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/usuarios'>
-                <i className='fa-solid fa-users'></i> Usuarios del Sistema ABM
+                <i className='fa-regular fa-address-book'></i> Gestionar
+                Habilidades del Empleado
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/roles'>
-                <i className='fa-regular fa-address-book'></i> Roles del
-                empleado ABM
+                <i className='fa-regular fa-address-book'></i> Gestionar Roles
+                del empleado
               </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title='Opciones' id='basic-nav-dropdown'>
-              <NavDropdown.Item as={Link} to='/departamentos-listado'>
-                <i className='fa-solid fa-building'></i> Departamentos
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/empleados-listado'>
-                <i className='fa-solid fa-user-tie'></i> Empleados
-              </NavDropdown.Item>
-
-              <NavDropdown.Divider />
               <NavDropdown.Item as={Link} to='/empleados/organigrama'>
                 <i className='fa-solid fa-sitemap'></i> Organigrama de Empleados
+              </NavDropdown.Item>
+            </NavDropdown>
+
+            <NavDropdown title='Departamentos' id='basic-nav-dropdown'>
+              <NavDropdown.Item as={Link} to='/departamentos-listado'>
+                <i className='fa-solid fa-building'></i> Ver Departamentos
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/departamentos'>
+                <i className='fa-solid fa-building'></i> Gestionar Departamentos
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/puestos'>
+                <i className='fa-solid fa-briefcase'></i> Gestionar Puestos de
+                Departamentos
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/niveles'>
+                <i className='fa-solid fa-layer-group'></i> Gestionar Niveles de
+                Departamentos
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/departamentos/organigrama'>
                 <i className='fa-solid fa-sitemap'></i> Organigrama de
                 Departamentos
               </NavDropdown.Item>
             </NavDropdown>
+            {/* <NavDropdown title='Usuarios' id='basic-nav-dropdown'>
+              <NavDropdown.Item as={Link} to='/usuarios'>
+                <i className='fa-solid fa-users'></i> Gestionar Usuarios del
+                Sistema
+              </NavDropdown.Item>
+            </NavDropdown> */}
           </Navbar.Collapse>
           <Navbar.Brand className='login-brand'>
             <Link

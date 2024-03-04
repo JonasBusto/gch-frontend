@@ -26,7 +26,7 @@ export function AccionesNivel({ departamentos, nivel, eliminarNivel }) {
         </Modal.Header>
 
         {nivel.departmentsId.length > 0 ? (
-          <div className='p-3'>
+          <div className='p-3 detalle-borrado'>
             <p>
               No puede eliminar este nivel ya que esta asociada a uno o varios
               departamentos

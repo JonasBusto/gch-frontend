@@ -28,7 +28,7 @@ export function AccionesEmpleado({ empleado, empleados, eliminarEmpleado }) {
           <Modal.Title>{'Eliminar Empleado'}</Modal.Title>
         </Modal.Header>
         {empleado.subordinatesId.length > 0 || empleado.supervisorId ? (
-          <div className='p-3'>
+          <div className='p-3 detalle-borrado'>
             {empleado.subordinatesId.length > 0 && (
               <div className='d-flex flex-column'>
                 <p>

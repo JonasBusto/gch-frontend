@@ -9,15 +9,15 @@ let cardsHome = [
     imagen_seccion:
       'https://factorialhr.es/wp-content/uploads/2017/09/16170038/desempen%CC%83o-laboral-min.jpg',
   },
-  {
-    id: 2,
-    rol: 'admin',
-    url: 'usuarios',
-    titulo_seccion: 'Sección Usuarios',
-    desc_seccion: 'ABM de usuarios y visualización de los mismos.',
-    imagen_seccion:
-      'https://www.questionpro.com/blog/wp-content/uploads/2023/05/2401-Portada-comunidad-de-usuarios.jpg',
-  },
+  // {
+  //   id: 2,
+  //   rol: 'admin',
+  //   url: 'usuarios',
+  //   titulo_seccion: 'Sección Usuarios',
+  //   desc_seccion: 'ABM de usuarios y visualización de los mismos.',
+  //   imagen_seccion:
+  //     'https://www.questionpro.com/blog/wp-content/uploads/2023/05/2401-Portada-comunidad-de-usuarios.jpg',
+  // },
   {
     id: 3,
     rol: 'admin',

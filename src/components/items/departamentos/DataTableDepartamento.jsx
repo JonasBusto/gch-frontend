@@ -38,11 +38,13 @@ export function AccionesDepartamento({
         {departamento.childDepartmentsId.length > 0 ||
         departamento.parentDepartmentId ||
         departamento.positionsId.length > 0 ? (
-          <div className='p-3 d-flex flex-column'>
-            <p>No puede eliminar este departamento ya que:</p>
+          <div className='p-3 d-flex flex-column detalle-borrado'>
+            <p className='w-100'>No puede eliminar este departamento ya que:</p>
             {puestosAsociados.length > 0 && (
-              <div className='d-flex flex-column'>
-                <p>Esta asociado a los siguientes puestos:</p>
+              <div className='d-flex flex-column w-100'>
+                <p>
+                  <i>Esta asociado a los siguientes puestos:</i>
+                </p>
                 <ul>
                   {puestosAsociados.map((puesto) => (
                     <li key={puesto.id}>
@@ -55,7 +57,7 @@ export function AccionesDepartamento({
               </div>
             )}
             {depHijosAsociados.length > 0 && (
-              <div className='d-flex flex-column'>
+              <div className='d-flex flex-column w-100'>
                 <p>
                   <i>Dependen de el los siguientes departamentos:</i>
                 </p>
@@ -71,7 +73,7 @@ export function AccionesDepartamento({
               </div>
             )}
             {depPadreAsociados && (
-              <div className='d-flex flex-column'>
+              <div className='d-flex flex-column w-100'>
                 <p>
                   <i>Depende del departamento: </i>
                 </p>

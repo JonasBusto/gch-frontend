@@ -25,7 +25,7 @@ export function AccionesHabilidad({ empleados, habilidad, eliminarHabilidad }) {
           <Modal.Title>{'Eliminar Habilidad '}</Modal.Title>
         </Modal.Header>
         {habilidadOcupada.length > 0 ? (
-          <div className='d-flex flex-column p-3'>
+          <div className='d-flex flex-column p-3 detalle-borrado'>
             <p>
               No puede eliminar esta habilidad ya que esta asociada a los
               empleados:

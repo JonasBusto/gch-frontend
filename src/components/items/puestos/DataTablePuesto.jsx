@@ -26,7 +26,7 @@ export function AccionesPuesto({ departamentos, puesto, eliminarPuesto }) {
         </Modal.Header>
 
         {puesto.departmentId ? (
-          <div className='p-3'>
+          <div className='p-3 detalle-borrado'>
             <p>
               No puede eliminar este puesto ya que esta asociado al
               departamento:

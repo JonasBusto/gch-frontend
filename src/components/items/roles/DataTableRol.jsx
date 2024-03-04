@@ -24,7 +24,7 @@ export function AccionesRol({ empleados, rol, eliminarRol }) {
         </Modal.Header>
 
         {rolAsignado.length > 0 ? (
-          <div className='p-3'>
+          <div className='p-3 detalle-borrado'>
             <p>
               No puede eliminar este rol ya que esta asociado a los empleados:
             </p>

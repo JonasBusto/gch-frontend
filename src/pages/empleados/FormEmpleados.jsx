@@ -92,7 +92,14 @@ export function FormEmpleados() {
 
   return (
     <div>
-      {' '}
+      {habilidades.length === 0 && (
+        <div className='alert-empleado'>
+          <p>
+            ¡¡Alerta: Es necesario tener al menos una 'Habilidad' cargada para
+            finalizar la carga del empleado!!
+          </p>
+        </div>
+      )}
       <Formik
         initialValues={valuesForm}
         validate={(values) => {
