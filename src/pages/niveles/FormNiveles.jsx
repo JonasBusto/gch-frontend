@@ -107,7 +107,7 @@ export function FormNiveles() {
           handleBlur,
         }) => (
           <Form onSubmit={handleSubmit} className='form-am-custom'>
-            <p>{id ? 'Modificar Puesto' : 'Alta Puesto'}</p>
+            <p>{id ? 'Modificar Nivel' : 'Alta Nivel'}</p>
 
             <Form.Group className='mb-3'>
               <Form.Label className='m-0'>Nombre del Nivel</Form.Label>
